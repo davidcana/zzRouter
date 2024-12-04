@@ -26,7 +26,7 @@ blueRouter.router.prototype.initialize = function () {
             return;
         }
 
-        this.navigatePath( "" );
+        this.navigatePath( '' );
     }
 
     window.onpopstate = () => {
@@ -35,17 +35,17 @@ blueRouter.router.prototype.initialize = function () {
 
     // Add event listeners for a elements
     this.addEventListenerOnList(
-        document.getElementsByTagName( "a" ),
-        "click", 
+        document.getElementsByTagName( 'a' ),
+        'click', 
         (e) => {
             e.preventDefault();
-            const href = e.target.getAttribute( "href" );
+            const href = e.target.getAttribute( 'href' );
             history.pushState(
                 {
                     'page': href
                 },
-                "page " + href,
-                "?" + "page" + "=" + href
+                'page ' + href,
+                '?' + 'page' + '=' + href
             );
             self.navigatePath( href );
         }
@@ -69,7 +69,7 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
     //alert( 'navigateUrl\nurl: ' + url );
 
     // Extract the page name (the string after = character); if undefined it must be the home page
-    this.navigatePath( url.split('=')[1] || "" );
+    this.navigatePath( url.split('=')[1] || '' );
 };
 
 blueRouter.router.prototype.navigatePath = function( path ) {
@@ -77,7 +77,7 @@ blueRouter.router.prototype.navigatePath = function( path ) {
 
     let content = this.getContentForPath( path );
 
-    document.getElementById( "currentPage" ).innerHTML = content;
+    document.getElementById( 'currentPage' ).innerHTML = content;
 };
 
 blueRouter.router.prototype.getContentForPath = function( path ) {
@@ -96,7 +96,7 @@ blueRouter.router.prototype.getContentForPath = function( path ) {
     }
 
     // No 404 page found
-    return "<h3>404 - Page Not Found: " + path + "</h3>";
+    return '<h3>404 - Page Not Found: ' + path + '</h3>';
 };
 
 blueRouter.router.prototype.getContentForRoute = function( route ) {
@@ -105,29 +105,6 @@ blueRouter.router.prototype.getContentForRoute = function( route ) {
 
     return content? content: 'No content found for route from path ' + route[ 'path' ];
 };
-
-/*
-blueRouter.router.prototype.navigatePath = function( path ) {
-    //alert( 'navigatePath\npath: ' + path );
-
-    let content;
-    switch( path ) {
-        case "":
-            content = "<h3>Home Page</h3>";
-            break;
-        case "about":
-            content = "<h3>About Page</h3>";
-            break;
-        case "links":
-            content = "<h3>Links Page</h3>";
-            break;
-        default:
-            content = "<h3>404 - Page Not Found: " + path + "</h3>";
-    }
-
-    document.getElementById( "currentPage" ).innerHTML = content;
-};
-*/
 
 blueRouter.router.prototype.addEventListenerOnList = function( list, event, fn ) {
     for ( let i = 0, len = list.length; i < len; i++ ) {
