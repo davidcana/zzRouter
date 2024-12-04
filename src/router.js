@@ -13,13 +13,15 @@ blueRouter.router.prototype.initialize = function () {
     //alert( 'initialize');
     
     this.pathname = window.location.pathname;
+    this.urlBase = window.location.href;
+
+    //alert( 'pathname: ' + this.pathname + '\nurlBase:' + this.urlBase );
 
     window.onload = () => {
-        //this.navigate( '/' );
-        this.navigate( window.location.pathname );
+        this.navigatePath( "" );
     }
     window.onpopstate = () => {
-        this.navigate( window.location.pathname );
+        this.navigateUrl( window.location.href );
     }
 
     // Add event listeners for a elements
@@ -30,24 +32,38 @@ blueRouter.router.prototype.initialize = function () {
         (e) => {
             e.preventDefault();
             const href = e.target.getAttribute( "href" );
-            history.pushState( null, "", href );
-            self.navigate( href );
+            history.pushState(
+                {
+                    page: href
+                },
+                "page " + href,
+                "?page=" + href
+            );
+            self.navigatePath( href );
         }
     );
 };
 
-blueRouter.router.prototype.navigate = function( path ) {
+blueRouter.router.prototype.navigateUrl = function( url ) {
+    //alert( 'navigateUrl\nurl: ' + url );
+
+    // Extract the page name (the string after = character); if undefined it must be the home page
+    this.navigatePath( url.split('=')[1] || "" );
+};
+
+blueRouter.router.prototype.navigatePath = function( path ) {
+    //alert( 'navigatePath\npath: ' + path );
 
     let content;
     switch( path ) {
-        case this.pathname:
-        case "/":
+        case "":
+        //case "home":
             content = "<h3>Home Page</h3>";
             break;
-        case "/about":
+        case "about":
             content = "<h3>About Page</h3>";
             break;
-        case "/links":
+        case "links":
             content = "<h3>Links Page</h3>";
             break;
         default:
