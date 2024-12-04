@@ -1,4 +1,4 @@
-// Register zzDOM if we are using Node
+// Register blueRouter if we are using Node
 if ( typeof module === 'object' && module.exports ) {
-    module.exports = zzDOM;
+    module.exports = blueRouter;
 }
