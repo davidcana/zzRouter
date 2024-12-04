@@ -3,14 +3,19 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
         browserify: {
-            'blueRouter-core-simple-browserify': {
+            sample: {
                 options: {
                     browserifyOptions: {
                         debug: true
                     }
                 },
-                src: 'build/blueRouter-core-simple.js',
-                dest: 'build/blueRouter-core-simple.browserify.js'
+                files: {
+                    'build/sample.min.js': [
+                        'src/blueRouter.js', 
+                        'src/router.js', 
+                        'samples/sample.js'
+                    ]
+                },
             }
         },
         qunit: {
@@ -97,22 +102,14 @@ module.exports = function(grunt) {
                 stripBanners: true,
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd HH:M:s") %> */\n'
             },
-            'blueRouter-core': {
+            sample: {
                 src: [
-                    'src/blueRouter.js',
-                    'src/router.js',
+                    'src/blueRouter.js', 
+                    'src/router.js', 
+                    'samples/sample.js',
                     'src/export.js'
                 ],
-                dest: 'build/blueRouter-core.js',
-                nonull: true
-            },
-            gcc: {
-                src: [
-                    'src/blueRouter.js',
-                    'src/router.js',
-                    'src/export.js'
-                ],
-                dest: 'build/blueRouter-gcc.js',
+                dest: 'build/sample.concat.js',
                 nonull: true
             }
         },
@@ -129,32 +126,12 @@ module.exports = function(grunt) {
             }
         },
         copy: {
-            standalone: {
-                src: 'build/blueRouter.js',
-                dest: 'docs/lib/blueRouter.js'
-            },
-            standaloneMin: {
-                src: 'build/blueRouter.min.js',
-                dest: 'docs/lib/blueRouter.min.js'
+            src: {
+                src: 'src/*',
+                dest: 'build/'
             }
         },
         'closure-compiler': {
-            simple: {
-                options: {
-                    js: [
-                        'src/blueRouter.js',
-                        'src/router.js',
-
-                    ],
-                    js_output_file: 'build/simple-tests.min.js',
-                    compilation_level: 'ADVANCED',
-                    create_source_map: 'build/simple-tests.min.js.map',
-                    warning_level: 'VERBOSE',
-                    output_wrapper: '(function(){\n%output%\n}).call(this)\n//# sourceMappingURL=simple-tests.min.js.map',
-                    debug: true,
-                    externs: 'externs/qunit-2.11.2.js'
-                }
-            },
             sample: {
                 options: {
                     js: [
@@ -162,11 +139,11 @@ module.exports = function(grunt) {
                         'src/router.js', 
                         'samples/sample.js'
                     ],
-                    js_output_file: 'build/sample.min.js',
+                    js_output_file: 'build/sample.gcc.js',
                     compilation_level: 'ADVANCED',
-                    create_source_map: 'build/sample.min.js.map',
+                    create_source_map: 'build/sample.gcc.js.map',
                     warning_level: 'VERBOSE',
-                    output_wrapper: '(function(){\n%output%\n}).call(this)\n//# sourceMappingURL=sample.min.js.map',
+                    output_wrapper: '(function(){\n%output%\n}).call(this)\n//# sourceMappingURL=sample.gcc.js.map',
                     debug: true
                 }
             }
@@ -181,6 +158,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-browserify')
     grunt.loadNpmTasks('grunt-exec');
     
     require('google-closure-compiler').grunt(grunt, {
@@ -191,11 +169,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('test', ['qunit']);
     grunt.registerTask('default', [
-        'concat:blueRouter-core',
-        'concat:gcc', 
-        'uglify', 
-        'compress:blueRouter-core',
-        'closure-compiler'
+        'closure-compiler:sample',
+        'copy:src'
     ]);
     grunt.registerTask('all', ['default', 'buildTests', 'test']);
 };
