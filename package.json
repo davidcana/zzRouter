@@ -1,0 +1,49 @@
+{
+  "name": "bluerouter",
+  "version": "0.1.0",
+  "main": "index.js",
+  "description": "A simple router component to make it easy build Single Page Applications.",
+  "keywords": [
+    "router",
+    "SPA"
+  ],
+  "bugs": "david.javapagetemplates@gmail.com",
+  "license": "LGPL-3.0",
+  "author": "David Cana Lopez",
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidcana/blueRouter"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "5.16.0",
+    "google-closure-compiler": "^20200830.0.0",
+    "grunt": "~1.1.0",
+    "grunt-contrib-compress": "~1.5.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "~2.1.0",
+    "grunt-contrib-nodeunit": "~2.1.0",
+    "grunt-contrib-qunit": "~3.1.0",
+    "grunt-contrib-uglify": "~4.0.1",
+    "grunt-contrib-watch": "~1.1.0",
+    "grunt-exec": "^3.0.0",
+    "http-server": "^0.12.3",
+    "npm-run-all": "^4.1.5",
+    "qunit": "~2.11.2",
+    "qunit-composite": "^2.0.0",
+    "velocity-animate": "^1.5.2",
+    "beefy": "~2.1.8",
+    "browserify": "~16.5.1",
+    "browserify-derequire": "~1.0.1"
+  },
+  "scripts": {
+    "testNode": "qunit test/js/app/node.js",
+    "testBrowser": "grunt qunit",
+    "test": "npm-run-all testBrowser testNode",
+    "http-server": "http-server -p 9000",
+    "beefy": "cd ./build; beefy *.js",
+    "start": "npm-run-all -p -r beefy http-server"
+  }
+}
