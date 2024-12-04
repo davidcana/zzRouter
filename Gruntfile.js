@@ -170,6 +170,7 @@ module.exports = function(grunt) {
     grunt.registerTask('test', ['qunit']);
     grunt.registerTask('default', [
         'closure-compiler:sample',
+        'concat:sample',
         'copy:src'
     ]);
     grunt.registerTask('all', ['default', 'buildTests', 'test']);
