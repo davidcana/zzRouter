@@ -1,6 +1,8 @@
 "use strict";
 
-let options = {};
+let options = {
+    browserHistoryOnLoad: true
+};
 
 let router = buildBlueRouter( options );
 

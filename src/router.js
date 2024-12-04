@@ -14,18 +14,24 @@ blueRouter.router.prototype.initialize = function () {
     
     this.pathname = window.location.pathname;
     this.urlBase = window.location.href;
+    let self = this;
 
     //alert( 'pathname: ' + this.pathname + '\nurlBase:' + this.urlBase );
 
     window.onload = () => {
+        if ( this.options.browserHistoryOnLoad ){
+            this.navigateUrl( window.location.href );
+            return;
+        }
+
         this.navigatePath( "" );
     }
+
     window.onpopstate = () => {
         this.navigateUrl( window.location.href );
     }
 
     // Add event listeners for a elements
-    let self = this;
     this.addEventListenerOnList(
         document.getElementsByTagName( "a" ),
         "click", 
@@ -37,7 +43,7 @@ blueRouter.router.prototype.initialize = function () {
                     page: href
                 },
                 "page " + href,
-                "?page=" + href
+                "?" + "page" + "=" + href
             );
             self.navigatePath( href );
         }
@@ -57,7 +63,6 @@ blueRouter.router.prototype.navigatePath = function( path ) {
     let content;
     switch( path ) {
         case "":
-        //case "home":
             content = "<h3>Home Page</h3>";
             break;
         case "about":

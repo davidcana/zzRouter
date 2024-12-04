@@ -10,7 +10,7 @@ var blueRouter = {};
     
     buildBlueRouter(
         {
-    
+            browserHistoryOnLoad: true
         }
     );
 */
