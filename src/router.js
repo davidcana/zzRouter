@@ -14,6 +14,8 @@ blueRouter.router.prototype.initialize = function () {
     
     this.pathname = window.location.pathname;
     this.urlBase = window.location.href;
+    this.routesMap = this.createRoutesMap();
+
     let self = this;
 
     //alert( 'pathname: ' + this.pathname + '\nurlBase:' + this.urlBase );
@@ -40,7 +42,7 @@ blueRouter.router.prototype.initialize = function () {
             const href = e.target.getAttribute( "href" );
             history.pushState(
                 {
-                    page: href
+                    'page': href
                 },
                 "page " + href,
                 "?" + "page" + "=" + href
@@ -50,6 +52,19 @@ blueRouter.router.prototype.initialize = function () {
     );
 };
 
+// Create a map with the data in routes, using the path as the key
+blueRouter.router.prototype.createRoutesMap = function() {
+
+    const routerMap = {};
+    const routes = this.options.routes || [];
+
+    routes.map(routeItem => {
+        routerMap[ routeItem[ 'path' ] ] = routeItem;
+    });
+
+    return routerMap;
+};
+
 blueRouter.router.prototype.navigateUrl = function( url ) {
     //alert( 'navigateUrl\nurl: ' + url );
 
@@ -57,6 +72,41 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
     this.navigatePath( url.split('=')[1] || "" );
 };
 
+blueRouter.router.prototype.navigatePath = function( path ) {
+    //alert( 'navigatePath\npath: ' + path );
+
+    let content = this.getContentForPath( path );
+
+    document.getElementById( "currentPage" ).innerHTML = content;
+};
+
+blueRouter.router.prototype.getContentForPath = function( path ) {
+
+    let route = this.routesMap[ path ];
+
+    // Check if there is a route for this path
+    if ( route ){
+        return this.getContentForRoute( route );
+    }
+
+    // No route found, 404 error
+    route = this.routesMap[ '(404)' ];
+    if ( route ){
+        return this.getContentForRoute( route );
+    }
+
+    // No 404 page found
+    return "<h3>404 - Page Not Found: " + path + "</h3>";
+};
+
+blueRouter.router.prototype.getContentForRoute = function( route ) {
+
+    let content = route[ 'content' ];
+
+    return content? content: 'No content found for route from path ' + route[ 'path' ];
+};
+
+/*
 blueRouter.router.prototype.navigatePath = function( path ) {
     //alert( 'navigatePath\npath: ' + path );
 
@@ -77,6 +127,7 @@ blueRouter.router.prototype.navigatePath = function( path ) {
 
     document.getElementById( "currentPage" ).innerHTML = content;
 };
+*/
 
 blueRouter.router.prototype.addEventListenerOnList = function( list, event, fn ) {
     for ( let i = 0, len = list.length; i < len; i++ ) {
