@@ -3,7 +3,8 @@
 // Initialize options
 let options = {
     browserHistoryOnLoad: true,
-    pagePrefix: '!'
+    pagePrefix: '!',
+    externalClass: 'external'
 };
 
 // Add routes to options

@@ -6,7 +6,7 @@ blueRouter.urlManager = {};
 
     url : http://127.0.0.1:9000/samples/sample.html#!about?param1=a&param2=b"
 
-    prepage: http://127.0.0.1:9000/samples/sample.html#
+    prepage: http://127.0.0.1:9000/samples/sample.html
     page: about
     params: {
         param1: a
@@ -20,15 +20,23 @@ blueRouter.urlManager.analize = function( url, options ) {
     // Extract the parts before and after pagePrefix
     let urlParts = url.split( options.pagePrefix );
     result.prepage = urlParts[ 0 ];
-    let postPath = urlParts[ 1 ];
+    let postPath = urlParts[ 1 ] || '';
+
+    // Remove # if present
+    if ( result.prepage.endsWith( '#' ) ){
+        result.prepage = result.prepage.slice( 0, -1 );
+    }
 
     // Extract the parts before and after ?
     let pathParts = postPath.split( '?' );
     result.page = pathParts[ 0 ];
-    let paramsString = pathParts[ 1 ];
+    let paramsString = pathParts[ 1 ] || '';
 
     // Add params
     result.params = {};
+    if ( paramsString == '' ){
+        return result;
+    }
     let vars = paramsString.split( '&' );
     for ( let i = 0; i < vars.length; i++ ) {
         let pair = vars[ i ].split( '=' );
@@ -36,6 +44,8 @@ blueRouter.urlManager.analize = function( url, options ) {
         let paramValue = pair[ 1 ];
         result.params[ paramName ] = paramValue;
     }
+
+    return result;
 };
 
 /* end of urlManager */

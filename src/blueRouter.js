@@ -11,7 +11,8 @@ var blueRouter = {};
     buildBlueRouter(
         {
             browserHistoryOnLoad: true,
-            pagePrefix: '!'
+            pagePrefix: '!',
+            externalClass: 'external'
         }
     );
 */
