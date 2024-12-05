@@ -2,7 +2,8 @@
 
 // Initialize options
 let options = {
-    browserHistoryOnLoad: true
+    browserHistoryOnLoad: true,
+    pagePrefix: '!'
 };
 
 // Add routes to options

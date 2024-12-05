@@ -10,7 +10,8 @@ var blueRouter = {};
     
     buildBlueRouter(
         {
-            browserHistoryOnLoad: true
+            browserHistoryOnLoad: true,
+            pagePrefix: '!'
         }
     );
 */
