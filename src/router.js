@@ -41,7 +41,13 @@ blueRouter.router.prototype.initialize = function () {
             const href = e.target.getAttribute( 'href' );
 
             // Follow the link if it is external (if it is marked as external in the class list)
+            /*
             if ( e.target.classList.contains ( self.options.externalClass ) ){
+                return;
+            }
+            */
+            // Follow the link if it is external (if it does not start by !)
+            if ( !href.startsWith( options.pagePrefix ) ){
                 return;
             }
 
