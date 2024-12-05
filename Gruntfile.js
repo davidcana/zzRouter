@@ -126,10 +126,14 @@ module.exports = function(grunt) {
             }
         },
         copy: {
-            src: {
+            srcToBuild: {
                 src: 'src/*',
                 dest: 'build/'
-            }
+            },
+            sampleToBuild: {
+                src: 'samples/*.js',
+                dest: 'build/'
+            },
         },
         'closure-compiler': {
             sample: {
@@ -171,7 +175,8 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'closure-compiler:sample',
         'concat:sample',
-        'copy:src'
+        'copy:srcToBuild',
+        'copy:sampleToBuild'
     ]);
     grunt.registerTask('all', ['default', 'buildTests', 'test']);
 };
