@@ -4,6 +4,7 @@ h1 {
     color: white;
     padding: .25em .25em .25em .5em;
     border-radius: 25px;
+    margin: 0 0 .5em 0;
 }
 
 nav {
@@ -13,12 +14,19 @@ nav {
     border-radius: 25px;
     display: inline-flex;
 }
-
 nav a {
     margin: 0 1em 0 1em;
 }
 nav a:link {
     text-decoration: none;
-    color:5d91c7;
+    color: black;
+}
+
+div.page-content {
+    margin: 0 .5em 0 .5em;
+}
+
+div.field {
+    margin: 1em 0 1em 0;
 }
 

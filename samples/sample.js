@@ -90,14 +90,18 @@ options.routes = [
             This is the text writer page. Write text and click 'Add text' button or press 'Enter' to add text.
         </p>
 
-        <div>Text</div>
-        <div>
-            <input type="text" id="textWriter_textToAdd" name="textWriter_textToAdd" required>
-            <button id="textWriter_addTextButton">Add text</button>
+        <div class="field">
+            <div>Text</div>
+            <div>
+                <input type="text" id="textWriter_textToAdd" name="textWriter_textToAdd" required>
+                <button id="textWriter_addTextButton">Add text</button>
+            </div>
         </div>
 
-        <div>History</div>
-        <div id="textWriter_history"></div>
+        <div class="field">
+            <div>History</div>
+            <div id="textWriter_history"></div>
+        </div>
     </div>
 </div>
 `
