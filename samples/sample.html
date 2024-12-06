@@ -4,26 +4,23 @@
         <meta charset="utf-8">
         <title>Blue router sample</title>
         
-        <script src="/build/src/blueRouter.js" defer></script>
-        <script src="/build/src/router.js" defer></script>
-        <script src="/build/src/urlManager.js" defer></script>
-        <script src="/build/samples/sample.js" defer></script>
-        <style>
+        <script src="/src/blueRouter.js" defer></script>
+        <script src="/src/router.js" defer></script>
+        <script src="/src/urlManager.js" defer></script>
+        <script src="/samples/sample.js" defer></script>
 
-        </style>
+        <link href="/samples/sample.css" rel="stylesheet">
     </head>
     <body>
         <h1>Blue router sample</h1>
-        
-        <h2>Navigation</h2>
-        <ul>
-            <li><a href="!">Home</a></li>
-            <li><a href="!about">About</a></li>
-            <li><a href="!links">Links</a></li>
-            <li><a href="https://www.wikipedia.org">Wikipedia</a></li>
-        </ul>
 
-        <h2>Pages</h2>
+        <nav>
+            <a href="!">Home</a> |
+            <a href="!about">About</a> |
+            <a href="!links">Links</a> |
+            <a href="https://www.wikipedia.org">Wikipedia</a>
+        </nav>
+
         <div class="pages" id="pages">
             <div class="currentPage" id="currentPage">{currentPage is empty}</div>
         </div>
