@@ -2,11 +2,23 @@
 h1 {
     background-color:#5d91c7;
     color: white;
+    padding: .25em .25em .25em .5em;
+    border-radius: 25px;
 }
 
 nav {
     background-color:#d9e2eb;
     color: white;
-    padding: .5em;
+    padding: .5em 1em .5em 1em;
+    border-radius: 25px;
+    display: inline-flex;
+}
+
+nav a {
+    margin: 0 1em 0 1em;
+}
+nav a:link {
+    text-decoration: none;
+    color:5d91c7;
 }
 
