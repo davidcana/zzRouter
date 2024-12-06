@@ -12,6 +12,15 @@ options.routes = [
     {
         'path': '',
         'content': `
+<h1>Blue router sample</h1>
+
+<nav>
+    <a href="!">Home</a> |
+    <a href="!about">About</a> |
+    <a href="!links">Links</a> |
+    <a href="https://www.wikipedia.org">Wikipedia</a>
+</nav>
+
 <div class="page" id="homePage">
     <h3>Home page</h3>
     This is the Home page
@@ -22,6 +31,15 @@ options.routes = [
     {
         'path': 'about',
         'content': `
+<h1>Blue router sample</h1>
+
+<nav>
+    <a href="!">Home</a> |
+    <a href="!about">About</a> |
+    <a href="!links">Links</a> |
+    <a href="https://www.wikipedia.org">Wikipedia</a>
+</nav>
+
 <div class="page" id="aboutPage">
     <h3>About page</h3>
     This is the about page
@@ -32,6 +50,15 @@ options.routes = [
     {
         'path': 'links',
         'content': `
+<h1>Blue router sample</h1>
+
+<nav>
+    <a href="!">Home</a> |
+    <a href="!about">About</a> |
+    <a href="!links">Links</a> |
+    <a href="https://www.wikipedia.org">Wikipedia</a>
+</nav>
+
 <div class="page" id="linksPage">
     <h3>Links page</h3>
     This is the links page
@@ -42,6 +69,15 @@ options.routes = [
     {
         'path': '(404)',
         'content': `
+<h1>Blue router sample</h1>
+
+<nav>
+    <a href="!">Home</a> |
+    <a href="!about">About</a> |
+    <a href="!links">Links</a> |
+    <a href="https://www.wikipedia.org">Wikipedia</a>
+</nav>
+
 <div class="page" id="404Page">
     <h3>404 page</h3>
     <p>Sorry</p>

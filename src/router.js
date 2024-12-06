@@ -16,9 +16,14 @@ blueRouter.router.prototype.initialize = function () {
     this.urlBase = window.location.href;
     this.routesMap = this.createRoutesMap();
 
-    let self = this;
-
     //alert( 'pathname: ' + this.pathname + '\nurlBase:' + this.urlBase );
+
+    // Add event listeners
+    this.addEventListenersForWindow();
+    this.addEventListenersForLinks();
+};
+
+blueRouter.router.prototype.addEventListenersForWindow = function() {
 
     window.onload = () => {
         if ( this.options.browserHistoryOnLoad ){
@@ -32,6 +37,11 @@ blueRouter.router.prototype.initialize = function () {
     window.onpopstate = () => {
         this.navigateUrl( window.location.href );
     }
+};
+
+blueRouter.router.prototype.addEventListenersForLinks = function() {
+    
+    let self = this;
 
     // Add event listeners for a elements
     this.addEventListenerOnList(
@@ -87,7 +97,7 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
     let content = this.getContentForPage( urlObject.page );
 
     // Update current page
-    document.getElementById( 'currentPage' ).innerHTML = content;
+    this.doPageTransition( content );
 };
 
 blueRouter.router.prototype.getContentForPage = function( page ) {
@@ -113,6 +123,22 @@ blueRouter.router.prototype.getContentForRoute = function( route ) {
 
     let content = route[ 'content' ];
     return content? content: 'No content found for route from path ' + route[ 'path' ];
+};
+
+blueRouter.router.prototype.doPageTransition = function( content ) {
+
+    // Update current page
+    document.getElementById( 'currentPage' ).innerHTML = content;
+
+    this.runEvent( 'init' );
+};
+
+blueRouter.router.prototype.runEvent = function( eventId ) {
+
+    if ( eventId == 'init' ){
+        //alert( 'init event' );
+        this.addEventListenersForLinks();
+    }
 };
 
 blueRouter.router.prototype.addEventListenerOnList = function( list, event, fn ) {
