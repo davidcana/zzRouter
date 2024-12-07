@@ -10,8 +10,8 @@ blueRouter.router = function ( userOptions ) {
     this.checkOptions();
 
     // Init some other vars
-    this.pathname = window.location.pathname;
-    this.urlBase = window.location.href;
+    //this.pathname = window.location.pathname;
+    //this.urlBase = window.location.href;
     this.routesMap = this.createRoutesMap();
 
     //alert( 'pathname: ' + this.pathname + '\nurlBase:' + this.urlBase );
