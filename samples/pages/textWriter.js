@@ -1,7 +1,7 @@
 /* textWriter page */
 pages[ 'textWriter' ] = {};
 
-pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_INIT ] = function(){
+pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_INIT ] = function( event ){
     //alert( 'EVENT_INIT' );
 
     document.getElementById( 'textWriter_addTextButton' ).addEventListener( 'click', function( event ){

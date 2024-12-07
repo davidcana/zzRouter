@@ -125,7 +125,7 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
     let content = this.getContentForPage( urlObject.page );
 
     // Update current page
-    this.doPageTransition( content, urlObject.page, currentPageId );
+    this.doPageTransition( content, urlObject.page, currentPageId, urlObject );
 };
 
 blueRouter.router.prototype.updateStack = function( pageId ) {
@@ -176,19 +176,19 @@ EVENT_MOUNTED: 'mounted',
 EVENT_BEFORE_OUT: 'beforeOut',
 EVENT_AFTER_OUT: 'afterOut',
 */
-blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId ) {
+blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId, urlObject ) {
 
     // Update current page
     document.getElementById( 'currentPage' ).innerHTML = content;
     
     // Run events
-    this.runEvent( blueRouter.defaultOptions.EVENT_BEFORE_OUT, currentPageId );
-    this.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId );
-    this.runEvent( blueRouter.defaultOptions.EVENT_INIT, nextPageId );
-    this.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId );
+    this.runEvent( blueRouter.defaultOptions.EVENT_BEFORE_OUT, currentPageId, undefined );
+    this.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, undefined );
+    this.runEvent( blueRouter.defaultOptions.EVENT_INIT, nextPageId, urlObject );
+    this.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId, urlObject );
 };
 
-blueRouter.router.prototype.runEvent = function( eventId, pageId ) {
+blueRouter.router.prototype.runEvent = function( eventId, pageId, urlObject ) {
 
     if ( eventId == blueRouter.defaultOptions.EVENT_INIT ){
         this.addEventListenersForLinks();
@@ -199,7 +199,10 @@ blueRouter.router.prototype.runEvent = function( eventId, pageId ) {
 
     // If a page is found, run the event handler
     if ( page ){
-        page[ eventId ]();
+        let event = {
+            params: urlObject.params || {}
+        };
+        page[ eventId ]( event );
     }
 };
 

@@ -20,7 +20,7 @@ options.routes = [
     <nav>
         <a href="!">Home</a> |
         <a href="!links">Links</a> |
-        <a href="!textWriter">Text writer</a>
+        <a href="!textWriter?a=1&b=2">Text writer</a>
     </nav>
 
     <div class="page-content">
