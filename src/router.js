@@ -160,7 +160,6 @@ blueRouter.router.prototype.doPageTransition = function( content, page ) {
 blueRouter.router.prototype.runEvent = function( eventId, pageId ) {
 
     if ( eventId == blueRouter.defaultOptions.EVENT_INIT ){
-        //alert( 'init event' );
         this.addEventListenersForLinks();
     }
 
