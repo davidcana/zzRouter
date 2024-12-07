@@ -13,6 +13,7 @@ blueRouter.router = function ( userOptions ) {
     //this.pathname = window.location.pathname;
     //this.urlBase = window.location.href;
     this.routesMap = this.createRoutesMap();
+    this.stack = [];
 
     //alert( 'pathname: ' + this.pathname + '\nurlBase:' + this.urlBase );
 
@@ -57,7 +58,7 @@ blueRouter.router.prototype.addEventListenersForWindow = function() {
         this.navigateUrl( '' );
     }
 
-    window.onpopstate = () => {
+    window.onpopstate = ( e ) => {
         this.navigateUrl( window.location.href );
     }
 };
@@ -116,11 +117,30 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
     // Create an url object to make it easy everything
     let urlObject = blueRouter.urlManager.analize( url, this.options );
 
+    // Update stack and get currentPageId
+    let currentPageId = this.updateStack( urlObject.page );
+
     // Get the content
     let content = this.getContentForPage( urlObject.page );
 
     // Update current page
-    this.doPageTransition( content, urlObject.page );
+    this.doPageTransition( content, urlObject.page, currentPageId );
+};
+
+blueRouter.router.prototype.updateStack = function( pageId ) {
+    
+    // If the penultimate element is the pageId then we are going backwards; otherwise we are going forward
+    let isBackward = this.stack[ this.stack.length - 2 ] == pageId;
+
+    if ( isBackward ){
+        // isBackward
+        return this.stack.pop();
+    }
+
+    // isForward
+    var currentPageId = this.stack[ this.stack.length - 1 ];
+    this.stack.push( pageId );
+    return currentPageId;
 };
 
 blueRouter.router.prototype.getContentForPage = function( pageId ) {
@@ -148,13 +168,23 @@ blueRouter.router.prototype.getContentForRoute = function( route ) {
     return content? content: 'No content found for route from path ' + route[ 'path' ];
 };
 
-blueRouter.router.prototype.doPageTransition = function( content, pageId ) {
+/*
+EVENT_INIT: 'init',
+EVENT_REINIT: 'reinit',
+EVENT_MOUNTED: 'mounted',
+EVENT_BEFORE_OUT: 'beforeOut',
+EVENT_AFTER_OUT: 'afterOut',
+*/
+blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId ) {
 
     // Update current page
     document.getElementById( 'currentPage' ).innerHTML = content;
-
-    this.runEvent( blueRouter.defaultOptions.EVENT_INIT, pageId );
-    this.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, pageId );
+    
+    // Run events
+    this.runEvent( blueRouter.defaultOptions.EVENT_BEFORE_OUT, currentPageId );
+    this.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId );
+    this.runEvent( blueRouter.defaultOptions.EVENT_INIT, nextPageId );
+    this.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId );
 };
 
 blueRouter.router.prototype.runEvent = function( eventId, pageId ) {
@@ -171,13 +201,6 @@ blueRouter.router.prototype.runEvent = function( eventId, pageId ) {
         page[ eventId ]();
     }
 };
-/*
-EVENT_INIT: 'init',
-EVENT_REINIT: 'reinit',
-EVENT_MOUNTED: 'mounted',
-EVENT_BEFORE_OUT: 'beforeOut',
-EVENT_AFTER_OUT: 'afterOut',
-*/
 
 // Move to utils.js
 blueRouter.router.prototype.addEventListenerOnList = function( list, event, fn ) {
