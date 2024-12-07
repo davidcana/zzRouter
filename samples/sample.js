@@ -5,8 +5,6 @@ const pages = {};
 
 // Initialize options
 let options = {
-    //browserHistoryOnLoad: true,
-    //pagePrefix: '!',
     pages: pages
 };
 

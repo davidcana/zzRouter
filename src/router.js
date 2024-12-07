@@ -7,6 +7,7 @@ blueRouter.router = function ( userOptions ) {
     // Init options
     this.options = {};
     this.extend( this.options, blueRouter.defaultOptions, userOptions );
+    this.checkOptions();
 
     // Init some other vars
     this.pathname = window.location.pathname;
@@ -21,6 +22,30 @@ blueRouter.router = function ( userOptions ) {
 };
 
 /* Methods */
+
+// Check that mandatory user defined properties are defined
+blueRouter.router.prototype.checkOptions = function() {
+
+    let errors = 0;
+    let errorMessages = '';
+
+    if ( ! this.options.routes ){
+        ++errors;
+        errorMessages += 'Routes must be defined. ';
+    }
+
+    if ( ! this.options.pages ){
+        ++errors;
+        errorMessages += 'Pages must be defined. ';
+    }
+
+    if ( errors ){
+        let fullErrorMessage = 'Unable to initalize Blue router. ' + errors + ' errors found: ' + errorMessages;
+        alert( fullErrorMessage );
+        throw fullErrorMessage;
+    }
+};
+
 blueRouter.router.prototype.addEventListenersForWindow = function() {
 
     window.onload = () => {
