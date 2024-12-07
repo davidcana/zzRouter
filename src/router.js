@@ -59,7 +59,8 @@ blueRouter.router.prototype.addEventListenersForWindow = function() {
     }
 
     window.onpopstate = ( e ) => {
-        this.navigateUrl( window.location.href );
+        //this.navigateUrl( window.location.href );
+        this.navigateUrl( e.state[ 'page' ] );
     }
 };
 
