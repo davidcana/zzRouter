@@ -120,7 +120,7 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
     let content = this.getContentForPage( urlObject.page );
 
     // Update current page
-    this.doPageTransition( content );
+    this.doPageTransition( content, urlObject.page );
 };
 
 blueRouter.router.prototype.getContentForPage = function( page ) {
@@ -148,21 +148,37 @@ blueRouter.router.prototype.getContentForRoute = function( route ) {
     return content? content: 'No content found for route from path ' + route[ 'path' ];
 };
 
-blueRouter.router.prototype.doPageTransition = function( content ) {
+blueRouter.router.prototype.doPageTransition = function( content, page ) {
 
     // Update current page
     document.getElementById( 'currentPage' ).innerHTML = content;
 
-    this.runEvent( 'init' );
+    this.runEvent( blueRouter.defaultOptions.EVENT_INIT, page );
+    this.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, page );
 };
 
-blueRouter.router.prototype.runEvent = function( eventId ) {
+blueRouter.router.prototype.runEvent = function( eventId, pageId ) {
 
-    if ( eventId == 'init' ){
+    if ( eventId == blueRouter.defaultOptions.EVENT_INIT ){
         //alert( 'init event' );
         this.addEventListenersForLinks();
     }
+
+    // Get the page object from options
+    let page = this.options.pages[ pageId ];
+
+    // If a page is found, run the event handler
+    if ( page ){
+        page[ eventId ]();
+    }
 };
+/*
+EVENT_INIT: 'init',
+EVENT_REINIT: 'reinit',
+EVENT_MOUNTED: 'mounted',
+EVENT_BEFORE_OUT: 'beforeOut',
+EVENT_AFTER_OUT: 'afterOut',
+*/
 
 // Move to utils.js
 blueRouter.router.prototype.addEventListenerOnList = function( list, event, fn ) {
