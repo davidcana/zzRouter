@@ -1,9 +1,13 @@
 // Sample
 
+// Initialize pages
+const pages = {};
+
 // Initialize options
 let options = {
-    browserHistoryOnLoad: true,
-    pagePrefix: '!'
+    //browserHistoryOnLoad: true,
+    //pagePrefix: '!',
+    pages: pages
 };
 
 // Add routes to options

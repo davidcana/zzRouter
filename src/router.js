@@ -2,16 +2,13 @@
  * blueRouter.router class
  */
 /** @constructor */
-blueRouter.router = function ( _options ) {
-    this.options = _options;
+blueRouter.router = function ( userOptions ) {
 
-    this.initialize();
-};
+    // Init options
+    this.options = {};
+    this.extend( this.options, blueRouter.defaultOptions, userOptions );
 
-/* Methods */
-blueRouter.router.prototype.initialize = function () {
-    //alert( 'initialize');
-    
+    // Init some other vars
     this.pathname = window.location.pathname;
     this.urlBase = window.location.href;
     this.routesMap = this.createRoutesMap();
@@ -23,6 +20,7 @@ blueRouter.router.prototype.initialize = function () {
     this.addEventListenersForLinks();
 };
 
+/* Methods */
 blueRouter.router.prototype.addEventListenersForWindow = function() {
 
     window.onload = () => {
@@ -57,7 +55,7 @@ blueRouter.router.prototype.addEventListenersForLinks = function() {
             }
             */
             // Follow the link if it is external (if it does not start by !)
-            if ( !href.startsWith( options.pagePrefix ) ){
+            if ( ! href.startsWith( self.options.pagePrefix ) ){
                 return;
             }
 
@@ -141,6 +139,7 @@ blueRouter.router.prototype.runEvent = function( eventId ) {
     }
 };
 
+// Move to utils.js
 blueRouter.router.prototype.addEventListenerOnList = function( list, event, fn ) {
 
     for ( let i = 0, len = list.length; i < len; i++ ) {
@@ -148,3 +147,22 @@ blueRouter.router.prototype.addEventListenerOnList = function( list, event, fn )
     }
 };
 
+blueRouter.router.prototype.extend = function( out, from1, from2 ) {
+    out = out || {};
+
+    for ( var i = 1; i < arguments.length; i++ ) {
+        if ( ! arguments[ i ] ){
+            continue;
+        }
+
+        for ( var key in arguments[ i ] ) {
+            if ( arguments[ i ].hasOwnProperty( key ) ){
+                out[ key ] = arguments[ i ][ key ];
+            }
+        }
+    }
+
+    return out;
+};
+
+// End Move to utils.js

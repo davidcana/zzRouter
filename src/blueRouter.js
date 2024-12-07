@@ -10,8 +10,8 @@ var blueRouter = {};
     
     buildBlueRouter(
         {
-            browserHistoryOnLoad: true,
-            pagePrefix: '!'
+            routes: routes,
+            pages: pages
         }
     );
 */
