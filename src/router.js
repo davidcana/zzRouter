@@ -123,9 +123,9 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
     this.doPageTransition( content, urlObject.page );
 };
 
-blueRouter.router.prototype.getContentForPage = function( page ) {
+blueRouter.router.prototype.getContentForPage = function( pageId ) {
 
-    let route = this.routesMap[ page ];
+    let route = this.routesMap[ pageId ];
 
     // Check if there is a route for this path
     if ( route ){
@@ -139,7 +139,7 @@ blueRouter.router.prototype.getContentForPage = function( page ) {
     }
 
     // No 404 page found
-    return '<h3>404 - Page not found: ' + page + '</h3>';
+    return '<h3>404 - Page not found: ' + pageId + '</h3>';
 };
 
 blueRouter.router.prototype.getContentForRoute = function( route ) {
@@ -148,13 +148,13 @@ blueRouter.router.prototype.getContentForRoute = function( route ) {
     return content? content: 'No content found for route from path ' + route[ 'path' ];
 };
 
-blueRouter.router.prototype.doPageTransition = function( content, page ) {
+blueRouter.router.prototype.doPageTransition = function( content, pageId ) {
 
     // Update current page
     document.getElementById( 'currentPage' ).innerHTML = content;
 
-    this.runEvent( blueRouter.defaultOptions.EVENT_INIT, page );
-    this.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, page );
+    this.runEvent( blueRouter.defaultOptions.EVENT_INIT, pageId );
+    this.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, pageId );
 };
 
 blueRouter.router.prototype.runEvent = function( eventId, pageId ) {
