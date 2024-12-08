@@ -169,14 +169,36 @@ blueRouter.router.prototype.getContentForRoute = function( route ) {
     return content? content: 'No content found for route from path ' + route[ 'path' ];
 };
 
+
 blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId, urlObject ) {
 
     // Update current page
-    document.getElementById( 'currentPage' ).innerHTML = content;
-    
+    //document.getElementById( 'currentPage' ).innerHTML = content;
+
+
+
     // Run events
     this.runEvent( blueRouter.defaultOptions.EVENT_BEFORE_OUT, currentPageId, {} );
+
+    // Add next page
+    let id = nextPageId == ''? 'home': nextPageId;
+    let currentPage = document.getElementsByClassName( 'currentPage' )[0];
+    currentPage.insertAdjacentHTML(
+        'afterend',
+        '<div class="nextPage page" id="' + id + '">'
+         + content
+         + '</div>'
+    );
+
+    // Remove current page
+    currentPage.remove();
     this.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
+
+    // Remove nextPage class and add currentPage class
+    let newPage = document.getElementById( id );
+    newPage.classList.remove( 'nextPage' );
+    newPage.classList.add( 'currentPage' );
+
     this.runEvent( blueRouter.defaultOptions.EVENT_INIT, nextPageId, urlObject );
     //this.runEvent( blueRouter.defaultOptions.EVENT_REINIT, nextPageId, urlObject );
     this.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId, urlObject );

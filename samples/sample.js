@@ -14,7 +14,7 @@ options.routes = [
     {
         'path': '',
         'content': `
-<div class="page" id="links">
+<div class="page" id="home">
     <h1>Blue router sample</h1>
 
     <nav>
