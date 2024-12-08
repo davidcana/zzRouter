@@ -14,7 +14,7 @@ module.exports = function(grunt) {
                         'src/blueRouter.js', 
                         'src/router.js', 
                         'src/defaultOptions.js',
-                        'src/urlManager.js',
+                        'src/utils.js',
                         'samples/sample.js'
                     ]
                 },
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
                     'src/blueRouter.js', 
                     'src/router.js', 
                     'src/defaultOptions.js',
-                    'src/urlManager.js',
+                    'src/utils.js',
                     'samples/sample.js',
                     'src/export.js'
                 ],
@@ -146,7 +146,7 @@ module.exports = function(grunt) {
                         'src/blueRouter.js', 
                         'src/router.js', 
                         'src/defaultOptions.js',
-                        'src/urlManager.js',
+                        'src/utils.js',
                         'samples/sample.js'
                     ],
                     js_output_file: 'build/sample.gcc.js',

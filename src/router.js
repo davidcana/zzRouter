@@ -6,7 +6,7 @@ blueRouter.router = function ( userOptions ) {
 
     // Init options
     this.options = {};
-    this.extend( this.options, blueRouter.defaultOptions, userOptions );
+    blueRouter.utils.extend( this.options, blueRouter.defaultOptions, userOptions );
     this.checkOptions();
 
     // Init some other vars
@@ -69,7 +69,7 @@ blueRouter.router.prototype.addEventListenersForLinks = function() {
     let self = this;
 
     // Add event listeners for a elements
-    this.addEventListenerOnList(
+    blueRouter.utils.addEventListenerOnList(
         document.getElementsByTagName( 'a' ),
         'click', 
         (e) => {
@@ -116,7 +116,7 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
     //alert( 'navigateUrl\nurl: ' + url );
 
     // Create an url object to make it easy everything
-    let urlObject = blueRouter.urlManager.analize( url, this.options );
+    let urlObject = blueRouter.utils.analizeUrl( url, this.options );
 
     // Update stack and get currentPageId
     let currentPageId = this.updateStack( urlObject.page );
@@ -134,11 +134,11 @@ blueRouter.router.prototype.updateStack = function( pageId ) {
     let isBackward = this.stack[ this.stack.length - 2 ] == pageId;
 
     if ( isBackward ){
-        // isBackward
+        // Is backward
         return this.stack.pop();
     }
 
-    // isForward
+    // Is forward
     var currentPageId = this.stack[ this.stack.length - 1 ];
     this.stack.push( pageId );
     return currentPageId;
@@ -169,22 +169,16 @@ blueRouter.router.prototype.getContentForRoute = function( route ) {
     return content? content: 'No content found for route from path ' + route[ 'path' ];
 };
 
-/*
-EVENT_INIT: 'init',
-EVENT_REINIT: 'reinit',
-EVENT_MOUNTED: 'mounted',
-EVENT_BEFORE_OUT: 'beforeOut',
-EVENT_AFTER_OUT: 'afterOut',
-*/
 blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId, urlObject ) {
 
     // Update current page
     document.getElementById( 'currentPage' ).innerHTML = content;
     
     // Run events
-    this.runEvent( blueRouter.defaultOptions.EVENT_BEFORE_OUT, currentPageId, undefined );
-    this.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, undefined );
+    this.runEvent( blueRouter.defaultOptions.EVENT_BEFORE_OUT, currentPageId, {} );
+    this.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
     this.runEvent( blueRouter.defaultOptions.EVENT_INIT, nextPageId, urlObject );
+    //this.runEvent( blueRouter.defaultOptions.EVENT_REINIT, nextPageId, urlObject );
     this.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId, urlObject );
 };
 
@@ -206,30 +200,3 @@ blueRouter.router.prototype.runEvent = function( eventId, pageId, urlObject ) {
     }
 };
 
-// Move to utils.js
-blueRouter.router.prototype.addEventListenerOnList = function( list, event, fn ) {
-
-    for ( let i = 0, len = list.length; i < len; i++ ) {
-        list[ i ].addEventListener( event, fn, false );
-    }
-};
-
-blueRouter.router.prototype.extend = function( out, from1, from2 ) {
-    out = out || {};
-
-    for ( var i = 1; i < arguments.length; i++ ) {
-        if ( ! arguments[ i ] ){
-            continue;
-        }
-
-        for ( var key in arguments[ i ] ) {
-            if ( arguments[ i ].hasOwnProperty( key ) ){
-                out[ key ] = arguments[ i ][ key ];
-            }
-        }
-    }
-
-    return out;
-};
-
-// End Move to utils.js

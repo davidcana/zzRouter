@@ -1,5 +1,5 @@
-/* urlManager */
-blueRouter.urlManager = {};
+/* utils */
+blueRouter.utils = {};
 
 /*
     Builds an object with data about the url. An example:
@@ -13,7 +13,7 @@ blueRouter.urlManager = {};
         param2: b
     }
 */
-blueRouter.urlManager.analize = function( url, options ) {
+blueRouter.utils.analizeUrl = function( url, options ) {
     
     let result = {};
 
@@ -48,4 +48,28 @@ blueRouter.urlManager.analize = function( url, options ) {
     return result;
 };
 
-/* end of urlManager */
+blueRouter.utils.addEventListenerOnList = function( list, event, fn ) {
+
+    for ( let i = 0, len = list.length; i < len; i++ ) {
+        list[ i ].addEventListener( event, fn, false );
+    }
+};
+
+blueRouter.utils.extend = function( out, from1, from2 ) {
+    out = out || {};
+
+    for ( var i = 1; i < arguments.length; i++ ) {
+        if ( ! arguments[ i ] ){
+            continue;
+        }
+
+        for ( var key in arguments[ i ] ) {
+            if ( arguments[ i ].hasOwnProperty( key ) ){
+                out[ key ] = arguments[ i ][ key ];
+            }
+        }
+    }
+
+    return out;
+};
+/* end of utils */
