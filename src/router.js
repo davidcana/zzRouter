@@ -176,11 +176,10 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
     this.runEvent( blueRouter.defaultOptions.EVENT_BEFORE_OUT, currentPageId, {} );
 
     // Add next page
-    let id = nextPageId == ''? 'home': nextPageId;
     let currentPage = document.getElementsByClassName( 'currentPage' )[0];
     currentPage.insertAdjacentHTML(
         'afterend',
-        '<div class="nextPage page" id="' + id + '">'
+        '<div class="nextPage page" id="' + nextPageId + '">'
          + content
          + '</div>'
     );
@@ -190,7 +189,7 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
     this.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
 
     // Remove nextPage class and add currentPage class
-    let newPage = document.getElementById( id );
+    let newPage = document.getElementById( nextPageId );
     newPage.classList.remove( 'nextPage' );
     newPage.classList.add( 'currentPage' );
 
