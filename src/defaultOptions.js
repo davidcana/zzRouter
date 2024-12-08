@@ -4,6 +4,10 @@ blueRouter.defaultOptions = {
     browserHistoryOnLoad: true,
     pagePrefix: '!',
 
+    // Special pages ids
+    PAGE_ID_HOME: '[home]',
+    PAGE_ID_404_ERROR: '[404]',
+
     // Events
     EVENT_INIT: 'init',
     EVENT_REINIT: 'reinit',

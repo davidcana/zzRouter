@@ -12,7 +12,7 @@ let options = {
 options.routes = [
     // Home page
     {
-        'path': '',
+        'path': '[home]',
         'content': `
 <h1>Blue router sample</h1>
 
@@ -104,7 +104,7 @@ options.routes = [
     },
     // Default route (404 page)
     {
-        'path': '(404)',
+        'path': '[404]',
         'content': `
 <h1>Blue router sample</h1>
 

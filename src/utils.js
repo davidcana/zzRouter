@@ -30,6 +30,12 @@ blueRouter.utils.analizeUrl = function( url, options ) {
     // Extract the parts before and after ?
     let pathParts = postPath.split( '?' );
     result.page = pathParts[ 0 ];
+
+    // Fix home page
+    if ( result.page == '') {
+        result.page = options.PAGE_ID_HOME;
+    }
+
     let paramsString = pathParts[ 1 ] || '';
 
     // Add params

@@ -154,7 +154,7 @@ blueRouter.router.prototype.getContentForPage = function( pageId ) {
     }
 
     // No route found, 404 error
-    route = this.routesMap[ '(404)' ];
+    route = this.routesMap[ this.options.PAGE_ID_404_ERROR ];
     if ( route ){
         return this.getContentForRoute( route );
     }
@@ -171,11 +171,6 @@ blueRouter.router.prototype.getContentForRoute = function( route ) {
 
 
 blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId, urlObject ) {
-
-    // Update current page
-    //document.getElementById( 'currentPage' ).innerHTML = content;
-
-
 
     // Run events
     this.runEvent( blueRouter.defaultOptions.EVENT_BEFORE_OUT, currentPageId, {} );
