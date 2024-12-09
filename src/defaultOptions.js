@@ -5,8 +5,8 @@ blueRouter.defaultOptions = {
     pagePrefix: '!',
 
     // Animations
-    animationIn: 'fade-in',
-    animationOut: 'fade-out',
+    animationOut: 'slide-out-top',
+    animationIn: 'scale-in-center',
 
     // Special pages ids
     PAGE_ID_HOME: '[home]',

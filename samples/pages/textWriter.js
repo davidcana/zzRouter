@@ -13,7 +13,7 @@ pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_INIT ] = function( event 
 };
 
 pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_REINIT ] = function(){
-    alert( 'EVENT_REINIT' );
+    //alert( 'EVENT_REINIT' );
 };
 
 pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_MOUNTED ] = function(){
@@ -21,11 +21,11 @@ pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_MOUNTED ] = function(){
 };
 
 pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_BEFORE_OUT ] = function(){
-    alert( 'EVENT_BEFORE_OUT' );
+    //alert( 'EVENT_BEFORE_OUT' );
 };
 
 pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_AFTER_OUT ] = function(){
-    alert( 'EVENT_AFTER_OUT' );
+    //alert( 'EVENT_AFTER_OUT' );
 };
 
 

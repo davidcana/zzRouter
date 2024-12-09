@@ -121,6 +121,11 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
     // Update stack and get currentPageId
     let currentPageId = this.updateStack( urlObject.page );
 
+    // Exit if trying to navigate to current page
+    if ( currentPageId == urlObject.page ){
+        return;
+    }
+
     // Get the content
     let content = this.getContentForPage( urlObject.page );
 
@@ -179,7 +184,7 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
     let currentPage = document.getElementsByClassName( 'currentPage' )[0];
     currentPage.insertAdjacentHTML(
         'afterend',
-        '<div class="nextPage page" id="' + nextPageId + '">'
+        '<div class="nextPage hidden page" id="' + nextPageId + '">'
          + content
          + '</div>'
     );
@@ -187,13 +192,24 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
 
     // Animate!
     let self = this;
+    let currentPageAnimationendListener = () => {
+        currentPage.removeEventListener( 'animationend', currentPageAnimationendListener );
+        newPage.classList.remove( 'hidden' );
+        newPage.classList.add( this.options.animationIn );
+
+        // Remove current page
+        currentPage.remove();
+        self.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
+    };
+    currentPage.addEventListener( 'animationend', currentPageAnimationendListener );
+
     let newPageAnimationendListener = () => {
         
         newPage.removeEventListener( 'animationend', newPageAnimationendListener );
 
         // Remove current page
-        currentPage.remove();
-        self.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
+        //currentPage.remove();
+        //self.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
 
         // Remove nextPage class and add currentPage class
         newPage.classList.remove( 'nextPage' );
@@ -207,7 +223,6 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
     newPage.addEventListener( 'animationend', newPageAnimationendListener );
 
     currentPage.classList.add( this.options.animationOut );
-    newPage.classList.add( this.options.animationIn );
 };
 
 blueRouter.router.prototype.runEvent = function( eventId, pageId, urlObject ) {
