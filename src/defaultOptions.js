@@ -4,6 +4,10 @@ blueRouter.defaultOptions = {
     browserHistoryOnLoad: true,
     pagePrefix: '!',
 
+    // Animations
+    animationIn: 'fade-in',
+    animationOut: 'fade-out',
+
     // Special pages ids
     PAGE_ID_HOME: '[home]',
     PAGE_ID_404_ERROR: '[404]',

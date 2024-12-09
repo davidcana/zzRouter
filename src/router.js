@@ -183,19 +183,31 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
          + content
          + '</div>'
     );
-
-    // Remove current page
-    currentPage.remove();
-    this.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
-
-    // Remove nextPage class and add currentPage class
     let newPage = document.getElementById( nextPageId );
-    newPage.classList.remove( 'nextPage' );
-    newPage.classList.add( 'currentPage' );
 
-    this.runEvent( blueRouter.defaultOptions.EVENT_INIT, nextPageId, urlObject );
-    //this.runEvent( blueRouter.defaultOptions.EVENT_REINIT, nextPageId, urlObject );
-    this.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId, urlObject );
+    // Animate!
+    let self = this;
+    let newPageAnimationendListener = () => {
+        
+        newPage.removeEventListener( 'animationend', newPageAnimationendListener );
+
+        // Remove current page
+        currentPage.remove();
+        self.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
+
+        // Remove nextPage class and add currentPage class
+        newPage.classList.remove( 'nextPage' );
+        newPage.classList.add( 'currentPage' );
+        newPage.classList.remove( this.options.animationIn );
+
+        self.runEvent( blueRouter.defaultOptions.EVENT_INIT, nextPageId, urlObject );
+        //self.runEvent( blueRouter.defaultOptions.EVENT_REINIT, nextPageId, urlObject );
+        self.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId, urlObject );
+    };
+    newPage.addEventListener( 'animationend', newPageAnimationendListener );
+
+    currentPage.classList.add( this.options.animationOut );
+    newPage.classList.add( this.options.animationIn );
 };
 
 blueRouter.router.prototype.runEvent = function( eventId, pageId, urlObject ) {
