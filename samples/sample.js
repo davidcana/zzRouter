@@ -16,17 +16,26 @@ options.routes = [
         'content': `
 <h1>Blue router sample</h1>
 
-<nav>
-    <a href="!">Home</a> |
-    <a href="!links">Links</a> |
-    <a href="!textWriter?a=1&b=2">Text writer</a>
-</nav>
-
 <div class="page-content">
     <h3>Home page</h3>
     <p>
         This is the Home page
     </p>
+
+    <ul id="home_links">
+        <li>
+            <a href="!links">Links</a>. Go to links page.
+        </li>
+        <li>
+            <a href="!textWriter">Text writer</a>. Go to text writer.
+        </li>
+        <li>
+            <a href="!textWriter?text1=copyThis">Text writer</a>. Go to text writer using 1 parameter.
+        </li>
+        <li>
+            <a href="!textWriter?text1=copyThis&text2=copyThisToo2">Text writer</a>. Go to text writer using 2 parameters.
+        </li>
+    </ul>
 </div>
 `
     },
@@ -36,11 +45,9 @@ options.routes = [
         'content': `
 <h1>Blue router sample</h1>
 
-<nav>
-    <a href="!">Home</a> |
-    <a href="!links">Links</a> |
-    <a href="!textWriter">Text writer</a>
-</nav>
+<div>
+    <a href="!">Home</a>
+</div>
 
 <div class="page-content">
     <h3>Links page</h3>
@@ -75,11 +82,9 @@ options.routes = [
         'content': `
 <h1>Blue router sample</h1>
 
-<nav>
-    <a href="!">Home</a> |
-    <a href="!links">Links</a> |
-    <a href="!textWriter">Text writer</a>
-</nav>
+<div>
+    <a href="!">Home</a>
+</div>
 
 <div class="page-content">
     <h3>Text writer page</h3>
