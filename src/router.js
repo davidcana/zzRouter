@@ -50,12 +50,7 @@ blueRouter.router.prototype.checkOptions = function() {
 blueRouter.router.prototype.addEventListenersForWindow = function() {
 
     window.onload = () => {
-        if ( this.options.browserHistoryOnLoad ){
-            this.navigateUrl( window.location.href );
-            return;
-        }
-
-        this.navigateUrl( '' );
+        this.navigateUrl( this.options.browserHistoryOnLoad? window.location.href: '' );
     }
 
     window.onpopstate = ( e ) => {
