@@ -78,4 +78,27 @@ blueRouter.utils.extend = function( out, from1, from2 ) {
 
     return out;
 };
+
+/* formatString */
+// Example: itils.formatString( '{0} is dead, but {1} is alive!', 'ASP', 'ASP.NET' )
+/**
+ * Takes 1 or more strings and do something cool with them.
+ * @param {...string|number} format
+ */
+blueRouter.utils.formatString = function( format ) {
+    
+    var args = Array.prototype.slice.call( arguments, 1 );
+    return format.replace(/{(\d+)}/g, function ( match, number ) {
+        return typeof args[ number ] != 'undefined'? args[ number ] : match;
+    });
+};
+
+blueRouter.utils.isFunction = function isFunction( obj ) {
+
+    // Support: Chrome <=57, Firefox <=52
+    // In some browsers, typeof returns "function" for HTML <object> elements
+    // (i.e., `typeof document.createElement( "object" ) === "function"`).
+    // We don't want to classify *any* DOM node as a function.
+    return typeof obj === "function" && typeof obj.nodeType !== "number";
+};
 /* end of utils */

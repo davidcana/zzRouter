@@ -14,6 +14,7 @@ module.exports = function(grunt) {
                         'src/blueRouter.js', 
                         'src/router.js', 
                         'src/defaultOptions.js',
+                        'src/htmlFetcher.js',
                         'src/utils.js',
                         'samples/sample.js'
                     ]
@@ -109,6 +110,7 @@ module.exports = function(grunt) {
                     'src/blueRouter.js', 
                     'src/router.js', 
                     'src/defaultOptions.js',
+                    'src/htmlFetcher.js',
                     'src/utils.js',
                     'samples/sample.js',
                     'src/export.js'
@@ -146,6 +148,7 @@ module.exports = function(grunt) {
                         'src/blueRouter.js', 
                         'src/router.js', 
                         'src/defaultOptions.js',
+                        'src/htmlFetcher.js',
                         'src/utils.js',
                         'samples/sample.js'
                     ],
