@@ -9,14 +9,19 @@ blueRouter.htmlFetcher.loadAllRouteItems = function( router, callback ){
     const routes = router.options.routes || [];
 
     // Filter routeItems with url
+    /*
     let urlRoutes = routes.filter( routeItem => {
         return routeItem[ 'url' ];
     });
-    
+    */
     // Get the number ot urls to get
-    let pending = urlRoutes.length;
+    //let pending = urlRoutes.length;
 
     // Iterate urlRoutes and load each routeItem
+    routes.map( routeItem => {
+        blueRouter.htmlFetcher.loadRouteItem( routeItem )
+    });
+    /*
     urlRoutes.map( routeItem => {
         blueRouter.htmlFetcher.loadRouteItem(
             routeItem,
@@ -27,15 +32,26 @@ blueRouter.htmlFetcher.loadAllRouteItems = function( router, callback ){
             }
         );
     });
+    */
 };
 
+blueRouter.htmlFetcher.loadRouteItem = function( routeItem ){
+
+    let url = routeItem[ 'url' ];
+    if ( ! url ){
+        return;
+    }
+    
+    routeItem[ 'content' ] = blueRouter.htmlFetcher.get( url );
+};
+/*
 blueRouter.htmlFetcher.loadRouteItem = function( routeItem, callback ){
 
     blueRouter.htmlFetcher.get(
         routeItem[ 'url' ],
-        function( data ){
+        function( text ){
             // Add data from server to content element of routeItem
-            routeItem[ 'content' ] = data;
+            routeItem[ 'content' ] = text;
 
             if ( callback && blueRouter.utils.isFunction( callback ) ){
                 callback();
@@ -43,13 +59,26 @@ blueRouter.htmlFetcher.loadRouteItem = function( routeItem, callback ){
         }
     );
 };
+*/
 
 /**
  * @param {string} url
- * @param {Function} successCallback
- * @param {Function=} errorCallback
  * 
  */
+blueRouter.htmlFetcher.get = async function( url ){
+
+    const response = await fetch( url );
+
+    if ( ! response.ok ) {
+        const message = `Error fetching ${url} has occured: ${response.status}`;
+        alert ( message );
+        throw new Error( message );
+    }
+  
+    const text = await response.text();
+    return text;
+};
+/*
 blueRouter.htmlFetcher.get = function( url, successCallback, errorCallback ){
 
     fetch( url )
@@ -80,6 +109,7 @@ blueRouter.htmlFetcher.get = function( url, successCallback, errorCallback ){
             }
         );
 };
+*/
 
 blueRouter.htmlFetcher.xhrError = function( response, errorInstance, stringError ){
     
