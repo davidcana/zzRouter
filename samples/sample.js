@@ -79,6 +79,7 @@ options.routes = [
     // Text writer page
     {
         'path': 'textWriter',
+        'keepAlive': true,
         'content': `
 <h1>Blue router sample</h1>
 

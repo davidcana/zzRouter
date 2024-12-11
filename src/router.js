@@ -105,7 +105,7 @@ blueRouter.router.prototype.createRoutesMap = function() {
     const routerMap = {};
     const routes = this.options.routes || [];
 
-    routes.map(routeItem => {
+    routes.map( routeItem => {
         routerMap[ routeItem[ 'path' ] ] = routeItem;
     });
 
@@ -169,6 +169,13 @@ blueRouter.router.prototype.getContentForPage = function( pageId ) {
 };
 
 blueRouter.router.prototype.getContentForRoute = function( route ) {
+    
+    if ( route[ 'keepAlive' ] ){
+        let alivePage = document.getElementById( route[ 'path' ] );
+        if ( alivePage ){
+            return alivePage;
+        }
+    }
 
     let content = route[ 'content' ];
     return content? content: 'No content found for route from path ' + route[ 'path' ];
@@ -180,49 +187,85 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
     // Run events
     this.runEvent( blueRouter.defaultOptions.EVENT_BEFORE_OUT, currentPageId, {} );
 
-    // Add next page
+    // Get the currentPage and add next page
     let currentPage = document.getElementsByClassName( 'currentPage' )[0];
-    currentPage.insertAdjacentHTML(
-        'afterend',
-        '<div class="nextPage hidden page" id="' + nextPageId + '">'
-         + content
-         + '</div>'
-    );
-    let newPage = document.getElementById( nextPageId );
+    let newPage = this.addNextPage( currentPage, content, nextPageId );
 
     // Animate!
     let self = this;
     let currentPageAnimationendListener = () => {
         currentPage.removeEventListener( 'animationend', currentPageAnimationendListener );
+        
+        // Remove hidden class, add animationIn class
         newPage.classList.remove( 'hidden' );
         newPage.classList.add( this.options.animationIn );
 
-        // Remove current page
-        currentPage.remove();
+        // Retire current page: save it as an alive page or remove it
+        this.retireCurrentPage( currentPageId, currentPage );
         self.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
     };
     currentPage.addEventListener( 'animationend', currentPageAnimationendListener );
 
     let newPageAnimationendListener = () => {
-        
         newPage.removeEventListener( 'animationend', newPageAnimationendListener );
 
-        // Remove current page
-        //currentPage.remove();
-        //self.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
-
-        // Remove nextPage class and add currentPage class
+        // Remove nextPage class, add currentPage class, remove animationIn class
         newPage.classList.remove( 'nextPage' );
         newPage.classList.add( 'currentPage' );
         newPage.classList.remove( this.options.animationIn );
 
-        self.runEvent( blueRouter.defaultOptions.EVENT_INIT, nextPageId, urlObject );
-        //self.runEvent( blueRouter.defaultOptions.EVENT_REINIT, nextPageId, urlObject );
+        // Run EVENT_INIT or EVENT_REINIT
+        self.runEvent(
+            content instanceof HTMLElement? blueRouter.defaultOptions.EVENT_REINIT: blueRouter.defaultOptions.EVENT_INIT,
+            nextPageId,
+            urlObject
+        );
+        // Run EVENT_MOUNTED
         self.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId, urlObject );
     };
     newPage.addEventListener( 'animationend', newPageAnimationendListener );
 
     currentPage.classList.add( this.options.animationOut );
+};
+
+blueRouter.router.prototype.addNextPage = function( currentPage, content, nextPageId ){
+
+    if ( content instanceof HTMLElement ){
+        currentPage.insertAdjacentElement(
+            'afterend',
+            content
+        );
+        content.classList.add( 'nextPage' );
+        content.classList.add( 'hidden' );
+        content.classList.remove( 'alive' );
+
+    } else {
+        currentPage.insertAdjacentHTML(
+            'afterend',
+            '<div class="nextPage hidden page" id="' + nextPageId + '">'
+            + content
+            + '</div>'
+        );
+    }
+
+    return document.getElementById( nextPageId );
+};
+
+// Retire current page: save it as an alive page or remove it
+blueRouter.router.prototype.retireCurrentPage = function( currentPageId, currentPage ){
+
+    let currentRoute = this.routesMap[ currentPageId ];
+
+    // If must keep alive current page, set page and alive as classes removing the rest
+    if ( currentRoute && currentRoute[ 'keepAlive' ]){
+        currentPage.removeAttribute( 'class' );
+        currentPage.classList.add( 'page' );
+        currentPage.classList.add( 'alive' );
+        return;
+    }
+
+    // Do not keep alive current page, so remove it
+    currentPage.remove();
 };
 
 blueRouter.router.prototype.runEvent = function( eventId, pageId, urlObject ) {
