@@ -129,8 +129,8 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
     if ( content instanceof Promise ){
         content.then( function( text ){
             // Update content of route
-            let route = self.routesMap[ urlObject.page ];
-            route[ 'content' ] = text;
+            let routeItem = self.routesMap[ urlObject.page ];
+            routeItem[ 'content' ] = text;
 
             // Run doPageTransition
             self.doPageTransition( text, urlObject.page, currentPageId, urlObject );
@@ -160,43 +160,44 @@ blueRouter.router.prototype.updateStack = function( pageId ) {
 
 blueRouter.router.prototype.getContentForPage = function( pageId ) {
 
-    let route = this.routesMap[ pageId ];
+    // Get the routeItem from the routesMap
+    let routeItem = this.routesMap[ pageId ];
 
     // Check if there is a route for this path
-    if ( route ){
-        return this.getContentForRoute( route );
+    if ( routeItem ){
+        return this.getContentForRoute( routeItem );
     }
 
     // No route found, 404 error
-    route = this.routesMap[ this.options.PAGE_ID_404_ERROR ];
-    if ( route ){
-        return this.getContentForRoute( route );
+    routeItem = this.routesMap[ this.options.PAGE_ID_404_ERROR ];
+    if ( routeItem ){
+        return this.getContentForRoute( routeItem );
     }
 
     // No 404 page found
     return '<h3>404 - Page not found: ' + pageId + '</h3>';
 };
 
-blueRouter.router.prototype.getContentForRoute = function( route ) {
+blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
     
-    if ( route[ 'keepAlive' ] ){
-        let alivePage = document.getElementById( route[ 'path' ] );
+    if ( routeItem[ 'keepAlive' ] ){
+        let alivePage = document.getElementById( routeItem[ 'path' ] );
         if ( alivePage ){
             return alivePage;
         }
     }
 
-    let content = route[ 'content' ];
+    let content = routeItem[ 'content' ];
     if ( content ){
         return content;
     }
 
-    let url = route[ 'url' ];
+    let url = routeItem[ 'url' ];
     if ( url ){
         return blueRouter.htmlFetcher.loadUrl( url );
     }
 
-    return 'No content found for route from path ' + route[ 'path' ];
+    return 'No content found for route from path ' + routeItem[ 'path' ];
 };
 
 
