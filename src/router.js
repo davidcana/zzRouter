@@ -123,8 +123,22 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
 
     // Get the content
     let content = this.getContentForPage( urlObject.page );
+    
+    // If content is a Promise wait and resolve it
+    let self = this;
+    if ( content instanceof Promise ){
+        content.then( function( text ){
+            // Update content of route
+            let route = self.routesMap[ urlObject.page ];
+            route[ 'content' ] = text;
 
-    // Update current page
+            // Run doPageTransition
+            self.doPageTransition( text, urlObject.page, currentPageId, urlObject );
+        });
+        return;
+    }
+
+    // content is NOT a Promise: update current page
     this.doPageTransition( content, urlObject.page, currentPageId, urlObject );
 };
 
@@ -173,7 +187,16 @@ blueRouter.router.prototype.getContentForRoute = function( route ) {
     }
 
     let content = route[ 'content' ];
-    return content? content: 'No content found for route from path ' + route[ 'path' ];
+    if ( content ){
+        return content;
+    }
+
+    let url = route[ 'url' ];
+    if ( url ){
+        return blueRouter.htmlFetcher.loadUrl( url );
+    }
+
+    return 'No content found for route from path ' + route[ 'path' ];
 };
 
 
