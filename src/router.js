@@ -9,6 +9,26 @@ blueRouter.router = function ( userOptions ) {
     blueRouter.utils.extend( this.options, blueRouter.defaultOptions, userOptions );
     this.checkOptions();
 
+    // Preload pages if needed
+    if ( this.options.preloadPages ){
+        let self = this;
+        blueRouter.htmlFetcher.loadAllUrls(
+            this,
+            () => {
+                self.init();
+            }
+        );
+        return;
+    }
+
+    // Do not preload pages: run init
+    this.init();
+};
+
+/* Methods */
+
+blueRouter.router.prototype.init = function() {
+
     // Init some other vars
     //this.pathname = window.location.pathname;
     //this.urlBase = window.location.href;
@@ -20,9 +40,10 @@ blueRouter.router = function ( userOptions ) {
     // Add event listeners
     this.addEventListenersForWindow();
     this.addEventListenersForLinks();
-};
 
-/* Methods */
+    // Navigate to window.location.href or home
+    this.navigateUrl( this.options.browserHistoryOnLoad? window.location.href: '' );
+};
 
 // Check that mandatory user defined properties are defined
 blueRouter.router.prototype.checkOptions = function() {
@@ -48,11 +69,11 @@ blueRouter.router.prototype.checkOptions = function() {
 };
 
 blueRouter.router.prototype.addEventListenersForWindow = function() {
-
+    /*
     window.onload = () => {
         this.navigateUrl( this.options.browserHistoryOnLoad? window.location.href: '' );
     }
-
+    */
     window.onpopstate = ( e ) => {
         this.navigateUrl( window.location.href );
         //this.navigateUrl( e.state[ 'page' ] );

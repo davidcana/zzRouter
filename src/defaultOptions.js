@@ -3,6 +3,7 @@
 blueRouter.defaultOptions = {
     browserHistoryOnLoad: true,
     pagePrefix: '!',
+    preloadPages: false,
 
     // Animations
     animationOut: 'slide-out-top',

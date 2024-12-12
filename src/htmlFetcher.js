@@ -14,9 +14,9 @@ blueRouter.htmlFetcher.loadAllUrls = function( router, callback ){
 
     // Iterate urlRoutes and load each routeItem if needed
     routes.map( routeItem => {
-        ++pending;
         let url = routeItem[ 'url' ];
         if ( url ){
+            ++pending;
             blueRouter.htmlFetcher.loadUrl( url ).then(
                 function( text ){
                     // Update content of route
