@@ -39,7 +39,7 @@ blueRouter.router.prototype.init = function() {
 
     // Add event listeners
     this.addEventListenersForWindow();
-    this.addEventListenersForLinks();
+    //this.addEventListenersForLinks();
 
     // Navigate to window.location.href or home
     this.navigateUrl( this.options.browserHistoryOnLoad? window.location.href: '' );
@@ -80,13 +80,14 @@ blueRouter.router.prototype.addEventListenersForWindow = function() {
     }
 };
 
-blueRouter.router.prototype.addEventListenersForLinks = function() {
+blueRouter.router.prototype.addEventListenersForLinks = function( pageId ) {
     
     let self = this;
 
     // Add event listeners for a elements
     blueRouter.utils.addEventListenerOnList(
-        document.getElementsByTagName( 'a' ),
+        //document.getElementsByTagName( 'a' ),
+        document.getElementById( pageId ).getElementsByTagName( 'a' ),
         'click', 
         (e) => {
             const href = e.target.getAttribute( 'href' );
@@ -311,7 +312,7 @@ blueRouter.router.prototype.retireCurrentPage = function( currentPageId, current
 blueRouter.router.prototype.runEvent = function( eventId, pageId, urlObject ) {
 
     if ( eventId == blueRouter.defaultOptions.EVENT_INIT ){
-        this.addEventListenersForLinks();
+        this.addEventListenersForLinks( pageId );
     }
 
     // Get the page object from options
