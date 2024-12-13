@@ -225,12 +225,18 @@ blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
 
 blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId, urlObject ) {
 
+    // Get the initEvent
+    const initEvent = content instanceof HTMLElement? blueRouter.defaultOptions.EVENT_REINIT: blueRouter.defaultOptions.EVENT_INIT;
+
     // Run events
     this.runEvent( blueRouter.defaultOptions.EVENT_BEFORE_OUT, currentPageId, {} );
 
     // Get the currentPage and add next page
     let currentPage = document.getElementsByClassName( 'currentPage' )[0];
     let newPage = this.addNextPage( currentPage, content, nextPageId );
+
+    // Render next page
+    this.runRenderRelated( initEvent, nextPageId, urlObject );
 
     // Animate!
     let self = this;
@@ -256,11 +262,8 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
         newPage.classList.remove( this.options.animationIn );
 
         // Run EVENT_INIT or EVENT_REINIT
-        self.runEvent(
-            content instanceof HTMLElement? blueRouter.defaultOptions.EVENT_REINIT: blueRouter.defaultOptions.EVENT_INIT,
-            nextPageId,
-            urlObject
-        );
+        self.runEvent( initEvent, nextPageId, urlObject );
+
         // Run EVENT_MOUNTED
         self.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId, urlObject );
     };
@@ -269,9 +272,36 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
     currentPage.classList.add( this.options.animationOut );
 };
 
+blueRouter.router.prototype.runRenderRelated = function( initEvent, nextPageId, urlObject ){
+
+    // Run preEvent (EVENT_PRE_INIT or EVENT_PRE_REINIT)
+    const preEvent = initEvent ===  this.options.EVENT_INIT?
+        this.options.EVENT_PRE_INIT:
+        this.options.EVENT_PRE_REINIT
+
+    this.runEvent( preEvent, nextPageId, urlObject );
+
+    // Run render if needed
+    const routeItem = this.routesMap[ nextPageId ];
+    const renderOption = initEvent ===  this.options.EVENT_INIT?
+        this.options.RUN_RENDER_BEFORE_EVENT_INIT:
+        this.options.RUN_RENDER_BEFORE_EVENT_REINIT;
+    const routeProperty = initEvent ===  this.options.EVENT_INIT?
+        'runRenderBeforeInit':
+        'runRenderBeforeReinit';
+    const mustRunRender = routeItem[ routeProperty ] === undefined?
+        renderOption:
+        routeItem[ routeProperty ];
+
+    if ( mustRunRender && this.options.renderFunction && blueRouter.utils.isFunction( this.options.renderFunction ) ){
+        blueRouter.options.renderFunction();
+    }
+};
+
 blueRouter.router.prototype.addNextPage = function( currentPage, content, nextPageId ){
 
     if ( content instanceof HTMLElement ){
+        // content is HTMLElement
         currentPage.insertAdjacentElement(
             'afterend',
             content
@@ -281,6 +311,7 @@ blueRouter.router.prototype.addNextPage = function( currentPage, content, nextPa
         content.classList.remove( 'alive' );
 
     } else {
+        // content must be text
         currentPage.insertAdjacentHTML(
             'afterend',
             '<div class="nextPage hidden page" id="' + nextPageId + '">'
@@ -323,7 +354,9 @@ blueRouter.router.prototype.runEvent = function( eventId, pageId, urlObject ) {
         let event = {
             params: urlObject.params || {}
         };
-        page[ eventId ]( event );
+        if ( page[ eventId ] && blueRouter.utils.isFunction( page[ eventId ] ) ){
+            page[ eventId ]( event );
+        }
     }
 };
 

@@ -14,12 +14,16 @@ blueRouter.defaultOptions = {
     PAGE_ID_404_ERROR: '[404]',
 
     // Events
+    EVENT_PRE_INIT: 'preInit',
     EVENT_INIT: 'init',
+    EVENT_PRE_REINIT: 'preReinit',
     EVENT_REINIT: 'reinit',
     EVENT_MOUNTED: 'mounted',
     EVENT_BEFORE_OUT: 'beforeOut',
     EVENT_AFTER_OUT: 'afterOut',
 
-    EVENT_PRE_PREFIX: 'pre_'
+    RUN_RENDER_BEFORE_EVENT_INIT: true,
+    RUN_RENDER_BEFORE_EVENT_REINIT: false
+
 };
 
