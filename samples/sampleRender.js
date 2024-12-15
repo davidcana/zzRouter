@@ -5,22 +5,24 @@ const pages = {};
 
 // Initialize options
 let initializeZPT = true;
-const dictionary = {};
 let options = {
-    pages: pages,
-    renderFunction: ( page ) => {
-        if ( initializeZPT ){
-            zpt.run({
-                'root': document.body,
-                'dictionary': dictionary
-            });
-            initializeZPT = false;
-        } else {
-            zpt.run({
-                'command': 'partialRender',
-                'target': page[ 'el' ]
-            });
-        }
+    pages: pages
+};
+
+// Add renderFunction
+const dictionary = {};
+options.renderFunction = ( page ) => {
+    if ( initializeZPT ){
+        zpt.run({
+            'root': document.body,
+            'dictionary': dictionary
+        });
+        initializeZPT = false;
+    } else {
+        zpt.run({
+            'command': 'partialRender',
+            'target': page[ 'el' ]
+        });
     }
 };
 
@@ -41,6 +43,16 @@ options.routes = [
         'path': 'textWriter',
         'keepAlive': true,
         'url': 'pages/textWriter.html'
+    },
+    // Render without waiting page
+    {
+        'path': 'renderWithoutWaiting',
+        'url': 'pages/renderWithoutWaiting.html'
+    },
+    // Render waiting for server page
+    {
+        'path': 'renderWaitingForServer',
+        'url': 'pages/renderWaitingForServer.html'
     },
     // Default route (404 page)
     {
