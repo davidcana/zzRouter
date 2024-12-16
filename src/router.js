@@ -269,13 +269,19 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
         
         // Remove hidden class, add animationIn class
         newPage.classList.remove( 'hidden' );
-        newPage.classList.add( this.options.animationIn );
+        if ( mustAnimate ){
+            newPage.classList.add( this.options.animationIn );
+        }
 
         // Retire current page: save it as an alive page or remove it
         this.retireCurrentPage( currentPageId, currentPage );
         self.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
     };
-    currentPage.addEventListener( 'animationend', currentPageAnimationendListener );
+    if ( mustAnimate ){
+        currentPage.addEventListener( 'animationend', currentPageAnimationendListener );
+    } else {
+        currentPageAnimationendListener();
+    }
 
     let newPageAnimationendListener = () => {
         newPage.removeEventListener( 'animationend', newPageAnimationendListener );
@@ -283,7 +289,9 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
         // Remove nextPage class, add currentPage class, remove animationIn class
         newPage.classList.remove( 'nextPage' );
         newPage.classList.add( 'currentPage' );
-        newPage.classList.remove( this.options.animationIn );
+        if ( mustAnimate ){
+            newPage.classList.remove( this.options.animationIn );
+        }
 
         // Run EVENT_INIT or EVENT_REINIT
         self.runEvent( initEvent, nextPageId, urlObject );
@@ -291,9 +299,12 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
         // Run EVENT_MOUNTED
         self.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId, urlObject );
     };
-    newPage.addEventListener( 'animationend', newPageAnimationendListener );
-
-    currentPage.classList.add( this.options.animationOut );
+    if ( mustAnimate ){
+        newPage.addEventListener( 'animationend', newPageAnimationendListener );
+        currentPage.classList.add( this.options.animationOut );
+    } else {
+        newPageAnimationendListener();
+    }
 };
 
 blueRouter.router.prototype.runRenderRelated = function( initEvent, nextPageId, urlObject ){
