@@ -42,7 +42,10 @@ blueRouter.router.prototype.init = function() {
     //this.addEventListenersForLinks();
 
     // Navigate to window.location.href or home
-    this.navigateUrl( this.options.browserHistoryOnLoad? window.location.href: '' );
+    this.navigateUrl(
+        this.options.browserHistoryOnLoad? window.location.href: '',
+        this.options.animateFirstTransition
+    );
 };
 
 // Check that mandatory user defined properties are defined
@@ -79,12 +82,12 @@ blueRouter.router.prototype.alertError = function( message ){
 blueRouter.router.prototype.addEventListenersForWindow = function() {
     /*
     window.onload = () => {
-        this.navigateUrl( this.options.browserHistoryOnLoad? window.location.href: '' );
+        this.navigateUrl( this.options.browserHistoryOnLoad? window.location.href: '', true );
     }
     */
     window.onpopstate = ( e ) => {
-        this.navigateUrl( window.location.href );
-        //this.navigateUrl( e.state[ 'page' ] );
+        this.navigateUrl( window.location.href, true );
+        //this.navigateUrl( e.state[ 'page' ], true );
     };
 };
 
@@ -119,7 +122,7 @@ blueRouter.router.prototype.addEventListenersForLinks = function( pageId ) {
                 'page ' + href,
                 '#' + href
             );
-            self.navigateUrl( href );
+            self.navigateUrl( href, true );
         }
     );
 };
@@ -147,7 +150,7 @@ blueRouter.router.prototype.getRouteItem = function( pageId, mayBeUndefined ) {
     this.alertError( 'No route found with id: ' + pageId );
 };
 
-blueRouter.router.prototype.navigateUrl = function( url ) {
+blueRouter.router.prototype.navigateUrl = function( url, mustAnimate ) {
     //alert( 'navigateUrl\nurl: ' + url );
 
     // Create an url object to make it easy everything
@@ -174,13 +177,13 @@ blueRouter.router.prototype.navigateUrl = function( url ) {
             routeItem[ 'content' ] = text;
 
             // Run doPageTransition
-            self.doPageTransition( text, urlObject.page, currentPageId, urlObject );
+            self.doPageTransition( text, urlObject.page, currentPageId, urlObject, mustAnimate );
         });
         return;
     }
 
     // content is NOT a Promise: update current page
-    this.doPageTransition( content, urlObject.page, currentPageId, urlObject );
+    this.doPageTransition( content, urlObject.page, currentPageId, urlObject, mustAnimate );
 };
 
 blueRouter.router.prototype.updateStack = function( pageId ) {
@@ -244,7 +247,7 @@ blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
 };
 
 
-blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId, urlObject ) {
+blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId, urlObject, mustAnimate ) {
 
     // Get the initEvent
     const initEvent = content instanceof HTMLElement? blueRouter.defaultOptions.EVENT_REINIT: blueRouter.defaultOptions.EVENT_INIT;

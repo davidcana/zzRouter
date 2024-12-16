@@ -8,7 +8,8 @@ blueRouter.defaultOptions = {
     // Animations
     animationOut: 'slide-out-top',
     animationIn: 'scale-in-center',
-
+    animateFirstTransition: false,
+    
     // Special pages ids
     PAGE_ID_HOME: '[home]',
     PAGE_ID_404_ERROR: '[404]',
