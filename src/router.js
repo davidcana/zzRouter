@@ -150,7 +150,7 @@ blueRouter.router.prototype.getRouteItem = function( pageId, mayBeUndefined ) {
     this.alertError( 'No route found with id: ' + pageId );
 };
 
-blueRouter.router.prototype.navigateUrl = function( url, mustAnimate ) {
+blueRouter.router.prototype.navigateUrl = function( url, mustAnimateByCode ) {
     //alert( 'navigateUrl\nurl: ' + url );
 
     // Create an url object to make it easy everything
@@ -177,13 +177,13 @@ blueRouter.router.prototype.navigateUrl = function( url, mustAnimate ) {
             routeItem[ 'content' ] = text;
 
             // Run doPageTransition
-            self.doPageTransition( text, urlObject.page, currentPageId, urlObject, mustAnimate );
+            self.doPageTransition( text, urlObject.page, currentPageId, urlObject, mustAnimateByCode );
         });
         return;
     }
 
     // content is NOT a Promise: update current page
-    this.doPageTransition( content, urlObject.page, currentPageId, urlObject, mustAnimate );
+    this.doPageTransition( content, urlObject.page, currentPageId, urlObject, mustAnimateByCode );
 };
 
 blueRouter.router.prototype.updateStack = function( pageId ) {
@@ -247,7 +247,11 @@ blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
 };
 
 
-blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId, urlObject, mustAnimate ) {
+blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId, urlObject, mustAnimateByCode ) {
+
+    // Get mustAnimateOut and mustAnimateIn
+    const mustAnimateOut = mustAnimateByCode && !!this.options.animationOut;
+    const mustAnimateIn = mustAnimateByCode && !!this.options.animationIn;
 
     // Get the initEvent
     const initEvent = content instanceof HTMLElement? blueRouter.defaultOptions.EVENT_REINIT: blueRouter.defaultOptions.EVENT_INIT;
@@ -262,26 +266,26 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
     // Render next page
     this.runRenderRelated( initEvent, nextPageId, urlObject );
 
-    // Animate!
+    // Define currentPageAnimationendListener and newPageAnimationendListener
     let self = this;
     let currentPageAnimationendListener = () => {
         currentPage.removeEventListener( 'animationend', currentPageAnimationendListener );
         
         // Remove hidden class, add animationIn class
         newPage.classList.remove( 'hidden' );
-        if ( mustAnimate ){
+        if ( mustAnimateIn ){
             newPage.classList.add( this.options.animationIn );
         }
 
         // Retire current page: save it as an alive page or remove it
         this.retireCurrentPage( currentPageId, currentPage );
         self.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
+
+        //  Run newPageAnimationendListener if listener of amimationend on newPage was not added
+        if ( ! mustAnimateIn ) {
+            newPageAnimationendListener();
+        }
     };
-    if ( mustAnimate ){
-        currentPage.addEventListener( 'animationend', currentPageAnimationendListener );
-    } else {
-        currentPageAnimationendListener();
-    }
 
     let newPageAnimationendListener = () => {
         newPage.removeEventListener( 'animationend', newPageAnimationendListener );
@@ -289,7 +293,7 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
         // Remove nextPage class, add currentPage class, remove animationIn class
         newPage.classList.remove( 'nextPage' );
         newPage.classList.add( 'currentPage' );
-        if ( mustAnimate ){
+        if ( mustAnimateIn ){
             newPage.classList.remove( this.options.animationIn );
         }
 
@@ -299,11 +303,20 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
         // Run EVENT_MOUNTED
         self.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId, urlObject );
     };
-    if ( mustAnimate ){
+
+    // Add event listeners
+    if ( mustAnimateOut ){
+        currentPage.addEventListener( 'animationend', currentPageAnimationendListener );
+    }
+    if ( mustAnimateIn ){
         newPage.addEventListener( 'animationend', newPageAnimationendListener );
+    }
+
+    // Animate!
+    if ( mustAnimateOut ){
         currentPage.classList.add( this.options.animationOut );
     } else {
-        newPageAnimationendListener();
+        currentPageAnimationendListener();
     }
 };
 
