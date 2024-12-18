@@ -27,6 +27,7 @@ blueRouter.router = function ( userOptions ) {
 
 /* Methods */
 
+/** @suppress {missingProperties} */
 blueRouter.router.prototype.init = function() {
 
     // Init some other vars
@@ -49,6 +50,7 @@ blueRouter.router.prototype.init = function() {
 };
 
 // Check that mandatory user defined properties are defined
+/** @suppress {missingProperties} */
 blueRouter.router.prototype.checkOptions = function() {
 
     let errors = 0;
@@ -91,6 +93,7 @@ blueRouter.router.prototype.addEventListenersForWindow = function() {
     };
 };
 
+/** @suppress {missingProperties} */
 blueRouter.router.prototype.addEventListenersForLinks = function( pageId ) {
     
     let self = this;
@@ -215,6 +218,7 @@ blueRouter.router.prototype.getContentForPage = function( pageId ) {
 
     // No route found, 404 error
     //routeItem = this.routesMap[ this.options.PAGE_ID_404_ERROR ];
+    /** @suppress {missingProperties} */
     routeItem = this.getRouteItem( this.options.PAGE_ID_404_ERROR, true );
     if ( routeItem ){
         return this.getContentForRoute( routeItem );
@@ -246,7 +250,7 @@ blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
     return 'No content found for route from path ' + routeItem[ 'path' ];
 };
 
-
+/** @suppress {missingProperties} */
 blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId, urlObject, mustAnimateByCode ) {
 
     // Get mustAnimateOut and mustAnimateIn
@@ -320,6 +324,7 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
     }
 };
 
+/** @suppress {missingProperties} */
 blueRouter.router.prototype.runRenderRelated = function( initEvent, nextPageId, urlObject ){
 
     // Run preEvent (EVENT_PRE_INIT or EVENT_PRE_REINIT)
@@ -407,6 +412,7 @@ blueRouter.router.prototype.runEvent = function( eventId, pageId, urlObject ) {
     }
 
     // Get the page object from options
+    /** @suppress {missingProperties} */
     let page = this.options.pages[ pageId ];
 
     // If a page is found, run the event handler

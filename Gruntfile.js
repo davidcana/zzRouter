@@ -105,29 +105,23 @@ module.exports = function(grunt) {
                 stripBanners: true,
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd HH:M:s") %> */\n'
             },
-            sample: {
+            standalone: {
                 src: [
                     'src/blueRouter.js', 
                     'src/router.js', 
                     'src/defaultOptions.js',
                     'src/htmlFetcher.js',
                     'src/utils.js',
-                    'samples/sample.js',
                     'src/export.js'
                 ],
-                dest: 'build/sample.concat.js',
+                dest: 'build/blueRouter.standalone.concat.js',
                 nonull: true
             }
         },
         uglify: {
-            core: {
+            standalone: {
                 files: {
-                    'build/blueRouter-core.min.js': [ 'build/blueRouter-core.js' ]
-                }
-            },
-            gcc: {
-                files: {
-                    'build/blueRouter-gcc.min.js': [ 'build/blueRouter-gcc.js' ]
+                    'build/blueRouter.standalone.concat.min.js': [ 'build/blueRouter.standalone.concat.js' ]
                 }
             }
         },
@@ -191,7 +185,8 @@ module.exports = function(grunt) {
     grunt.registerTask('test', ['qunit']);
     grunt.registerTask('default', [
         'closure-compiler:sample',
-        'concat:sample'
+        'concat:standalone',
+        'uglify:standalone'
     ]);
     grunt.registerTask('all', ['default', 'buildTests', 'test']);
 };
