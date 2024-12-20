@@ -4,13 +4,8 @@ var Qunit = require( 'qunit' );
 var zz = require( 'zzdom' );
 var blueRouter = require( '../../build/blueRouter.standalone.concat.js' );
 
-window.globalVar = 'It works!';
-
-// Unit tests
-QUnit.test( "Simple navigation test", function( assert ) {
-    //assert.equal( zz('#t1-1').html() , "" );
-    assert.equal( "" , "" );
-
+// Init router
+const initRouter = () => {
     // Initialize pages
     const pages = {};
 
@@ -35,10 +30,10 @@ QUnit.test( "Simple navigation test", function( assert ) {
 
     <ul id="home_links">
         <li>
-            <a href="!page1">Page 1</a>. Go to page 1.
+            <a href="!page1" id="home_page1Link">Page 1</a>. Go to page 1.
         </li>
         <li>
-            <a href="!page2">Page 2</a>. Go to page 2.
+            <a href="!page2" id="home_page2Link">Page 2</a>. Go to page 2.
         </li>
     </ul>
 </div>
@@ -62,10 +57,10 @@ QUnit.test( "Simple navigation test", function( assert ) {
 
     <ul id="page1_links">
         <li>
-            <a href="!page11">Page 11</a>. Go to page 11.
+            <a href="!page11" id="page1_page11Link">Page 11</a>. Go to page 11.
         </li>
         <li>
-            <a href="!page12">Page 12</a>. Go to page 12.
+            <a href="!page12" id="page1_page12Link">Page 12</a>. Go to page 12.
         </li>
     </ul>
 </div>
@@ -195,4 +190,22 @@ QUnit.test( "Simple navigation test", function( assert ) {
 
     // Create new router instance
     let router = new blueRouter.router( options );
+};
+
+// Unit tests
+QUnit.test( "Simple navigation test", function( assert ) {
+
+    // Init router
+    initRouter();
+
+    // Start testing
+    assert.equal( zz('#home_page1Link').html() , "Page 1" );
+    assert.equal( zz('#home_page2Link').html() , "Page 2" );
+
+    // Go to page 1
+    zz('#home_page1Link').el.click();
+    assert.equal( zz('#page1_page11Link').html() , "Page 11" );
+    assert.equal( zz('#page1_page12Link').html() , "Page 12" );
 });
+
+
