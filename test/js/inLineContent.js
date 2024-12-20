@@ -231,7 +231,7 @@ QUnit.test( "Simple navigation test", function( assert ) {
     zz('#page22_homeLink').el.click();
 });
 
-QUnit.test( "History navigation test", function( assert ) {
+QUnit.test( "History navigation test", async function( assert ) {
 
     // Start testing
     assert.equal( zz('#home_page1Link').html() , "Page 1" );
@@ -246,16 +246,41 @@ QUnit.test( "History navigation test", function( assert ) {
     zz('#page1_page11Link').el.click();
     assert.equal( zz('#page11_p').text().trim() , "This is Page 11" );
 
-    // Go back to page 1
+    // Get a reference to finish the qunit test later
     var done = assert.async();
+
+    // Go back to page 1
     history.back();
-    setTimeout(
-        function() {
-            assert.equal( zz('#page1_page11Link').html() , "Page 11" );
-            assert.equal( zz('#page1_page12Link').html() , "Page 12" );
-            done();
-        },
-        500
-    );
+    await wait( 500 );
+    assert.equal( zz('#page1_page11Link').html() , "Page 11" );
+    assert.equal( zz('#page1_page12Link').html() , "Page 12" );
+
+    // Go forward to page 11
+    history.forward();
+    await wait( 500 );
+    assert.equal( zz('#page11_p').text().trim() , "This is Page 11" );
+
+    // Go back to page 1
+    history.back();
+    await wait( 500 );
+    assert.equal( zz('#page1_page11Link').html() , "Page 11" );
+    assert.equal( zz('#page1_page12Link').html() , "Page 12" );
+
+    // Go back to home page
+    //history.back();
+    //await wait( 500 );
+    //assert.equal( zz('#home_page1Link').html() , "Page 1" );
+    //assert.equal( zz('#home_page2Link').html() , "Page 2" );
+    
+
+
+    // Finish qunit test
+    done();
 });
+
+const wait = function( timeout ) {
+    return new Promise( resolve => {
+        setTimeout( resolve, timeout );
+    });
+};
 
