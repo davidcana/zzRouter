@@ -164,6 +164,30 @@ const initRouter = () => {
     <p id="page22_p">
         This is Page 22
     </p>
+
+    <ul id="page22_links">
+        <li>
+            <a href="!page221" id="page22_page221Link">Page 221</a>. Go to page 221.
+        </li>
+    </ul>
+</div>
+`
+        },
+        // page221
+        {
+            'path': 'page221',
+            'content': `
+<h1>Blue router test</h1>
+
+<div>
+    <a href="!" id="page221_homeLink">Home</a>
+</div>
+
+<div class="page-content">
+    <h3>Page 221</h3>
+    <p id="page221_p">
+        This is Page 221
+    </p>
 </div>
 `
         },
@@ -249,6 +273,8 @@ QUnit.test( "History navigation test", async function( assert ) {
     // Get a reference to finish the qunit test later
     var done = assert.async();
 
+    // Test first back-forward-back
+
     // Go back to page 1
     history.back();
     await wait( 500 );
@@ -266,13 +292,46 @@ QUnit.test( "History navigation test", async function( assert ) {
     assert.equal( zz('#page1_page11Link').html() , "Page 11" );
     assert.equal( zz('#page1_page12Link').html() , "Page 12" );
 
-    // Go back to home page
-    //history.back();
-    //await wait( 500 );
-    //assert.equal( zz('#home_page1Link').html() , "Page 1" );
-    //assert.equal( zz('#home_page2Link').html() , "Page 2" );
+    // Go to home: can not use go back because of qunit strange behaviour
+    zz('#page1_homeLink').el.click();
+    assert.equal( zz('#home_page1Link').html() , "Page 1" );
+    assert.equal( zz('#home_page2Link').html() , "Page 2" );
     
+    // Go to page 2
+    zz('#home_page2Link').el.click();
+    assert.equal( zz('#page2_page21Link').html() , "Page 21" );
+    assert.equal( zz('#page2_page22Link').html() , "Page 22" );
+    
+    // Go to page 22
+    zz('#page2_page22Link').el.click();
+    assert.equal( zz('#page22_p').text().trim() , "This is Page 22" );
+    
+    // Go to page 221
+    zz('#page22_page221Link').el.click();
+    assert.equal( zz('#page221_p').text().trim() , "This is Page 221" );
+    
+    // Test second back-back-forward-forward
+    
+    // Go back to page 22
+    history.back();
+    await wait( 500 );
+    assert.equal( zz('#page22_p').text().trim() , "This is Page 22" );
+    
+    // Go back to page 2
+    history.back();
+    await wait( 500 );
+    assert.equal( zz('#page2_page21Link').html() , "Page 21" );
+    assert.equal( zz('#page2_page22Link').html() , "Page 22" );
 
+    // Go forward to page 22
+    history.forward();
+    await wait( 500 );
+    assert.equal( zz('#page22_p').text().trim() , "This is Page 22" );
+
+    // Go forward to page 221
+    history.forward();
+    await wait( 500 );
+    assert.equal( zz('#page221_p').text().trim() , "This is Page 221" );
 
     // Finish qunit test
     done();
