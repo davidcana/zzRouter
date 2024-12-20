@@ -9,9 +9,11 @@ const initRouter = () => {
     // Initialize pages
     const pages = {};
 
-    // Initialize options
+    // Initialize options: no animations
     let options = {
-        pages: pages
+        pages: pages,
+        animationOut: false,
+        animationIn: false
     };
 
     // Add routes to options
@@ -25,7 +27,7 @@ const initRouter = () => {
 <div class="page-content">
     <h3>Home page</h3>
     <p>
-        This is the Home page
+        This is Home page
     </p>
 
     <ul id="home_links">
@@ -46,13 +48,13 @@ const initRouter = () => {
 <h1>Blue router test</h1>
 
 <div>
-    <a href="!">Home</a>
+    <a href="!" id="page1_homeLink">Home</a>
 </div>
 
 <div class="page-content">
     <h3>Page 1</h3>
     <p>
-        This is the Page 1
+        This is Page 1
     </p>
 
     <ul id="page1_links">
@@ -73,13 +75,13 @@ const initRouter = () => {
 <h1>Blue router test</h1>
 
 <div>
-    <a href="!">Home</a>
+    <a href="!" id="page11_homeLink">Home</a>
 </div>
 
 <div class="page-content">
     <h3>Page 11</h3>
-    <p>
-        This is the Page 11
+    <p id="page11_p">
+        This is Page 11
     </p>
 </div>
 `
@@ -91,13 +93,13 @@ const initRouter = () => {
 <h1>Blue router test</h1>
 
 <div>
-    <a href="!">Home</a>
+    <a href="!" id="page12_homeLink">Home</a>
 </div>
 
 <div class="page-content">
     <h3>Page 12</h3>
-    <p>
-        This is the Page 12
+    <p id="page12_p">
+        This is Page 12
     </p>
 </div>
 `
@@ -109,21 +111,21 @@ const initRouter = () => {
 <h1>Blue router test</h1>
 
 <div>
-    <a href="!">Home</a>
+    <a href="!" id="page2_homeLink">Home</a>
 </div>
 
 <div class="page-content">
     <h3>Page 2</h3>
     <p>
-        This is the Page 2
+        This is Page 2
     </p>
 
     <ul id="page2_links">
         <li>
-            <a href="!page21">Page 21</a>. Go to page 21.
+            <a href="!page21" id="page2_page21Link">Page 21</a>. Go to page 21.
         </li>
         <li>
-            <a href="!page22">Page 22</a>. Go to page 22.
+            <a href="!page22" id="page2_page22Link">Page 22</a>. Go to page 22.
         </li>
     </ul>
 </div>
@@ -136,13 +138,13 @@ const initRouter = () => {
 <h1>Blue router test</h1>
 
 <div>
-    <a href="!">Home</a>
+    <a href="!" id="page21_homeLink">Home</a>
 </div>
 
 <div class="page-content">
     <h3>Page 21</h3>
-    <p>
-        This is the Page 21
+    <p id="page21_p">
+        This is Page 21
     </p>
 </div>
 `
@@ -154,13 +156,13 @@ const initRouter = () => {
 <h1>Blue router test</h1>
 
 <div>
-    <a href="!">Home</a>
+    <a href="!" id="page22_homeLink">Home</a>
 </div>
 
 <div class="page-content">
     <h3>Page 22</h3>
-    <p>
-        This is the Page 22
+    <p id="page22_p">
+        This is Page 22
     </p>
 </div>
 `
@@ -172,7 +174,7 @@ const initRouter = () => {
 <h1>Blue router test</h1>
 
 <div>
-    <a href="!">Home</a>
+    <a href="!" id="404_homeLink">Home</a>
 </div>
 
 <div class="page-content">
@@ -192,11 +194,11 @@ const initRouter = () => {
     let router = new blueRouter.router( options );
 };
 
+// Init router
+initRouter();
+
 // Unit tests
 QUnit.test( "Simple navigation test", function( assert ) {
-
-    // Init router
-    initRouter();
 
     // Start testing
     assert.equal( zz('#home_page1Link').html() , "Page 1" );
@@ -206,6 +208,24 @@ QUnit.test( "Simple navigation test", function( assert ) {
     zz('#home_page1Link').el.click();
     assert.equal( zz('#page1_page11Link').html() , "Page 11" );
     assert.equal( zz('#page1_page12Link').html() , "Page 12" );
+
+    // Go to page 11
+    zz('#page1_page11Link').el.click();
+    assert.equal( zz('#page11_p').text().trim() , "This is Page 11" );
+
+    // Go to home
+    zz('#page11_homeLink').el.click();
+    assert.equal( zz('#home_page1Link').html() , "Page 1" );
+    assert.equal( zz('#home_page2Link').html() , "Page 2" );
+
+    // Go to page 2
+    zz('#home_page2Link').el.click();
+    assert.equal( zz('#page2_page21Link').html() , "Page 21" );
+    assert.equal( zz('#page2_page22Link').html() , "Page 22" );
+
+    // Go to page 22
+    zz('#page2_page22Link').el.click();
+    assert.equal( zz('#page22_p').text().trim() , "This is Page 22" );
 });
 
 
