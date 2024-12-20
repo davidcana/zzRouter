@@ -226,6 +226,36 @@ QUnit.test( "Simple navigation test", function( assert ) {
     // Go to page 22
     zz('#page2_page22Link').el.click();
     assert.equal( zz('#page22_p').text().trim() , "This is Page 22" );
+
+    // Go to home
+    zz('#page22_homeLink').el.click();
 });
 
+QUnit.test( "History navigation test", function( assert ) {
+
+    // Start testing
+    assert.equal( zz('#home_page1Link').html() , "Page 1" );
+    assert.equal( zz('#home_page2Link').html() , "Page 2" );
+
+    // Go to page 1
+    zz('#home_page1Link').el.click();
+    assert.equal( zz('#page1_page11Link').html() , "Page 11" );
+    assert.equal( zz('#page1_page12Link').html() , "Page 12" );
+
+    // Go to page 11
+    zz('#page1_page11Link').el.click();
+    assert.equal( zz('#page11_p').text().trim() , "This is Page 11" );
+
+    // Go back to page 1
+    var done = assert.async();
+    history.back();
+    setTimeout(
+        function() {
+            assert.equal( zz('#page1_page11Link').html() , "Page 11" );
+            assert.equal( zz('#page1_page12Link').html() , "Page 12" );
+            done();
+        },
+        500
+    );
+});
 
