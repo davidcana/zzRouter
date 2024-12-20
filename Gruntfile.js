@@ -3,22 +3,14 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
         browserify: {
-            sample: {
+            inLineContent: {
                 options: {
                     browserifyOptions: {
                         debug: true
                     }
                 },
-                files: {
-                    'build/sample.min.js': [
-                        'src/blueRouter.js', 
-                        'src/router.js', 
-                        'src/defaultOptions.js',
-                        'src/htmlFetcher.js',
-                        'src/utils.js',
-                        'samples/sample.js'
-                    ]
-                },
+                src: 'test/js/inLineContent.js',
+                dest: 'build/inLineContent.js'
             }
         },
         qunit: {
@@ -26,10 +18,14 @@ module.exports = function(grunt) {
                 options: {
                     timeout: 60000,
                     urls: [
-                        'http://localhost:9000/test/blueRouter-core.html'
+                        'http://localhost:9000/test/inLineContent.html'
                     ]
                 }
             }
+        },
+        watch: {
+            files: [ 'js/*.js', 'test/js/*.js' ],
+            tasks: [ 'browserify' ]
         },
         compress: {
             main: {
@@ -168,6 +164,7 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-qunit');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -186,7 +183,8 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'closure-compiler:sample',
         'concat:standalone',
-        'uglify:standalone'
+        'uglify:standalone',
+        'browserify'
     ]);
     grunt.registerTask('all', ['default', 'buildTests', 'test']);
 };
