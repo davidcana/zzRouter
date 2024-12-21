@@ -114,11 +114,9 @@ options.routes = [
         'content': `
 <h1>Blue router sample</h1>
 
-<nav>
-    <a href="!">Home</a> |
-    <a href="!links">Links</a> |
-    <a href="!textWriter">Text writer</a>
-</nav>
+<div>
+    <a href="!">Home</a>
+</div>
 
 <div class="page-content">
     <h3>404 page</h3>

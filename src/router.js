@@ -40,7 +40,6 @@ blueRouter.router.prototype.init = function() {
 
     // Add event listeners
     this.addEventListenersForWindow();
-    //this.addEventListenersForLinks();
 
     // Navigate to window.location.href or home
     this.navigateUrl(
@@ -68,11 +67,6 @@ blueRouter.router.prototype.checkOptions = function() {
 
     if ( errors ){
         this.alertError( 'Unable to initalize Blue router. ' + errors + ' errors found: ' + errorMessages );
-        /*
-        let fullErrorMessage = 'Unable to initalize Blue router. ' + errors + ' errors found: ' + errorMessages;
-        alert( fullErrorMessage );
-        throw fullErrorMessage;
-        */
     }
 };
 
@@ -143,14 +137,26 @@ blueRouter.router.prototype.createRoutesMap = function() {
     return routerMap;
 };
 
-blueRouter.router.prototype.getRouteItem = function( pageId, mayBeUndefined ) {
+blueRouter.router.prototype.getRouteItem = function( pageId ) {
 
+    // Look for the route
     let routeItem = this.routesMap[ pageId ];
-    if ( routeItem || mayBeUndefined ){
+    if ( routeItem ){
         return routeItem;
     }
 
-    this.alertError( 'No route found with id: ' + pageId );
+    // No route found, 404 error
+    routeItem = this.routesMap[ this.options.PAGE_ID_404_ERROR ];
+    if ( routeItem ){
+        return routeItem;
+    }
+
+    // No 404 page, build a 404 route
+    return {
+        'path': this.options.PAGE_ID_404_ERROR,
+        'content': '<h3>404 - Page not found: ' + pageId + '</h3>'
+    };
+    //this.alertError( 'No route found with id ' + pageId + ' and no 404 page found.' );
 };
 
 blueRouter.router.prototype.navigateUrl = function( url, mustAnimateByCode ) {
@@ -175,8 +181,7 @@ blueRouter.router.prototype.navigateUrl = function( url, mustAnimateByCode ) {
     if ( content instanceof Promise ){
         content.then( function( text ){
             // Update content of route
-            //let routeItem = self.routesMap[ urlObject.page ];
-            let routeItem = self.getRouteItem( urlObject.page, false );
+            let routeItem = self.getRouteItem( urlObject.page );
             routeItem[ 'content' ] = text;
 
             // Run doPageTransition
@@ -208,28 +213,15 @@ blueRouter.router.prototype.updateStack = function( pageId ) {
 blueRouter.router.prototype.getContentForPage = function( pageId ) {
 
     // Get the routeItem from the routesMap
-    //let routeItem = this.routesMap[ pageId ];
-    let routeItem = this.getRouteItem( pageId, true );
+    let routeItem = this.getRouteItem( pageId );
 
-    // Check if there is a route for this path
-    if ( routeItem ){
-        return this.getContentForRoute( routeItem );
-    }
-
-    // No route found, 404 error
-    //routeItem = this.routesMap[ this.options.PAGE_ID_404_ERROR ];
-    /** @suppress {missingProperties} */
-    routeItem = this.getRouteItem( this.options.PAGE_ID_404_ERROR, true );
-    if ( routeItem ){
-        return this.getContentForRoute( routeItem );
-    }
-
-    // No 404 page found
-    return '<h3>404 - Page not found: ' + pageId + '</h3>';
+    // Get the content of that route
+    return this.getContentForRoute( routeItem );
 };
 
 blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
     
+    // Check keepAlive
     if ( routeItem[ 'keepAlive' ] ){
         let alivePage = document.getElementById( routeItem[ 'path' ] );
         if ( alivePage ){
@@ -237,11 +229,13 @@ blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
         }
     }
 
+    // Check content
     let content = routeItem[ 'content' ];
     if ( content ){
         return content;
     }
 
+    // Check url
     let url = routeItem[ 'url' ];
     if ( url ){
         return blueRouter.htmlFetcher.loadUrl( url );
@@ -335,8 +329,7 @@ blueRouter.router.prototype.runRenderRelated = function( initEvent, nextPageId, 
     this.runEvent( preEvent, nextPageId, urlObject );
 
     // Run render if needed
-    //const routeItem = this.routesMap[ nextPageId ];
-    const routeItem = this.getRouteItem( nextPageId, false );
+    const routeItem = this.getRouteItem( nextPageId );
     const renderOption = initEvent ===  this.options.EVENT_INIT?
         this.options.RUN_RENDER_BEFORE_EVENT_INIT:
         this.options.RUN_RENDER_BEFORE_EVENT_REINIT;
@@ -390,8 +383,7 @@ blueRouter.router.prototype.addNextPage = function( currentPage, content, nextPa
 // Retire current page: save it as an alive page or remove it
 blueRouter.router.prototype.retireCurrentPage = function( currentPageId, currentPage ){
 
-    //let currentRoute = this.routesMap[ currentPageId ];
-    let currentRoute = this.getRouteItem( currentPageId, true );
+    let currentRoute = this.getRouteItem( currentPageId );
 
     // If must keep alive current page, set page and alive as classes removing the rest
     if ( currentRoute && currentRoute[ 'keepAlive' ]){
