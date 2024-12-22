@@ -10,7 +10,7 @@ const initRouter = () => {
     const pages = {};
 
     // Load js of pages
-    pages[ 'page1' ] = require( './pages/page1.js', eventList );
+    pages[ 'page1' ] = require( './pages/page1.js' )( eventList );
 
     // Initialize options: no animations
     let options = {
@@ -133,16 +133,49 @@ const eventList = [];
 const router = initRouter();
 
 // Unit tests
-QUnit.test( "Simple navigation test", function( assert ) {
+QUnit.test( "Simple events test", async function( assert ) {
+    
+    // Get a reference to finish the qunit test later
+    var done = assert.async();
 
     // Start testing
-    assert.equal( zz('#home_page1Link').html() , "Page 1" );
-    assert.equal( zz('#home_page2Link').html() , "Page 2" );
+    const expectedEventList = [];
+    assert.deepEqual( eventList , expectedEventList );
 
-    let eventList = [];
+    // Go to page 1
+    zz('#home_page1Link').el.click();
+    expectedEventList.push( 'page1_init' );
+    expectedEventList.push( 'page1_mounted' );
+    assert.deepEqual( eventList , expectedEventList );
 
-    // Go to home
-    //zz('#page22_homeLink').el.click();
+    // Go to home using link
+    zz('#page1_homeLink').el.click();
+    expectedEventList.push( 'page1_beforeOut' );
+    expectedEventList.push( 'page1_afterOut' );
+    assert.deepEqual( eventList , expectedEventList );
+
+    // Go to page 1 again
+    zz('#home_page1Link').el.click();
+    expectedEventList.push( 'page1_init' );
+    expectedEventList.push( 'page1_mounted' );
+    assert.deepEqual( eventList , expectedEventList );
+
+    // Go to home using back
+    history.back();
+    await wait( 500 );
+    expectedEventList.push( 'page1_beforeOut' );
+    expectedEventList.push( 'page1_afterOut' );
+    assert.deepEqual( eventList , expectedEventList );
+    
+    // Go to page 1 again using forward
+    history.forward();
+    await wait( 500 );
+    expectedEventList.push( 'page1_init' );
+    expectedEventList.push( 'page1_mounted' );
+    assert.deepEqual( eventList , expectedEventList );
+
+    // Finish qunit test
+    done();
 });
 
 const wait = function( timeout ) {
