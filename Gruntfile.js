@@ -11,6 +11,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/inLineContent.js',
                 dest: 'build/js/inLineContent.js'
+            },
+            inLineEvents: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/inLineEvents.js',
+                dest: 'build/js/inLineEvents.js'
             }
         },
         qunit: {
@@ -18,13 +27,14 @@ module.exports = function(grunt) {
                 options: {
                     timeout: 60000,
                     urls: [
-                        'http://localhost:9000/test/inLineContent.html'
+                        'http://localhost:9000/test/inLineContent.html',
+                        'http://localhost:9000/test/inLineEvents.html'
                     ]
                 }
             }
         },
         watch: {
-            files: [ 'js/*.js', 'test/js/*.js' ],
+            files: [ 'js/*.js', 'test/js/*.js', 'test/js/pages/*.js' ],
             tasks: [ 'browserify' ]
         },
         compress: {
