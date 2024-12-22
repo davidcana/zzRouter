@@ -37,6 +37,9 @@ const initRouter = () => {
         <li>
             <a href="!page2" id="home_page2Link">Page 2</a>. Go to page 2.
         </li>
+        <li>
+            <a href="!brokenPage" id="home_brokenPageLink">Broken page</a>. Go to broken page.
+        </li>
     </ul>
 </div>
 `
@@ -191,6 +194,10 @@ const initRouter = () => {
 </div>
 `
         },
+        // brokenPage
+        {
+            'path': 'brokenPage'
+        },
         // Default route (404 page)
         {
             'path': '[404]',
@@ -198,7 +205,7 @@ const initRouter = () => {
 <h1>Blue router test</h1>
 
 <div>
-    <a href="!" id="404_homeLink">Home</a>
+    <a href="!" id="e404_homeLink">Home</a>
 </div>
 
 <div class="page-content">
@@ -206,7 +213,7 @@ const initRouter = () => {
     <p>
         Sorry
     </p>
-    <p>
+    <p id="e404_p">
         Requested content not found.
     </p>
 </div>
@@ -215,11 +222,11 @@ const initRouter = () => {
     ];
 
     // Create new router instance
-    let router = new blueRouter.router( options );
+    return new blueRouter.router( options );
 };
 
 // Init router
-initRouter();
+const router = initRouter();
 
 // Unit tests
 QUnit.test( "Simple navigation test", function( assert ) {
@@ -332,6 +339,33 @@ QUnit.test( "History navigation test", async function( assert ) {
     history.forward();
     await wait( 500 );
     assert.equal( zz('#page221_p').text().trim() , "This is Page 221" );
+
+    // Finish qunit test
+    done();
+});
+
+QUnit.test( "404 error test", async function( assert ) {
+    
+    // Get a reference to finish the qunit test later
+    var done = assert.async();
+
+    // Try to go to 404 error page
+    window.location.href = "/test/inLineContent.html#!notFound";
+    await wait( 500 );
+
+    // Test 404 page
+    assert.equal( zz('#e404_p').text().trim() , "Requested content not found." );
+    
+    // Go to home
+    zz('#e404_homeLink').el.click();
+
+    // Go to bokenPage: page with no content defined
+    zz('#home_brokenPageLink').el.click();
+    assert.ok( zz('#error').text().startsWith( "No content found for route from path" ) );
+
+    // Go to home
+    //window.location.href = "/test/inLineContent.html";
+    //await wait( 500 );
 
     // Finish qunit test
     done();

@@ -241,7 +241,7 @@ blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
         return blueRouter.htmlFetcher.loadUrl( url );
     }
 
-    return 'No content found for route from path ' + routeItem[ 'path' ];
+    return '<div id="error">No content found for route from path ' + routeItem[ 'path' ] + '</div>';
 };
 
 /** @suppress {missingProperties} */

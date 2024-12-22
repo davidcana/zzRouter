@@ -10,7 +10,7 @@ module.exports = function(grunt) {
                     }
                 },
                 src: 'test/js/inLineContent.js',
-                dest: 'build/inLineContent.js'
+                dest: 'build/js/inLineContent.js'
             }
         },
         qunit: {
