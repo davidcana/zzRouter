@@ -129,16 +129,16 @@ const initRouter = () => {
 };
 
 // Init router
-const eventList = [];
+let eventList = [];
 const router = initRouter();
 
-// Unit tests
-QUnit.test( "Simple events test", async function( assert ) {
-    
+// Invoked from Simple events test and Simple events keepAlive test
+const simpleEventTest = async function( assert, initEventAgain ){
     // Get a reference to finish the qunit test later
     var done = assert.async();
 
-    // Start testing
+    // Start testing, eventList and expectedEventList must be empty at first
+    eventList.length = 0;
     const expectedEventList = [];
     assert.deepEqual( eventList , expectedEventList );
 
@@ -156,7 +156,7 @@ QUnit.test( "Simple events test", async function( assert ) {
 
     // Go to page 1 again
     zz('#home_page1Link').el.click();
-    expectedEventList.push( 'page1_init' );
+    expectedEventList.push( initEventAgain );
     expectedEventList.push( 'page1_mounted' );
     assert.deepEqual( eventList , expectedEventList );
 
@@ -170,12 +170,31 @@ QUnit.test( "Simple events test", async function( assert ) {
     // Go to page 1 again using forward
     history.forward();
     await wait( 500 );
-    expectedEventList.push( 'page1_init' );
+    expectedEventList.push( initEventAgain );
     expectedEventList.push( 'page1_mounted' );
     assert.deepEqual( eventList , expectedEventList );
+    
+    // Go to home using link
+    zz('#page1_homeLink').el.click();
 
     // Finish qunit test
     done();
+};
+
+// Unit tests
+
+// Check that all init events are page1_init
+QUnit.test( "Simple events test", async function( assert ) {
+    simpleEventTest( assert, 'page1_init' );
+});
+
+// Check that all the init events except the first one are page1_reinit
+QUnit.test( "Simple events keepAlive test", async function( assert ) {
+
+    // Set keepAlive of page1 to true
+    router.routesMap[ 'page1' ][ 'keepAlive' ] = true;
+
+    simpleEventTest( assert, 'page1_reinit' );
 });
 
 const wait = function( timeout ) {
