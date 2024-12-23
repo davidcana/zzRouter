@@ -11,6 +11,7 @@ const initRouter = () => {
 
     // Load js of pages
     pages[ 'page1' ] = require( './pages/page1.js' )( eventList );
+    pages[ 'textWriter' ] = require( './pages/textWriter.js' );
 
     // Initialize options: no animations
     let options = {
@@ -79,7 +80,23 @@ const initRouter = () => {
 </div>
 
 <div class="page-content">
+    <h3>Text writer page</h3>
+    <p>
+        This is the text writer page. Write text and click 'Add text' button or press 'Enter' to add text.
+    </p>
 
+    <div class="field">
+        <div>Text</div>
+        <div>
+            <input type="text" id="textWriter_textToAdd" name="textWriter_textToAdd" required>
+            <button id="textWriter_addTextButton">Add text</button>
+        </div>
+    </div>
+
+    <div class="field">
+        <div>History</div>
+        <div id="textWriter_history"></div>
+    </div>
 </div>
 `
         },
@@ -132,6 +149,8 @@ const initRouter = () => {
 let eventList = [];
 const router = initRouter();
 
+// Unit tests
+
 // Invoked from Simple events test and Simple events keepAlive test
 const simpleEventTest = async function( assert, initEventAgain ){
     // Get a reference to finish the qunit test later
@@ -181,8 +200,6 @@ const simpleEventTest = async function( assert, initEventAgain ){
     done();
 };
 
-// Unit tests
-
 // Check that all init events are page1_init
 QUnit.test( "Simple events test", async function( assert ) {
     simpleEventTest( assert, 'page1_init' );
@@ -195,6 +212,71 @@ QUnit.test( "Simple events keepAlive test", async function( assert ) {
     router.routesMap[ 'page1' ][ 'keepAlive' ] = true;
 
     simpleEventTest( assert, 'page1_reinit' );
+});
+
+// Invoked from No keep alive in edited page test and Keep alive in edited page
+const editedPageTest = async function( assert, textContent1, textContent2, textContent3, textContent4 ){
+    // Get a reference to finish the qunit test later
+    var done = assert.async();
+
+    // Go to page 1 and then to textWriter page
+    zz('#home_page1Link').el.click();
+    zz('#page1_textWriterLink').el.click();
+    assert.equal( zz('#textWriter_history').text(), '' );
+
+    // Add some text and check it is added to textWriter_history
+    zz('#textWriter_textToAdd').val( 'First line added' );
+    zz('#textWriter_addTextButton').el.click();
+    assert.equal( zz('#textWriter_history').text(), textContent1 );
+
+    // Go back to page1, go forward to textWriter page
+    history.back();
+    await wait( 500 );
+    history.forward();
+    await wait( 500 );
+    assert.equal( zz('#textWriter_history').text(), textContent2 );
+
+    // Add some text and check it is added to textWriter_history
+    zz('#textWriter_textToAdd').val( 'Second line added' );
+    zz('#textWriter_addTextButton').el.click();
+    assert.equal( zz('#textWriter_history').text(), textContent3 );
+
+    // Go back to page1, go forward to textWriter page
+    history.back();
+    await wait( 500 );
+    history.forward();
+    await wait( 500 );
+    assert.equal( zz('#textWriter_history').text(), textContent4 );
+    
+    // Go to home using link
+    zz('#textWriter_homeLink').el.click();
+
+    // Finish qunit test
+    done();
+};
+
+QUnit.test( "No keep alive in edited page test", async function( assert ) {
+
+    editedPageTest(
+        assert,
+        'First line added',
+        '',
+        'Second line added',
+        ''
+    );
+});
+
+QUnit.test( "Keep alive in edited page test", async function( assert ) {
+    // Set keepAlive of page1 to true
+    router.routesMap[ 'textWriter' ][ 'keepAlive' ] = true;
+    
+    editedPageTest(
+        assert,
+        'First line added',
+        'First line added',
+        'First line addedSecond line added',
+        'First line addedSecond line added'
+    );
 });
 
 const wait = function( timeout ) {

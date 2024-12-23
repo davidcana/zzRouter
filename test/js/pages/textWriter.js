@@ -26,4 +26,4 @@ page[ 'mounted' ] = function( event ){
     }
 };
 
-
+module.exports = page;
