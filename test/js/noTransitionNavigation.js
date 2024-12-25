@@ -350,7 +350,7 @@ QUnit.test( "404 error test", async function( assert ) {
     var done = assert.async();
 
     // Try to go to 404 error page
-    window.location.href = "/test/inLineContent.html#!notFound";
+    window.location.href = "/test/noTransitionNavigation.html#!notFound";
     await wait( 500 );
 
     // Test 404 page
@@ -364,7 +364,7 @@ QUnit.test( "404 error test", async function( assert ) {
     assert.ok( zz('#error').text().startsWith( "No content found for route from path" ) );
 
     // Go to home
-    //window.location.href = "/test/inLineContent.html";
+    //window.location.href = "/test/noTransitionNavigation.html";
     //await wait( 500 );
 
     // Finish qunit test

@@ -3,14 +3,14 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
         browserify: {
-            inLineContent: {
+            noTransitionNavigation: {
                 options: {
                     browserifyOptions: {
                         debug: true
                     }
                 },
-                src: 'test/js/inLineContent.js',
-                dest: 'build/js/inLineContent.js'
+                src: 'test/js/noTransitionNavigation.js',
+                dest: 'build/js/noTransitionNavigation.js'
             },
             inLineEvents: {
                 options: {
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                 options: {
                     timeout: 60000,
                     urls: [
-                        'http://localhost:9000/test/inLineContent.html',
+                        'http://localhost:9000/test/noTransitionNavigation.html',
                         'http://localhost:9000/test/inLineEvents.html',
                         'http://localhost:9000/test/inLineRender.html'
                     ]
