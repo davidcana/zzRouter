@@ -12,14 +12,14 @@ module.exports = function(grunt) {
                 src: 'test/js/noTransitionNavigation.js',
                 dest: 'build/js/noTransitionNavigation.js'
             },
-            inLineEvents: {
+            noTransitionEvents: {
                 options: {
                     browserifyOptions: {
                         debug: true
                     }
                 },
-                src: 'test/js/inLineEvents.js',
-                dest: 'build/js/inLineEvents.js'
+                src: 'test/js/noTransitionEvents.js',
+                dest: 'build/js/noTransitionEvents.js'
             },
             inLineRender: {
                 options: {
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
                     timeout: 60000,
                     urls: [
                         'http://localhost:9000/test/noTransitionNavigation.html',
-                        'http://localhost:9000/test/inLineEvents.html',
+                        'http://localhost:9000/test/noTransitionEvents.html',
                         'http://localhost:9000/test/inLineRender.html'
                     ]
                 }
