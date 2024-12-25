@@ -21,14 +21,14 @@ module.exports = function(grunt) {
                 src: 'test/js/noTransitionEvents.js',
                 dest: 'build/js/noTransitionEvents.js'
             },
-            inLineRender: {
+            noTransitionRender: {
                 options: {
                     browserifyOptions: {
                         debug: true
                     }
                 },
-                src: 'test/js/inLineRender.js',
-                dest: 'build/js/inLineRender.js'
+                src: 'test/js/noTransitionRender.js',
+                dest: 'build/js/noTransitionRender.js'
             }
         },
         qunit: {
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
                     urls: [
                         'http://localhost:9000/test/noTransitionNavigation.html',
                         'http://localhost:9000/test/noTransitionEvents.html',
-                        'http://localhost:9000/test/inLineRender.html'
+                        'http://localhost:9000/test/noTransitionRender.html'
                     ]
                 }
             }
