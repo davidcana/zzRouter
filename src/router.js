@@ -137,6 +137,7 @@ blueRouter.router.prototype.createRoutesMap = function() {
     return routerMap;
 };
 
+/** @suppress {missingProperties} */
 blueRouter.router.prototype.getRouteItem = function( pageId ) {
 
     // Look for the route
