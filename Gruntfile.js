@@ -47,6 +47,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/inTransitionNavigation.js',
                 dest: 'build/js/inTransitionNavigation.js'
+            },
+            outTransitionNavigation: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/outTransitionNavigation.js',
+                dest: 'build/js/outTransitionNavigation.js'
             }
         },
         qunit: {
