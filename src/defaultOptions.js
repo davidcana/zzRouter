@@ -6,8 +6,8 @@ blueRouter.defaultOptions = {
     preloadPages: false,
 
     // Animations
-    //animationOut: 'slide-out-top',
-    animationOut: false,
+    animationOut: 'slide-out-top',
+    //animationOut: false,
     animationIn: 'scale-in-center',
     //animationIn: false,
     animateFirstTransition: false,

@@ -29,6 +29,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/noTransitionRender.js',
                 dest: 'build/js/noTransitionRender.js'
+            },
+            bothTransitionNavigation: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/bothTransitionNavigation.js',
+                dest: 'build/js/bothTransitionNavigation.js'
             }
         },
         qunit: {
