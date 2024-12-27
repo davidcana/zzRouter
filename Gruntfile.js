@@ -92,6 +92,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/bothTransitionRender.js',
                 dest: 'build/js/bothTransitionRender.js'
+            },
+            inTransitionRender: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/inTransitionRender.js',
+                dest: 'build/js/inTransitionRender.js'
             }
         },
         qunit: {
