@@ -65,6 +65,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/bothTransitionEvents.js',
                 dest: 'build/js/bothTransitionEvents.js'
+            },
+            inTransitionEvents: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/inTransitionEvents.js',
+                dest: 'build/js/inTransitionEvents.js'
             }
         },
         qunit: {
