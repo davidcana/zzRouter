@@ -21,20 +21,7 @@ const initRouter = () => {
 // Init router
 const router = initRouter();
 
-// Import navigation tests
-var navigation = require( './navigation.js' );
-
 // Unit tests
-QUnit.test( "Simple navigation test", async function( assert ) {
-    return navigation.simpleNavigationTest( assert );
-});
-
-QUnit.test( "History navigation test", async function( assert ) {
-    return navigation.historyNavigationTest( assert );
-});
-
-QUnit.test( "404 error test", async function( assert ) {
-    return navigation._404ErrorTest( assert );
-});
+require( './navigation.js' )();
 
 
