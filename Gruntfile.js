@@ -252,13 +252,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        shell: {
-            // Create symlinks in build directory so we don't need to do anything when updating files in that folders
-            // and  we want to see the samples.html page
-            createSymlinks: {
-                command: 'ln -s ../src build; ln -s ../samples build'
-            }
-        },
         exec: {
             check_node: 'node samples/src/app/node.js'
         }
@@ -272,7 +265,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-browserify')
     grunt.loadNpmTasks('grunt-exec');
-    grunt.loadNpmTasks('grunt-shell');
 
     require('google-closure-compiler').grunt(grunt, {
         platform: ['native', 'java', 'javascript'],
@@ -287,5 +279,5 @@ module.exports = function(grunt) {
         'uglify:standalone',
         'browserify'
     ]);
-    grunt.registerTask('all', ['default', 'buildTests', 'test']);
+    grunt.registerTask('all', ['default', 'test']);
 };
