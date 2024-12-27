@@ -115,11 +115,23 @@ module.exports = function(grunt) {
         qunit: {
             browser: {
                 options: {
-                    timeout: 60000,
+                    timeout: 300000,
+                    executablePath: '/usr/bin/firefox',
                     urls: [
                         'http://localhost:9000/test/noTransitionNavigation.html',
+                        'http://localhost:9000/test/bothTransitionNavigation.html',
+                        'http://localhost:9000/test/inTransitionNavigation.html',
+                        'http://localhost:9000/test/outTransitionNavigation.html',
+
                         'http://localhost:9000/test/noTransitionEvents.html',
-                        'http://localhost:9000/test/noTransitionRender.html'
+                        'http://localhost:9000/test/bothTransitionEvents.html',
+                        'http://localhost:9000/test/inTransitionEvents.html',
+                        'http://localhost:9000/test/outTransitionEvents.html',
+                        
+                        'http://localhost:9000/test/noTransitionRender.html',
+                        'http://localhost:9000/test/bothTransitionRender.html',
+                        'http://localhost:9000/test/inTransitionRender.html',
+                        'http://localhost:9000/test/outTransitionRender.html'
                     ]
                 }
             }
