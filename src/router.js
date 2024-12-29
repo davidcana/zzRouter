@@ -107,7 +107,7 @@ blueRouter.router.prototype.addEventListenersForLinks = function( pageId ) {
             }
             */
             // Follow the link if it is external (if it does not start by !)
-            if ( ! href.startsWith( self.options.pagePrefix ) ){
+            if ( ! href.startsWith( self.options.PAGE_PREFIX ) ){
                 return;
             }
 

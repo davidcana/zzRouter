@@ -201,7 +201,7 @@ Options in lower case are recommended to be customized:
 
 Options in upper case are not recommended to be customized, but do it if you know what you are doing:
 
-* pagePrefix ('!'). The prefix used in the URL for an internal page preceded by **#**. So if a page URL is https://mySpaApp.org/sample.html then the URL for an internal page **links** would be https://mySpaApp.org/sample.html#!links.
+* PAGE_PREFIX ('!'). The prefix used in the URL for an internal page preceded by **#**. So if a page URL is https://mySpaApp.org/sample.html then the URL for an internal page **links** would be https://mySpaApp.org/sample.html#!links.
 * PAGE_ID_HOME ('[home]'). The id/path used for the home page.
 * PAGE_ID_404_ERROR ('[404]'). The id/path used for the 404 error page.
 * EVENT_PRE_INIT ('preInit'). The name of the preInit event.

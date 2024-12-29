@@ -17,8 +17,8 @@ blueRouter.utils.analizeUrl = function( url, options ) {
     
     let result = {};
 
-    // Extract the parts before and after pagePrefix
-    let urlParts = url.split( options.pagePrefix );
+    // Extract the parts before and after PAGE_PREFIX
+    let urlParts = url.split( options.PAGE_PREFIX );
     result.prepage = urlParts[ 0 ];
     let postPath = urlParts[ 1 ] || '';
 

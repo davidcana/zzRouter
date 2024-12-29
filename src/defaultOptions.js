@@ -2,7 +2,6 @@
 
 blueRouter.defaultOptions = {
     browserHistoryOnLoad: true,
-    pagePrefix: '!',
     preloadPages: false,
 
     // Animations
@@ -12,6 +11,9 @@ blueRouter.defaultOptions = {
     //animationIn: false,
     animateFirstTransition: false,
     
+    // Misc
+    PAGE_PREFIX: '!',
+
     // Special pages ids
     PAGE_ID_HOME: '[home]',
     PAGE_ID_404_ERROR: '[404]',
