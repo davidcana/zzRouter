@@ -10,7 +10,7 @@ blueRouter.router = function ( userOptions ) {
     this.checkOptions();
 
     // Preload pages if needed
-    if ( this.options.preloadPages ){
+    if ( this.options.preloadPagesOnLoad ){
         let self = this;
         blueRouter.htmlFetcher.loadAllUrls(
             this,

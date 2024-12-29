@@ -6,7 +6,7 @@ const pages = {};
 // Initialize options
 let options = {
     pages: pages,
-    preloadPages: true
+    preloadPagesOnLoad: true
 };
 
 // Add routes to options

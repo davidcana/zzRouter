@@ -2,7 +2,7 @@
 
 blueRouter.defaultOptions = {
     updateOnLoad: true,
-    preloadPages: false,
+    preloadPagesOnLoad: false,
 
     // Animations
     animationOut: 'slide-out-top',
