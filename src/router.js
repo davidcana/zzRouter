@@ -44,7 +44,7 @@ blueRouter.router.prototype.init = function() {
     // Navigate to window.location.href or home
     this.navigateUrl(
         this.options.browserHistoryOnLoad? window.location.href: '',
-        this.options.animateFirstTransition
+        this.options.animateTransitionsOnLoad
     );
 };
 

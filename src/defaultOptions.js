@@ -9,7 +9,7 @@ blueRouter.defaultOptions = {
     //animationOut: false,
     animationIn: 'scale-in-center',
     //animationIn: false,
-    animateFirstTransition: false,
+    animateTransitionsOnLoad: false,
     
     // Misc
     PAGE_PREFIX: '!',
