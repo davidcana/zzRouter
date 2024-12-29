@@ -35,5 +35,5 @@ options.routes = [
 ];
 
 // Create new router instance
-let router = buildBlueRouter( options );
+const router = new blueRouter.router( options );
 
