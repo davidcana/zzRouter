@@ -43,7 +43,7 @@ blueRouter.router.prototype.init = function() {
 
     // Navigate to window.location.href or home
     this.navigateUrl(
-        this.options.browserHistoryOnLoad? window.location.href: '',
+        this.options.updateOnLoad? window.location.href: '',
         this.options.animateTransitionsOnLoad
     );
 };
@@ -78,7 +78,7 @@ blueRouter.router.prototype.alertError = function( message ){
 blueRouter.router.prototype.addEventListenersForWindow = function() {
     /*
     window.onload = () => {
-        this.navigateUrl( this.options.browserHistoryOnLoad? window.location.href: '', true );
+        this.navigateUrl( this.options.updateOnLoad? window.location.href: '', true );
     }
     */
     window.onpopstate = ( e ) => {

@@ -1,7 +1,7 @@
 // Default options
 
 blueRouter.defaultOptions = {
-    browserHistoryOnLoad: true,
+    updateOnLoad: true,
     preloadPages: false,
 
     // Animations
