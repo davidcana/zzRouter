@@ -110,6 +110,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/outTransitionRender.js',
                 dest: 'build/js/outTransitionRender.js'
+            },
+            bothTransitionLazyUrlEvents: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/bothTransitionLazyUrlEvents.js',
+                dest: 'build/js/bothTransitionLazyUrlEvents.js'
             }
         },
         qunit: {

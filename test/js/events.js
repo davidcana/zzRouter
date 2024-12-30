@@ -11,6 +11,9 @@ module.exports = function ( router, eventList ) {
     const simpleEventTest = async function( assert, initEventAgain ){
         // Get a reference to finish the qunit test later
         var done = assert.async();
+        
+        // Wait in case lazy Url
+        await utils.waitShort();
 
         // Start testing, eventList and expectedEventList must be empty at first
         eventList.length = 0;
