@@ -37,6 +37,46 @@ QUnit.test( "Lazy URLs test", async function( assert ) {
     // Wait for animations
     await utils.waitShort();
 
+    // Define some page contents
+    const homeContent =`<h1>Blue router test</h1>
+
+<div class="page-content">
+    <h3>Home page</h3>
+    <p>
+        This is Home page
+    </p>
+
+    <ul id="home_links">
+        <li>
+            <a href="!page1" id="home_page1Link">Page 1</a>. Go to page 1.
+        </li>
+        <li>
+            <a href="!page2" id="home_page2Link">Page 2</a>. Go to page 2.
+        </li>
+    </ul>
+</div>
+`;
+
+    const page1Content =`<h1>Blue router test</h1>
+
+<div>
+    <a href="!" id="page1_homeLink">Home</a>
+</div>
+
+<div class="page-content">
+    <h3>Page 1</h3>
+    <p>
+        This is Page 1
+    </p>
+
+    <ul id="page1_links">
+        <li>
+            <a href="!textWriter" id="page1_textWriterLink">Text writer</a>. Go to Text writer page.
+        </li>
+    </ul>
+</div>
+`;
+    
     // Test urls and that contents are undefined yet
     assert.equal( router.routesMap[ 'page1' ][ 'url' ] , 'pages/page1.html' );
     assert.equal( router.routesMap[ 'page1' ][ 'content' ] , undefined );
@@ -49,7 +89,8 @@ QUnit.test( "Lazy URLs test", async function( assert ) {
 
     // Test home, content must have been already loaded
     assert.equal( router.routesMap[ '[home]' ][ 'url' ] , 'pages/home.html' );
-    assert.ok( router.routesMap[ '[home]' ][ 'content' ].startsWith( '<h1>Blue router test</h1>' ) );
+    //assert.ok( router.routesMap[ '[home]' ][ 'content' ].startsWith( '<h1>Blue router test</h1>' ) );
+    assert.equal( router.routesMap[ '[home]' ][ 'content' ] , homeContent );
 
     // Go to page 1
     zz('#home_page1Link').el.click();
@@ -68,7 +109,8 @@ QUnit.test( "Lazy URLs test", async function( assert ) {
     assert.equal( router.routesMap[ '[home]' ][ 'url' ] , 'pages/home.html' );
     assert.ok( router.routesMap[ '[home]' ][ 'content' ].startsWith( '<h1>Blue router test</h1>' ) );
     assert.equal( router.routesMap[ 'page1' ][ 'url' ] , 'pages/page1.html' );
-    assert.ok( router.routesMap[ 'page1' ][ 'content' ].startsWith( '<h1>Blue router test</h1>' ) );
+    //assert.ok( router.routesMap[ 'page1' ][ 'content' ].startsWith( '<h1>Blue router test</h1>' ) );
+    assert.equal( router.routesMap[ 'page1' ][ 'content' ] , page1Content );
 
     // Go to home
     zz('#page1_homeLink').el.click();
