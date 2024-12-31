@@ -119,6 +119,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/bothTransitionLazyUrlEvents.js',
                 dest: 'build/js/bothTransitionLazyUrlEvents.js'
+            },
+            bothTransitionPreloadUrlEvents: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/bothTransitionPreloadUrlEvents.js',
+                dest: 'build/js/bothTransitionPreloadUrlEvents.js'
             }
         },
         qunit: {
@@ -140,7 +149,10 @@ module.exports = function(grunt) {
                         'http://localhost:9000/test/noTransitionRender.html',
                         'http://localhost:9000/test/bothTransitionRender.html',
                         'http://localhost:9000/test/inTransitionRender.html',
-                        'http://localhost:9000/test/outTransitionRender.html'
+                        'http://localhost:9000/test/outTransitionRender.html',
+
+                        'http://localhost:9000/test/bothTransitionLazyUrlEvents.html',
+                        'http://localhost:9000/test/bothTransitionPreloadUrlEvents.html'
                     ]
                 }
             }

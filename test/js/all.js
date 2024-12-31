@@ -12,5 +12,8 @@ QUnit.testSuites([
     { name: "No transition render Test Suite", path: "./noTransitionRender.html" },
     { name: "Both transition render Test Suite", path: "./bothTransitionRender.html" },
     { name: "In transition render Test Suite", path: "./inTransitionRender.html" },
-    { name: "Out transition render Test Suite", path: "./outTransitionRender.html" }
+    { name: "Out transition render Test Suite", path: "./outTransitionRender.html" },
+
+    { name: "Both transition lazy URL events Test Suite", path: "./bothTransitionLazyUrlEvents.html" },
+    { name: "Both transition Preload URL events Test Suite", path: "./bothTransitionPreloadUrlEvents.html" }
 ]);
