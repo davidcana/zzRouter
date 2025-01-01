@@ -254,16 +254,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        copy: {
-            srcToBuild: {
-                src: 'src/*',
-                dest: 'build/'
-            },
-            sampleToBuild: {
-                src: 'samples/*.js',
-                dest: 'build/'
-            },
-        },
         'closure-compiler': {
             sample: {
                 options: {
@@ -283,9 +273,6 @@ module.exports = function(grunt) {
                     debug: true
                 }
             }
-        },
-        exec: {
-            check_node: 'node samples/src/app/node.js'
         }
     });
 
@@ -293,10 +280,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-browserify')
-    grunt.loadNpmTasks('grunt-exec');
 
     require('google-closure-compiler').grunt(grunt, {
         platform: ['native', 'java', 'javascript'],
