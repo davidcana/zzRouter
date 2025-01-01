@@ -134,7 +134,6 @@ module.exports = function(grunt) {
             browser: {
                 options: {
                     timeout: 300000,
-                    executablePath: '/usr/bin/firefox',
                     urls: [
                         'http://localhost:9000/test/noTransitionNavigation.html',
                         'http://localhost:9000/test/bothTransitionNavigation.html',
