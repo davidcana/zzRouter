@@ -72,7 +72,7 @@ module.exports = function ( router, eventList ) {
     QUnit.test( "Simple events keepAlive test", async function( assert ) {
 
         // Set keepAlive of page1 to true
-        router.routesMap[ 'page1' ][ 'keepAlive' ] = true;
+        router.routesMap[ 'page1' ].keepAlive = true;
 
         simpleEventTest( assert, 'page1_reinit' );
     });
@@ -134,7 +134,7 @@ module.exports = function ( router, eventList ) {
 
     QUnit.test( "Keep alive in edited page test", async function( assert ) {
         // Set keepAlive of page1 to true
-        router.routesMap[ 'textWriter' ][ 'keepAlive' ] = true;
+        router.routesMap[ 'textWriter' ].keepAlive = true;
         
         editedPageTest(
             assert,

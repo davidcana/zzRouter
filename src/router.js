@@ -131,7 +131,7 @@ blueRouter.router.prototype.createRoutesMap = function() {
     const routes = this.options.routes || [];
 
     routes.map( routeItem => {
-        routerMap[ routeItem[ 'path' ] ] = routeItem;
+        routerMap[ routeItem.path ] = routeItem;
     });
 
     return routerMap;
@@ -154,8 +154,8 @@ blueRouter.router.prototype.getRouteItem = function( pageId ) {
 
     // No 404 page, build a 404 route
     return {
-        'path': this.options.PAGE_ID_404_ERROR,
-        'content': '<h3>404 - Page not found: ' + pageId + '</h3>'
+        path: this.options.PAGE_ID_404_ERROR,
+        content: '<h3>404 - Page not found: ' + pageId + '</h3>'
     };
     //this.alertError( 'No route found with id ' + pageId + ' and no 404 page found.' );
 };
@@ -183,7 +183,7 @@ blueRouter.router.prototype.navigateUrl = function( url, mustAnimateByCode ) {
         content.then( function( text ){
             // Update content of route
             let routeItem = self.getRouteItem( urlObject.page );
-            routeItem[ 'content' ] = text;
+            routeItem.content = text;
 
             // Run doPageTransition
             self.doPageTransition( text, urlObject.page, currentPageId, urlObject, mustAnimateByCode );
@@ -223,26 +223,26 @@ blueRouter.router.prototype.getContentForPage = function( pageId ) {
 blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
     
     // Check keepAlive
-    if ( routeItem[ 'keepAlive' ] ){
-        let alivePage = document.getElementById( routeItem[ 'path' ] );
+    if ( routeItem.keepAlive ){
+        let alivePage = document.getElementById( routeItem.path );
         if ( alivePage ){
             return alivePage;
         }
     }
 
     // Check content
-    let content = routeItem[ 'content' ];
+    let content = routeItem.content;
     if ( content ){
         return content;
     }
 
     // Check url
-    let url = routeItem[ 'url' ];
+    let url = routeItem.url;
     if ( url ){
         return blueRouter.htmlFetcher.loadUrl( url );
     }
 
-    return '<div id="error">No content found for route from path ' + routeItem[ 'path' ] + '</div>';
+    return '<div id="error">No content found for route from path ' + routeItem.path + '</div>';
 };
 
 /** @suppress {missingProperties} */
@@ -387,7 +387,7 @@ blueRouter.router.prototype.retireCurrentPage = function( currentPageId, current
     let currentRoute = this.getRouteItem( currentPageId );
 
     // If must keep alive current page, set page and alive as classes removing the rest
-    if ( currentRoute && currentRoute[ 'keepAlive' ]){
+    if ( currentRoute && currentRoute.keepAlive){
         currentPage.removeAttribute( 'class' );
         currentPage.classList.add( 'page' );
         currentPage.classList.add( 'alive' );

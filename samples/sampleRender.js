@@ -30,34 +30,34 @@ options.renderFunction = ( page ) => {
 options.routes = [
     // Home page
     {
-        'path': '[home]',
-        'url': 'pages/homeRender.html'
+        path: '[home]',
+        url: 'pages/homeRender.html'
     },
     // Links page
     {
-        'path': 'links',
-        'url': 'pages/links.html'
+        path: 'links',
+        url: 'pages/links.html'
     },
     // Text writer page
     {
-        'path': 'textWriter',
-        'keepAlive': true,
-        'url': 'pages/textWriter.html'
+        path: 'textWriter',
+        keepAlive: true,
+        url: 'pages/textWriter.html'
     },
     // Render without waiting page
     {
-        'path': 'renderWithoutWaiting',
-        'url': 'pages/renderWithoutWaiting.html'
+        path: 'renderWithoutWaiting',
+        url: 'pages/renderWithoutWaiting.html'
     },
     // Render waiting for server page
     {
-        'path': 'renderWaitingForServer',
-        'url': 'pages/renderWaitingForServer.html'
+        path: 'renderWaitingForServer',
+        url: 'pages/renderWaitingForServer.html'
     },
     // Default route (404 page)
     {
-        'path': '[404]',
-        'url': 'pages/404error.html'
+        path: '[404]',
+        url: 'pages/404error.html'
     }
 ];
 

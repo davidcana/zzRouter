@@ -12,24 +12,24 @@ let options = {
 options.routes = [
     // Home page
     {
-        'path': '[home]',
-        'url': 'pages/home.html'
+        path: '[home]',
+        url: 'pages/home.html'
     },
     // Links page
     {
-        'path': 'links',
-        'url': 'pages/links.html'
+        path: 'links',
+        url: 'pages/links.html'
     },
     // Text writer page
     {
-        'path': 'textWriter',
-        'keepAlive': true,
-        'url': 'pages/textWriter.html'
+        path: 'textWriter',
+        keepAlive: true,
+        url: 'pages/textWriter.html'
     },
     // Default route (404 page)
     {
-        'path': '[404]',
-        'url': 'pages/404error.html'
+        path: '[404]',
+        url: 'pages/404error.html'
     }
 ];
 

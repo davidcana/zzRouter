@@ -14,13 +14,13 @@ blueRouter.htmlFetcher.loadAllUrls = function( router, callback ){
 
     // Iterate urlRoutes and load each routeItem if needed
     routes.map( routeItem => {
-        let url = routeItem[ 'url' ];
+        let url = routeItem.url;
         if ( url ){
             ++pending;
             blueRouter.htmlFetcher.loadUrl( url ).then(
                 function( text ){
                     // Update content of route
-                    routeItem[ 'content' ] = text;
+                    routeItem.content = text;
 
                     // Run callback when all files have been loaded
                     if ( --pending == 0 && callback && blueRouter.utils.isFunction( callback ) ){

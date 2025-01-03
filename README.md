@@ -40,8 +40,8 @@ First of all, an example of routes with content defined as string literals. This
     const routes = {
         // Home page
         {
-        'path': '[home]',
-        'content': `
+        path: '[home]',
+        content: `
 <h1>Blue router sample</h1>
 
 <div class="page-content">
@@ -60,8 +60,8 @@ First of all, an example of routes with content defined as string literals. This
         },
         // Links page
         {
-            'path': 'links',
-            'content': `
+            path: 'links',
+            content: `
 <h1>Blue router sample</h1>
 
 <div>
@@ -97,8 +97,8 @@ First of all, an example of routes with content defined as string literals. This
         },
         // Default route (404 page)
         {
-            'path': '[404]',
-            'content': `
+            path: '[404]',
+            content: `
 <h1>Blue router sample</h1>
 
 <div>
@@ -130,18 +130,18 @@ An example of lazy loading of HTML from URLs. Providing **pages/home.html**, **p
     const routes = {
         // Home page
         {
-            'path': '[home]',
-            'url': 'pages/home.html'
+            path: '[home]',
+            url: 'pages/home.html'
         },
         // Links page
         {
-            'path': 'links',
-            'url': 'pages/links.html'
+            path: 'links',
+            url: 'pages/links.html'
         },
         // Default route (404 page)
         {
-            'path': '[404]',
-            'url': 'pages/404error.html'
+            path: '[404]',
+            url: 'pages/404error.html'
         }
     };
 

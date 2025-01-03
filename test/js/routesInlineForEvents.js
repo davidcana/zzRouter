@@ -2,8 +2,8 @@
 const routes = [
     // Home page
     {
-        'path': '[home]',
-        'content': `
+        path: '[home]',
+        content: `
 <h1>Blue router test</h1>
 
 <div class="page-content">
@@ -25,8 +25,8 @@ const routes = [
     },
     // page1
     {
-        'path': 'page1',
-        'content': `
+        path: 'page1',
+        content: `
 <h1>Blue router test</h1>
 
 <div>
@@ -49,8 +49,8 @@ const routes = [
     },
     // textWriter
     {
-        'path': 'textWriter',
-        'content': `
+        path: 'textWriter',
+        content: `
 <h1>Blue router test</h1>
 
 <div>
@@ -80,8 +80,8 @@ const routes = [
     },
     // page2
     {
-        'path': 'page2',
-        'content': `
+        path: 'page2',
+        content: `
 <h1>Blue router test</h1>
 
 <div>
@@ -98,8 +98,8 @@ const routes = [
     },
     // Default route (404 page)
     {
-        'path': '[404]',
-        'content': `
+        path: '[404]',
+        content: `
 <h1>Blue router test</h1>
 
 <div>

@@ -78,19 +78,19 @@ QUnit.test( "Lazy URLs test", async function( assert ) {
 `;
     
     // Test urls and that contents are undefined yet
-    assert.equal( router.routesMap[ 'page1' ][ 'url' ] , 'pages/page1.html' );
-    assert.equal( router.routesMap[ 'page1' ][ 'content' ] , undefined );
-    assert.equal( router.routesMap[ 'textWriter' ][ 'url' ] , 'pages/textWriter.html' );
-    assert.equal( router.routesMap[ 'textWriter' ][ 'content' ] , undefined );
-    assert.equal( router.routesMap[ 'page2' ][ 'url' ] , 'pages/page2.html' );
-    assert.equal( router.routesMap[ 'page2' ][ 'content' ] , undefined );
-    assert.equal( router.routesMap[ '[404]' ][ 'url' ] , 'pages/404.html' );
-    assert.equal( router.routesMap[ '[404]' ][ 'content' ] , undefined );
+    assert.equal( router.routesMap[ 'page1' ].url , 'pages/page1.html' );
+    assert.equal( router.routesMap[ 'page1' ].content , undefined );
+    assert.equal( router.routesMap[ 'textWriter' ].url , 'pages/textWriter.html' );
+    assert.equal( router.routesMap[ 'textWriter' ].content , undefined );
+    assert.equal( router.routesMap[ 'page2' ].url , 'pages/page2.html' );
+    assert.equal( router.routesMap[ 'page2' ].content , undefined );
+    assert.equal( router.routesMap[ '[404]' ].url , 'pages/404.html' );
+    assert.equal( router.routesMap[ '[404]' ].content , undefined );
 
     // Test home, content must have been already loaded
-    assert.equal( router.routesMap[ '[home]' ][ 'url' ] , 'pages/home.html' );
-    //assert.ok( router.routesMap[ '[home]' ][ 'content' ].startsWith( '<h1>Blue router test</h1>' ) );
-    assert.equal( router.routesMap[ '[home]' ][ 'content' ] , homeContent );
+    assert.equal( router.routesMap[ '[home]' ].url , 'pages/home.html' );
+    //assert.ok( router.routesMap[ '[home]' ].content.startsWith( '<h1>Blue router test</h1>' ) );
+    assert.equal( router.routesMap[ '[home]' ].content , homeContent );
 
     // Go to page 1
     zz('#home_page1Link').el.click();
@@ -98,19 +98,19 @@ QUnit.test( "Lazy URLs test", async function( assert ) {
     assert.equal( zz('#page1_textWriterLink').html() , "Text writer" );
     
     // Test urls and that contents are undefined yet
-    assert.equal( router.routesMap[ 'textWriter' ][ 'url' ] , 'pages/textWriter.html' );
-    assert.equal( router.routesMap[ 'textWriter' ][ 'content' ] , undefined );
-    assert.equal( router.routesMap[ 'page2' ][ 'url' ] , 'pages/page2.html' );
-    assert.equal( router.routesMap[ 'page2' ][ 'content' ] , undefined );
-    assert.equal( router.routesMap[ '[404]' ][ 'url' ] , 'pages/404.html' );
-    assert.equal( router.routesMap[ '[404]' ][ 'content' ] , undefined );
+    assert.equal( router.routesMap[ 'textWriter' ].url , 'pages/textWriter.html' );
+    assert.equal( router.routesMap[ 'textWriter' ].content , undefined );
+    assert.equal( router.routesMap[ 'page2' ].url , 'pages/page2.html' );
+    assert.equal( router.routesMap[ 'page2' ].content , undefined );
+    assert.equal( router.routesMap[ '[404]' ].url , 'pages/404.html' );
+    assert.equal( router.routesMap[ '[404]' ].content , undefined );
     
     // Test home and page1, content must have been already loaded
-    assert.equal( router.routesMap[ '[home]' ][ 'url' ] , 'pages/home.html' );
-    assert.ok( router.routesMap[ '[home]' ][ 'content' ].startsWith( '<h1>Blue router test</h1>' ) );
-    assert.equal( router.routesMap[ 'page1' ][ 'url' ] , 'pages/page1.html' );
-    //assert.ok( router.routesMap[ 'page1' ][ 'content' ].startsWith( '<h1>Blue router test</h1>' ) );
-    assert.equal( router.routesMap[ 'page1' ][ 'content' ] , page1Content );
+    assert.equal( router.routesMap[ '[home]' ].url , 'pages/home.html' );
+    assert.ok( router.routesMap[ '[home]' ].content.startsWith( '<h1>Blue router test</h1>' ) );
+    assert.equal( router.routesMap[ 'page1' ].url , 'pages/page1.html' );
+    //assert.ok( router.routesMap[ 'page1' ].content.startsWith( '<h1>Blue router test</h1>' ) );
+    assert.equal( router.routesMap[ 'page1' ].content , page1Content );
 
     // Go to home
     zz('#page1_homeLink').el.click();
