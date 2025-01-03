@@ -10,7 +10,7 @@ const initRouter = () => {
 
     // Initialize options: no animations
     let options = {
-        pages: pages,
+        eventsByPage: pages,
         animationOut: false,
         animationIn: false,
         routes: require( './routesInlineForNavigation.js' )

@@ -21,7 +21,7 @@ blueRouter.router = function ( userOptions ) {
         return;
     }
 
-    // Do not preload pages: run init
+    // Do not preload pages, run init
     this.init();
 };
 
@@ -57,12 +57,12 @@ blueRouter.router.prototype.checkOptions = function() {
 
     if ( ! this.options.routes ){
         ++errors;
-        errorMessages += 'Routes must be defined. ';
+        errorMessages += 'routes must be defined. ';
     }
 
-    if ( ! this.options.pages ){
+    if ( ! this.options.eventsByPage ){
         ++errors;
-        errorMessages += 'Pages must be defined. ';
+        errorMessages += 'eventsByPage must be defined. ';
     }
 
     if ( errors ){
@@ -406,7 +406,7 @@ blueRouter.router.prototype.runEvent = function( eventId, pageId, urlObject ) {
 
     // Get the page object from options
     /** @suppress {missingProperties} */
-    let page = this.options.pages[ pageId ];
+    let page = this.options.eventsByPage[ pageId ];
 
     // If a page is found, run the event handler
     if ( page ){

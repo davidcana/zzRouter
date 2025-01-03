@@ -1,2 +1,8 @@
 New in 0.1.0
 - Initial version.
+
+New in 0.2.0 (comming soon)
+- Events management improved. 3 ways to define event listeners:
+    - In routeItems, 'events' configuration option. An object of functions, one per event.
+    - In configuration options, 'events' configuration option. An object of functions, one per event.
+    - In configuration options, 'eventsByPage' configuration option. An object of objects of functions, one per event.

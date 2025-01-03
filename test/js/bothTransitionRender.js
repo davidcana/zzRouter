@@ -16,7 +16,7 @@ const initRouter = () => {
     // Initialize options: no animations
     let initializeZPT = true;
     let options = {
-        pages: pages,
+        eventsByPage: pages,
         routes: require( './routesInlineForRender.js' )
     };
 

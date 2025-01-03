@@ -13,7 +13,7 @@ const initRouter = () => {
 
     // Initialize options: both animations
     let options = {
-        pages: pages,
+        eventsByPage: pages,
         animationIn: false,
         routes: require( './routesInlineForEvents.js' )
     };

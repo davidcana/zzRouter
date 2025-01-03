@@ -16,7 +16,7 @@ const initRouter = () => {
 
     // Initialize options: both animations
     let options = {
-        pages: pages,
+        eventsByPage: pages,
         routes: require( './routesUrlForEvents.js' )
     };
     

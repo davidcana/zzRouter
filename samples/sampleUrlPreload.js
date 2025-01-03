@@ -5,7 +5,7 @@ const pages = {};
 
 // Initialize options
 let options = {
-    pages: pages,
+    eventsByPage: pages,
     preloadPagesOnLoad: true
 };
 

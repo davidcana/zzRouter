@@ -6,7 +6,7 @@ const pages = {};
 // Initialize options
 let initializeZPT = true;
 let options = {
-    pages: pages
+    eventsByPage: pages
 };
 
 // Add renderFunction
