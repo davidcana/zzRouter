@@ -157,7 +157,7 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: [ 'js/*.js', 'test/js/*.js', 'test/js/pages/*.js' ],
+            files: [ 'src/*.js', 'test/js/*.js', 'test/js/pages/*.js' ],
             tasks: [ 'browserify' ]
         },
         compress: {
