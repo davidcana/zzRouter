@@ -40,7 +40,7 @@ First of all, an example of routes with content defined as string literals. This
     const routes = {
         // Home page
         {
-        path: '[home]',
+        id: '[home]',
         content: `
 <h1>Blue router sample</h1>
 
@@ -60,7 +60,7 @@ First of all, an example of routes with content defined as string literals. This
         },
         // Links page
         {
-            path: 'links',
+            id: 'links',
             content: `
 <h1>Blue router sample</h1>
 
@@ -97,7 +97,7 @@ First of all, an example of routes with content defined as string literals. This
         },
         // Default route (404 page)
         {
-            path: '[404]',
+            id: '[404]',
             content: `
 <h1>Blue router sample</h1>
 
@@ -130,17 +130,17 @@ An example of lazy loading of HTML from URLs. Providing **pages/home.html**, **p
     const routes = {
         // Home page
         {
-            path: '[home]',
+            id: '[home]',
             url: 'pages/home.html'
         },
         // Links page
         {
-            path: 'links',
+            id: 'links',
             url: 'pages/links.html'
         },
         // Default route (404 page)
         {
-            path: '[404]',
+            id: '[404]',
             url: 'pages/404error.html'
         }
     };
@@ -184,7 +184,7 @@ The list of available configuration options (default values in brackets).
 The only required configuration option is:
 
 * routes (undefined). An array of array items. Each array items defines an internal page and might have the next configuration options:
-    * path. Required. The path of the page. It is an id of the page too, so you can't have more than one route item with the same **path**.
+    * id (undefined). Required. You can't have more than one route item with the same **id**. It is also the path of the page.
     * content (undefined). Optional. A string containing the HTML of the page.
     * url (undefined). Optional. The relative URL of the content of the page. A **content** or an **url** value must be set.
     * keepAlive (false). Optional. Set to **true** if you want to cache this page to recover its content the next time it is shown.

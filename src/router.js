@@ -31,12 +31,8 @@ blueRouter.router = function ( userOptions ) {
 blueRouter.router.prototype.init = function() {
 
     // Init some other vars
-    //this.pathname = window.location.pathname;
-    //this.urlBase = window.location.href;
     this.routesMap = this.createRoutesMap();
     this.stack = [];
-
-    //alert( 'pathname: ' + this.pathname + '\nurlBase:' + this.urlBase );
 
     // Add event listeners
     this.addEventListenersForWindow();
@@ -131,7 +127,7 @@ blueRouter.router.prototype.createRoutesMap = function() {
     const routes = this.options.routes || [];
 
     routes.map( routeItem => {
-        routerMap[ routeItem.path ] = routeItem;
+        routerMap[ routeItem.id ] = routeItem;
     });
 
     return routerMap;
@@ -154,7 +150,7 @@ blueRouter.router.prototype.getRouteItem = function( pageId ) {
 
     // No 404 page, build a 404 route
     return {
-        path: this.options.PAGE_ID_404_ERROR,
+        id: this.options.PAGE_ID_404_ERROR,
         content: '<h3>404 - Page not found: ' + pageId + '</h3>'
     };
     //this.alertError( 'No route found with id ' + pageId + ' and no 404 page found.' );
@@ -224,7 +220,7 @@ blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
     
     // Check keepAlive
     if ( routeItem.keepAlive ){
-        let alivePage = document.getElementById( routeItem.path );
+        let alivePage = document.getElementById( routeItem.id );
         if ( alivePage ){
             return alivePage;
         }
@@ -242,7 +238,7 @@ blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
         return blueRouter.htmlFetcher.loadUrl( url );
     }
 
-    return '<div id="error">No content found for route from path ' + routeItem.path + '</div>';
+    return '<div id="error">No content found for route from path ' + routeItem.id + '</div>';
 };
 
 /** @suppress {missingProperties} */

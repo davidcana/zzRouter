@@ -2,7 +2,7 @@
 const routes = [
     // Home page
     {
-        path: '[home]',
+        id: '[home]',
         content: `
 <h1>Blue router test</h1>
 
@@ -25,7 +25,7 @@ const routes = [
     },
     // page1
     {
-        path: 'page1',
+        id: 'page1',
         content: `
 <h1>Blue router test</h1>
 
@@ -49,7 +49,7 @@ const routes = [
     },
     // textWriter
     {
-        path: 'textWriter',
+        id: 'textWriter',
         content: `
 <h1>Blue router test</h1>
 
@@ -80,7 +80,7 @@ const routes = [
     },
     // page2
     {
-        path: 'page2',
+        id: 'page2',
         content: `
 <h1>Blue router test</h1>
 
@@ -98,7 +98,7 @@ const routes = [
     },
     // Default route (404 page)
     {
-        path: '[404]',
+        id: '[404]',
         content: `
 <h1>Blue router test</h1>
 

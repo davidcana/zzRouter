@@ -3,7 +3,7 @@
 const routes = [
     // Home page
     {
-        path: '[home]',
+        id: '[home]',
         content: `
 <h1>Blue router test</h1>
 
@@ -26,7 +26,7 @@ const routes = [
     },
     // page render without waiting
     {
-        path: 'renderWithoutWaiting',
+        id: 'renderWithoutWaiting',
         content: `
 <h1>Blue router test</h1>
 
@@ -48,7 +48,7 @@ const routes = [
     },
     // page render waiting for server
     {
-        path: 'renderWaitingForServer',
+        id: 'renderWaitingForServer',
         content: `
 <h1>Blue router test</h1>
 
@@ -70,7 +70,7 @@ const routes = [
     },
     // Default route (404 page)
     {
-        path: '[404]',
+        id: '[404]',
         content: `
 <h1>Blue router test</h1>
 

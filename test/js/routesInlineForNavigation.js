@@ -2,7 +2,7 @@
 const routes = [
     // Home page
     {
-        path: '[home]',
+        id: '[home]',
         content: `
 <h1>Blue router test</h1>
 
@@ -28,7 +28,7 @@ const routes = [
     },
     // page1
     {
-    path: 'page1',
+    id: 'page1',
     content: `
 <h1>Blue router test</h1>
 
@@ -55,7 +55,7 @@ const routes = [
     },
     // page11
     {
-        path: 'page11',
+        id: 'page11',
         content: `
 <h1>Blue router test</h1>
 
@@ -73,7 +73,7 @@ const routes = [
     },
     // page12
     {
-        path: 'page12',
+        id: 'page12',
         content: `
 <h1>Blue router test</h1>
 
@@ -91,7 +91,7 @@ const routes = [
     },
     // page2
     {
-        path: 'page2',
+        id: 'page2',
         content: `
 <h1>Blue router test</h1>
 
@@ -118,7 +118,7 @@ const routes = [
     },
     // page21
     {
-        path: 'page21',
+        id: 'page21',
         content: `
 <h1>Blue router test</h1>
 
@@ -136,7 +136,7 @@ const routes = [
     },
     // page22
     {
-        path: 'page22',
+        id: 'page22',
         content: `
 <h1>Blue router test</h1>
 
@@ -160,7 +160,7 @@ const routes = [
     },
     // page221
     {
-        path: 'page221',
+        id: 'page221',
         content: `
 <h1>Blue router test</h1>
 
@@ -178,11 +178,11 @@ const routes = [
     },
     // brokenPage
     {
-        path: 'brokenPage'
+        id: 'brokenPage'
     },
     // Default route (404 page)
     {
-        path: '[404]',
+        id: '[404]',
         content: `
 <h1>Blue router test</h1>
 

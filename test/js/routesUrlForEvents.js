@@ -2,27 +2,27 @@
 const routes = [
     // Home page
     {
-        path: '[home]',
+        id: '[home]',
         url: 'pages/home.html'
     },
     // page1
     {
-        path: 'page1',
+        id: 'page1',
         url: 'pages/page1.html'
     },
     // textWriter
     {
-        path: 'textWriter',
+        id: 'textWriter',
         url: 'pages/textWriter.html'
     },
     // page2
     {
-        path: 'page2',
+        id: 'page2',
         url: 'pages/page2.html'
     },
     // Default route (404 page)
     {
-        path: '[404]',
+        id: '[404]',
         url: 'pages/404.html'
     }
 ];

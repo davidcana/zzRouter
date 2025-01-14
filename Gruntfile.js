@@ -157,8 +157,16 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: [ 'src/*.js', 'test/js/*.js', 'test/js/pages/*.js' ],
-            tasks: [ 'browserify' ]
+            files: [
+                'src/*.js',
+                'test/js/*.js',
+                'test/js/pages/*.js'
+            ],
+            tasks: [
+                'concat:standalone',
+                'uglify:standalone',
+                'browserify'
+            ]
         },
         compress: {
             main: {

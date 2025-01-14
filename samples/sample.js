@@ -12,7 +12,7 @@ let options = {
 options.routes = [
     // Home page
     {
-        path: '[home]',
+        id: '[home]',
         content: `
 <h1>Blue router sample</h1>
 
@@ -41,7 +41,7 @@ options.routes = [
     },
     // Links page
     {
-        path: 'links',
+        id: 'links',
         content: `
 <h1>Blue router sample</h1>
 
@@ -78,7 +78,7 @@ options.routes = [
     },
     // Text writer page
     {
-        path: 'textWriter',
+        id: 'textWriter',
         keepAlive: true,
         content: `
 <h1>Blue router sample</h1>
@@ -110,7 +110,7 @@ options.routes = [
     },
     // Default route (404 page)
     {
-        path: '[404]',
+        id: '[404]',
         content: `
 <h1>Blue router sample</h1>
 
