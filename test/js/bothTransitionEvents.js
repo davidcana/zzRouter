@@ -1,6 +1,6 @@
 // Tests for events, both transitions
 
-var blueRouter = require( '../../build/blueRouter.js' );
+var blueRouter = require( '../../dist/blueRouter.js' );
 
 // Init router
 const initRouter = () => {

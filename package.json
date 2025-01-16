@@ -19,6 +19,7 @@
     "beefy": "^2.1.8",
     "browserify": "^17.0.1",
     "browserify-derequire": "^1.1.1",
+    "genversion": "^3.2.0",
     "google-closure-compiler": "^20240317.0.0",
     "grunt": "^1.6.1",
     "grunt-browserify": "^6.0.0",
@@ -38,6 +39,7 @@
     "test": "grunt qunit",
     "http-server": "http-server -p 9000",
     "beefy": "cd ./build; beefy *.js",
-    "start": "npm-run-all -p -r beefy http-server"
+    "start": "npm-run-all -p -r beefy http-server",
+    "version": "genversion src/version.js"
   }
 }

@@ -1,7 +1,7 @@
 var Qunit = require( 'qunit' );
 var zz = require( 'zzdom' );
 var zpt = require( 'zpt' );
-var blueRouter = require( '../../build/blueRouter.js' );
+var blueRouter = require( '../../dist/blueRouter.js' );
 
 // Init router
 const initRouter = () => {

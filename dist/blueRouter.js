@@ -1,4 +1,4 @@
-/*! bluerouter - v0.1.0 - 2025-01-16 13:31:28 */
+/*! bluerouter - v0.1.0 - 2025-01-16 13:55:36 */
 /**
  * A namespace.
  * @const
