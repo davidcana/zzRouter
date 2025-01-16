@@ -1,2 +1,4 @@
-var zzDOM = require('./build/zzDOM-closures-full.js');
-module.exports = zzDOM.zz;
+/* Declare exports */
+var blueRouter = require( './dist/blueRouter.js' );
+module.exports = blueRouter.router;
+
