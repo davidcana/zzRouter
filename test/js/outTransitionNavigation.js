@@ -1,7 +1,7 @@
 // Tests for navigation, out transitions
 
 var Qunit = require( 'qunit' );
-var blueRouter = require( '../../build/blueRouter.standalone.concat.js' );
+var blueRouter = require( '../../build/blueRouter.js' );
 
 // Init router
 const initRouter = () => {

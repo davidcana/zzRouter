@@ -2,7 +2,7 @@
 
 var Qunit = require( 'qunit' );
 var zz = require( 'zzdom' );
-var blueRouter = require( '../../build/blueRouter.standalone.concat.js' );
+var blueRouter = require( '../../build/blueRouter.js' );
 
 // Init router
 const initRouter = () => {

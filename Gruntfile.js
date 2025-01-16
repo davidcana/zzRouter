@@ -251,14 +251,14 @@ module.exports = function(grunt) {
                     'src/utils.js',
                     'src/export.js'
                 ],
-                dest: 'build/blueRouter.standalone.concat.js',
+                dest: 'build/blueRouter.js',
                 nonull: true
             }
         },
         uglify: {
             standalone: {
                 files: {
-                    'build/blueRouter.standalone.concat.min.js': [ 'build/blueRouter.standalone.concat.js' ]
+                    'build/blueRouter.min.js': [ 'build/blueRouter.js' ]
                 }
             }
         },
