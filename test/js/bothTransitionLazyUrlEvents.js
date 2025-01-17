@@ -1,6 +1,7 @@
 // Tests for events, both transitions
 
-var blueRouter = require( '../../dist/blueRouter.js' );
+//var blueRouter = require( '../../dist/blueRouter.js' );
+var blueRouter = require( '../../index.js' );
 var utils = require( './utils.js' );
 var Qunit = require( 'qunit' );
 var zz = require( 'zzdom' );
@@ -21,7 +22,7 @@ const initRouter = () => {
     };
     
     // Create new router instance
-    return new blueRouter.router( options );
+    return new blueRouter( options );
 };
 
 // Init router
