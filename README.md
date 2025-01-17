@@ -21,9 +21,11 @@
     * 7KB minified, 3KB gzipped.
 
 ## Why use Blue router
+
 Use it if you want to build a SPA using vanilla Javascript and if you don't want to use any heavy javascript framework. You can also use CSS directly or your favourite CSS framework.
 
 ## Browser Support
+
 No support for very old browsers. No polyfills. **Blue router** should work with any not too old browser. It should work with any browser that supports:
 
 * [Fetch API](https://caniuse.com/mdn-api_fetch).
@@ -32,9 +34,17 @@ No support for very old browsers. No polyfills. **Blue router** should work with
 * [History API](https://caniuse.com/mdn-api_history).
 
 ## Using Blue router
+
 Let's see some examples.
 
-First of all, an example of routes with content defined as string literals. This SPA consist of a home page, a links page and a 404 error page:
+First of all, 2 files are needed to be added to the HTML page, a JS file and a CSS file:
+
+```html
+    <script src="blueRouter.js" defer></script>
+    <link href="blueRouter.css" rel="stylesheet">
+```
+
+An example of routes with content defined as string literals. This SPA consist of a home page, a links page and a 404 error page:
 
 ```javascript
     const routes = {
@@ -161,8 +171,19 @@ If we prefer to preload pages use the **preloadPagesOnLoad** option:
     });
 ```
 
-## Events
+## Page loading process
 
+Let's see what happens when an internal link is clicked:
+
+* **EVENT_BEFORE_OUT** event of current page is triggered.
+* Next page is added to DOM. Some classes are added to that page: **nextPage**, **hidden** and **page**. The page is not visible yet.
+* Trigger preinitialization event of next page. It will usually be **EVENT_PRE_INIT**, but if the related route item is defined as **keepAlive*** and the page has been initialized before then the event to trigger would be **EVENT_PRE_REINIT**.
+* Run render function if needed. That optional function can be defined in configuration options.
+* If out animation must to be done, start it. Anyway current page must be removed from DOM; wait for out animation if needed. If the related route item is defined as **keepAlive*** then do not remove it, add remove previous classes and add some classes to it: **alive** and **page**.
+* **EVENT_AFTER_OUT** event of current page is triggered.
+* If in animation must to be done, start it. Remove **nextPage** and add **currentPage** to the next page.
+* Trigger initialization event of next page. It will usually be **EVENT_INIT**, but if the related route item is defined as **keepAlive*** and the page has been initialized before then the event to trigger would be **EVENT_REINIT**.
+* Trigger **EVENT_MOUNTED** event of next page.
 
 ## CSS animations
 
@@ -176,6 +197,18 @@ If we prefer to preload pages use the **preloadPagesOnLoad** option:
 * slide-out-top
 
 You can use your custom CSS animations too.
+
+## Events reference
+
+The list of events:
+
+* EVENT_PRE_INIT ('preInit')
+* EVENT_INIT ('init')
+* EVENT_PRE_REINIT ('preReinit')
+* EVENT_REINIT ('reinit')
+* EVENT_MOUNTED ('mounted')
+* EVENT_BEFORE_OUT ('beforeOut')
+* EVENT_AFTER_OUT ('afterOut')
 
 ## Configuration options reference
 
