@@ -177,75 +177,6 @@ module.exports = function(grunt) {
                 ]
             }
         },
-        compress: {
-            main: {
-                options: {
-                    archive: 'dist/<%= pkg.name %>-js_<%= grunt.template.today("yyyy-mm-dd_HHMM") %>.tar.gz',
-                    pretty: true
-                },
-                expand: true,
-                files: [
-                    {
-                        cwd: 'docs/',
-                        expand: true,
-                        src: ['**/*', '!**/*~'],
-                        dest: 'docs'
-                    },
-                    {
-                        cwd: 'externs/',
-                        expand: true,
-                        src: ['**/*', '!**/*~'],
-                        dest: 'externs'
-                    },
-                    {
-                        cwd: 'samples/',
-                        expand: true,
-                        src: ['**/*', '!**/*~'],
-                        dest: 'samples'
-                    },
-                    {
-                        cwd: 'src/',
-                        expand: true,
-                        src: ['**/*', '!**/*~'],
-                        dest: 'src'
-                    },
-                    {
-                        cwd: 'test/',
-                        expand: true,
-                        src: ['**/*', '!**/*~'],
-                        dest: 'test'
-                    }, 
-                    {
-                        src: ['changes.txt']
-                    },
-                    {
-                        src: ['Gruntfile.js']
-                    }, 
-                    {
-                        src: ['LICENSE']
-                    },
-                    {
-                        src: ['package.json']
-                    },
-                    {
-                        src: ['package-lock.json']
-                    },
-                    {
-                        src: ['README.md']
-                    }
-                ]
-            },
-            'blueRouter-core': {
-                options: {
-                    archive: 'build/blueRouter-core.min.js.tar.gz'
-                },
-                files: [
-                    {
-                        src: [ 'build/blueRouter-core.min.js' ]
-                    }
-                ]
-            }
-        },
         concat: {
             options: {
                 stripBanners: true,
@@ -269,6 +200,19 @@ module.exports = function(grunt) {
                 files: {
                     'dist/blueRouter.min.js': [ 'dist/blueRouter.js' ]
                 }
+            }
+        },
+        compress: {
+            standalone: {
+                options: {
+                    mode: 'gzip'
+                },
+                files: [
+                    {
+                        src: [ 'dist/blueRouter.min.js' ],
+                        dest: 'dist/blueRouter.min.js.gz',
+                    }
+                ]
             }
         },
         'closure-compiler': {
@@ -311,6 +255,7 @@ module.exports = function(grunt) {
         'closure-compiler:sample',
         'concat:standalone',
         'uglify:standalone',
+        'compress:standalone',
         'browserify'
     ]);
     grunt.registerTask('all', ['default', 'test']);

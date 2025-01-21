@@ -18,7 +18,7 @@
     * Includes some simple CSS transitions.
     * Use your custom CSS transitions easily.
 * Small size:
-    * 7KB minified, 3KB gzipped.
+    * 17.2KB, 6.1KB minified, 2.4KB gzipped.
 
 ## Why use Blue router
 
