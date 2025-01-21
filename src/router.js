@@ -1,19 +1,19 @@
 /*
- * blueRouter
+ * blueRouter main methods
  */
 /** @nocollapse */
 /** @this {Object} */
-blueRouter.start = function ( userOptions ) {
+blueRouter.start = function( userOptions ) {
 
     // Init options
     this.options = {};
-    blueRouter.utils.extend( this.options, blueRouter.defaultOptions, userOptions );
+    this.utils.extend( this.options, this.defaultOptions, userOptions );
     this.checkOptions();
 
     // Preload pages if needed
     if ( this.options.preloadPagesOnLoad ){
         let self = this;
-        blueRouter.htmlFetcher.loadAllUrls(
+        this.htmlFetcher.loadAllUrls(
             this,
             () => {
                 self.init();
@@ -95,7 +95,7 @@ blueRouter.addEventListenersForLinks = function( pageId ) {
     let self = this;
 
     // Add event listeners for a elements
-    blueRouter.utils.addEventListenerOnList(
+    this.utils.addEventListenerOnList(
         //document.getElementsByTagName( 'a' ),
         document.getElementById( pageId ).getElementsByTagName( 'a' ),
         'click', 
@@ -262,10 +262,10 @@ blueRouter.doPageTransition = function( content, nextPageId, currentPageId, urlO
     const mustAnimateIn = mustAnimateByCode && !!this.options.animationIn;
 
     // Get the initEvent
-    const initEvent = content instanceof HTMLElement? blueRouter.defaultOptions.EVENT_REINIT: blueRouter.defaultOptions.EVENT_INIT;
+    const initEvent = content instanceof HTMLElement? this.defaultOptions.EVENT_REINIT: this.defaultOptions.EVENT_INIT;
 
     // Run events
-    this.runEvent( blueRouter.defaultOptions.EVENT_BEFORE_OUT, currentPageId, {} );
+    this.runEvent( this.defaultOptions.EVENT_BEFORE_OUT, currentPageId, {} );
 
     // Get the currentPage and add next page
     let currentPage = document.getElementsByClassName( 'currentPage' )[0];
@@ -287,7 +287,7 @@ blueRouter.doPageTransition = function( content, nextPageId, currentPageId, urlO
 
         // Retire current page: save it as an alive page or remove it
         this.retireCurrentPage( currentPageId, currentPage );
-        self.runEvent( blueRouter.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
+        self.runEvent( this.defaultOptions.EVENT_AFTER_OUT, currentPageId, {} );
 
         //  Run newPageAnimationendListener if listener of amimationend on newPage was not added
         if ( ! mustAnimateIn ) {
@@ -309,7 +309,7 @@ blueRouter.doPageTransition = function( content, nextPageId, currentPageId, urlO
         self.runEvent( initEvent, nextPageId, urlObject );
 
         // Run EVENT_MOUNTED
-        self.runEvent( blueRouter.defaultOptions.EVENT_MOUNTED, nextPageId, urlObject );
+        self.runEvent( this.defaultOptions.EVENT_MOUNTED, nextPageId, urlObject );
     };
 
     // Add event listeners
@@ -351,7 +351,7 @@ blueRouter.runRenderRelated = function( initEvent, nextPageId, urlObject ){
         renderOption:
         routeItem[ routeProperty ];
 
-    if ( mustRunRender && this.options.renderFunction && blueRouter.utils.isFunction( this.options.renderFunction ) ){
+    if ( mustRunRender && this.options.renderFunction && this.utils.isFunction( this.options.renderFunction ) ){
         this.options.renderFunction(
             this.buildPageInstance( nextPageId )
         );
@@ -412,7 +412,7 @@ blueRouter.retireCurrentPage = function( currentPageId, currentPage ){
 /** @this {Object} */
 blueRouter.runEvent = function( eventId, pageId, urlObject ) {
 
-    if ( eventId == blueRouter.defaultOptions.EVENT_INIT ){
+    if ( eventId == this.defaultOptions.EVENT_INIT ){
         this.addEventListenersForLinks( pageId );
     }
 
@@ -425,7 +425,7 @@ blueRouter.runEvent = function( eventId, pageId, urlObject ) {
         let event = {
             params: urlObject.params || {}
         };
-        if ( page[ eventId ] && blueRouter.utils.isFunction( page[ eventId ] ) ){
+        if ( page[ eventId ] && this.utils.isFunction( page[ eventId ] ) ){
             page[ eventId ]( event );
         }
     }
