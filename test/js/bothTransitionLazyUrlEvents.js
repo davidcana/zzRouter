@@ -1,13 +1,13 @@
 // Tests for events, both transitions
 
-//var blueRouter = require( '../../dist/blueRouter.js' );
 var blueRouter = require( '../../index.js' );
 var utils = require( './utils.js' );
 var Qunit = require( 'qunit' );
 var zz = require( 'zzdom' );
 
 // Init router
-const initRouter = () => {
+let eventList = [];
+const initRouter = (() => {
     // Initialize pages
     const pages = {};
 
@@ -21,13 +21,9 @@ const initRouter = () => {
         routes: require( './routesUrlForEvents.js' )
     };
     
-    // Create new router instance
-    return new blueRouter( options );
-};
-
-// Init router
-let eventList = [];
-const router = initRouter();
+    // Start router
+    blueRouter.start( options );
+})();
 
 // Unit tests
 QUnit.test( "Lazy URLs test", async function( assert ) {
@@ -79,19 +75,19 @@ QUnit.test( "Lazy URLs test", async function( assert ) {
 `;
     
     // Test urls and that contents are undefined yet
-    assert.equal( router.routesMap[ 'page1' ].url , 'pages/page1.html' );
-    assert.equal( router.routesMap[ 'page1' ].content , undefined );
-    assert.equal( router.routesMap[ 'textWriter' ].url , 'pages/textWriter.html' );
-    assert.equal( router.routesMap[ 'textWriter' ].content , undefined );
-    assert.equal( router.routesMap[ 'page2' ].url , 'pages/page2.html' );
-    assert.equal( router.routesMap[ 'page2' ].content , undefined );
-    assert.equal( router.routesMap[ '[404]' ].url , 'pages/404.html' );
-    assert.equal( router.routesMap[ '[404]' ].content , undefined );
+    assert.equal( blueRouter.routesMap[ 'page1' ].url , 'pages/page1.html' );
+    assert.equal( blueRouter.routesMap[ 'page1' ].content , undefined );
+    assert.equal( blueRouter.routesMap[ 'textWriter' ].url , 'pages/textWriter.html' );
+    assert.equal( blueRouter.routesMap[ 'textWriter' ].content , undefined );
+    assert.equal( blueRouter.routesMap[ 'page2' ].url , 'pages/page2.html' );
+    assert.equal( blueRouter.routesMap[ 'page2' ].content , undefined );
+    assert.equal( blueRouter.routesMap[ '[404]' ].url , 'pages/404.html' );
+    assert.equal( blueRouter.routesMap[ '[404]' ].content , undefined );
 
     // Test home, content must have been already loaded
-    assert.equal( router.routesMap[ '[home]' ].url , 'pages/home.html' );
-    //assert.ok( router.routesMap[ '[home]' ].content.startsWith( '<h1>Blue router test</h1>' ) );
-    assert.equal( router.routesMap[ '[home]' ].content , homeContent );
+    assert.equal( blueRouter.routesMap[ '[home]' ].url , 'pages/home.html' );
+    //assert.ok( blueRouter.routesMap[ '[home]' ].content.startsWith( '<h1>Blue router test</h1>' ) );
+    assert.equal( blueRouter.routesMap[ '[home]' ].content , homeContent );
 
     // Go to page 1
     zz('#home_page1Link').el.click();
@@ -99,19 +95,19 @@ QUnit.test( "Lazy URLs test", async function( assert ) {
     assert.equal( zz('#page1_textWriterLink').html() , "Text writer" );
     
     // Test urls and that contents are undefined yet
-    assert.equal( router.routesMap[ 'textWriter' ].url , 'pages/textWriter.html' );
-    assert.equal( router.routesMap[ 'textWriter' ].content , undefined );
-    assert.equal( router.routesMap[ 'page2' ].url , 'pages/page2.html' );
-    assert.equal( router.routesMap[ 'page2' ].content , undefined );
-    assert.equal( router.routesMap[ '[404]' ].url , 'pages/404.html' );
-    assert.equal( router.routesMap[ '[404]' ].content , undefined );
+    assert.equal( blueRouter.routesMap[ 'textWriter' ].url , 'pages/textWriter.html' );
+    assert.equal( blueRouter.routesMap[ 'textWriter' ].content , undefined );
+    assert.equal( blueRouter.routesMap[ 'page2' ].url , 'pages/page2.html' );
+    assert.equal( blueRouter.routesMap[ 'page2' ].content , undefined );
+    assert.equal( blueRouter.routesMap[ '[404]' ].url , 'pages/404.html' );
+    assert.equal( blueRouter.routesMap[ '[404]' ].content , undefined );
     
     // Test home and page1, content must have been already loaded
-    assert.equal( router.routesMap[ '[home]' ].url , 'pages/home.html' );
-    assert.ok( router.routesMap[ '[home]' ].content.startsWith( '<h1>Blue router test</h1>' ) );
-    assert.equal( router.routesMap[ 'page1' ].url , 'pages/page1.html' );
-    //assert.ok( router.routesMap[ 'page1' ].content.startsWith( '<h1>Blue router test</h1>' ) );
-    assert.equal( router.routesMap[ 'page1' ].content , page1Content );
+    assert.equal( blueRouter.routesMap[ '[home]' ].url , 'pages/home.html' );
+    assert.ok( blueRouter.routesMap[ '[home]' ].content.startsWith( '<h1>Blue router test</h1>' ) );
+    assert.equal( blueRouter.routesMap[ 'page1' ].url , 'pages/page1.html' );
+    //assert.ok( blueRouter.routesMap[ 'page1' ].content.startsWith( '<h1>Blue router test</h1>' ) );
+    assert.equal( blueRouter.routesMap[ 'page1' ].content , page1Content );
 
     // Go to home
     zz('#page1_homeLink').el.click();
@@ -121,6 +117,6 @@ QUnit.test( "Lazy URLs test", async function( assert ) {
     done();
 });
 
-require( './events.js' )( router, eventList );
+require( './events.js' )( blueRouter, eventList );
 
 

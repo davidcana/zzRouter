@@ -1,8 +1,8 @@
 /*
- * blueRouter.router class
+ * blueRouter
  */
-/** @constructor */
-blueRouter.router = function ( userOptions ) {
+/** @nocollapse */
+blueRouter.start = function ( userOptions ) {
 
     // Init options
     this.options = {};
@@ -28,7 +28,7 @@ blueRouter.router = function ( userOptions ) {
 /* Methods */
 
 /** @suppress {missingProperties} */
-blueRouter.router.prototype.init = function() {
+blueRouter.init = function() {
 
     // Init some other vars
     this.routesMap = this.createRoutesMap();
@@ -46,7 +46,7 @@ blueRouter.router.prototype.init = function() {
 
 // Check that mandatory user defined properties are defined
 /** @suppress {missingProperties} */
-blueRouter.router.prototype.checkOptions = function() {
+blueRouter.checkOptions = function() {
 
     let errors = 0;
     let errorMessages = '';
@@ -66,12 +66,12 @@ blueRouter.router.prototype.checkOptions = function() {
     }
 };
 
-blueRouter.router.prototype.alertError = function( message ){
+blueRouter.alertError = function( message ){
     alert( message );
     throw message;
 };
 
-blueRouter.router.prototype.addEventListenersForWindow = function() {
+blueRouter.addEventListenersForWindow = function() {
     /*
     window.onload = () => {
         this.navigateUrl( this.options.updateOnLoad? window.location.href: '', true );
@@ -84,7 +84,7 @@ blueRouter.router.prototype.addEventListenersForWindow = function() {
 };
 
 /** @suppress {missingProperties} */
-blueRouter.router.prototype.addEventListenersForLinks = function( pageId ) {
+blueRouter.addEventListenersForLinks = function( pageId ) {
     
     let self = this;
 
@@ -121,7 +121,7 @@ blueRouter.router.prototype.addEventListenersForLinks = function( pageId ) {
 };
 
 // Create a map with the data in routes, using the path as the key
-blueRouter.router.prototype.createRoutesMap = function() {
+blueRouter.createRoutesMap = function() {
 
     const routerMap = {};
     const routes = this.options.routes || [];
@@ -134,7 +134,7 @@ blueRouter.router.prototype.createRoutesMap = function() {
 };
 
 /** @suppress {missingProperties} */
-blueRouter.router.prototype.getRouteItem = function( pageId ) {
+blueRouter.getRouteItem = function( pageId ) {
 
     // Look for the route
     let routeItem = this.routesMap[ pageId ];
@@ -156,7 +156,7 @@ blueRouter.router.prototype.getRouteItem = function( pageId ) {
     //this.alertError( 'No route found with id ' + pageId + ' and no 404 page found.' );
 };
 
-blueRouter.router.prototype.navigateUrl = function( url, mustAnimateByCode ) {
+blueRouter.navigateUrl = function( url, mustAnimateByCode ) {
     //alert( 'navigateUrl\nurl: ' + url );
 
     // Create an url object to make it easy everything
@@ -191,7 +191,7 @@ blueRouter.router.prototype.navigateUrl = function( url, mustAnimateByCode ) {
     this.doPageTransition( content, urlObject.page, currentPageId, urlObject, mustAnimateByCode );
 };
 
-blueRouter.router.prototype.updateStack = function( pageId ) {
+blueRouter.updateStack = function( pageId ) {
     
     // If the penultimate element is the pageId then we are going backwards; otherwise we are going forward
     let isBackward = this.stack[ this.stack.length - 2 ] == pageId;
@@ -207,7 +207,7 @@ blueRouter.router.prototype.updateStack = function( pageId ) {
     return currentPageId;
 };
 
-blueRouter.router.prototype.getContentForPage = function( pageId ) {
+blueRouter.getContentForPage = function( pageId ) {
 
     // Get the routeItem from the routesMap
     let routeItem = this.getRouteItem( pageId );
@@ -216,7 +216,7 @@ blueRouter.router.prototype.getContentForPage = function( pageId ) {
     return this.getContentForRoute( routeItem );
 };
 
-blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
+blueRouter.getContentForRoute = function( routeItem ) {
     
     // Check keepAlive
     if ( routeItem.keepAlive ){
@@ -242,7 +242,7 @@ blueRouter.router.prototype.getContentForRoute = function( routeItem ) {
 };
 
 /** @suppress {missingProperties} */
-blueRouter.router.prototype.doPageTransition = function( content, nextPageId, currentPageId, urlObject, mustAnimateByCode ) {
+blueRouter.doPageTransition = function( content, nextPageId, currentPageId, urlObject, mustAnimateByCode ) {
 
     // Get mustAnimateOut and mustAnimateIn
     const mustAnimateOut = mustAnimateByCode && !!this.options.animationOut;
@@ -316,7 +316,7 @@ blueRouter.router.prototype.doPageTransition = function( content, nextPageId, cu
 };
 
 /** @suppress {missingProperties} */
-blueRouter.router.prototype.runRenderRelated = function( initEvent, nextPageId, urlObject ){
+blueRouter.runRenderRelated = function( initEvent, nextPageId, urlObject ){
 
     // Run preEvent (EVENT_PRE_INIT or EVENT_PRE_REINIT)
     const preEvent = initEvent ===  this.options.EVENT_INIT?
@@ -344,7 +344,7 @@ blueRouter.router.prototype.runRenderRelated = function( initEvent, nextPageId, 
     }
 };
 
-blueRouter.router.prototype.buildPageInstance = function( pageId ){
+blueRouter.buildPageInstance = function( pageId ){
 
     return {
          'id': pageId,
@@ -352,7 +352,7 @@ blueRouter.router.prototype.buildPageInstance = function( pageId ){
     };
 };
 
-blueRouter.router.prototype.addNextPage = function( currentPage, content, nextPageId ){
+blueRouter.addNextPage = function( currentPage, content, nextPageId ){
 
     if ( content instanceof HTMLElement ){
         // content is HTMLElement
@@ -378,7 +378,7 @@ blueRouter.router.prototype.addNextPage = function( currentPage, content, nextPa
 };
 
 // Retire current page: save it as an alive page or remove it
-blueRouter.router.prototype.retireCurrentPage = function( currentPageId, currentPage ){
+blueRouter.retireCurrentPage = function( currentPageId, currentPage ){
 
     let currentRoute = this.getRouteItem( currentPageId );
 
@@ -394,7 +394,7 @@ blueRouter.router.prototype.retireCurrentPage = function( currentPageId, current
     currentPage.remove();
 };
 
-blueRouter.router.prototype.runEvent = function( eventId, pageId, urlObject ) {
+blueRouter.runEvent = function( eventId, pageId, urlObject ) {
 
     if ( eventId == blueRouter.defaultOptions.EVENT_INIT ){
         this.addEventListenersForLinks( pageId );

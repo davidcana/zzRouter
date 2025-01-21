@@ -61,6 +61,6 @@ options.routes = [
     }
 ];
 
-// Create new router instance
-const router = new blueRouter.router( options );
+// Start router
+blueRouter.start( options );
 

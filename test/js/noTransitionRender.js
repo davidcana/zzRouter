@@ -1,11 +1,10 @@
 var Qunit = require( 'qunit' );
 var zz = require( 'zzdom' );
 var zpt = require( 'zpt' );
-//var blueRouter = require( '../../dist/blueRouter.js' );
 var blueRouter = require( '../../index.js' );
 
 // Init router
-const initRouter = () => {
+const initRouter = (() => {
     // Initialize pages
     const pages = {};
 
@@ -39,12 +38,9 @@ const initRouter = () => {
         }
     };
 
-    // Create new router instance
-    return new blueRouter( options );
-};
-
-// Init router
-const router = initRouter();
+    // Start router
+    blueRouter.start( options );
+})();
 
 // Unit tests
 require( './render.js' )();

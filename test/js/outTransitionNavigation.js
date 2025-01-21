@@ -1,11 +1,10 @@
 // Tests for navigation, out transitions
 
 var Qunit = require( 'qunit' );
-//var blueRouter = require( '../../dist/blueRouter.js' );
 var blueRouter = require( '../../index.js' );
 
 // Init router
-const initRouter = () => {
+const initRouter = (() => {
     // Initialize pages
     const pages = {};
 
@@ -16,12 +15,9 @@ const initRouter = () => {
         routes: require( './routesInlineForNavigation.js' )
     };
 
-    // Create new router instance
-    return new blueRouter( options );
-};
-
-// Init router
-const router = initRouter();
+    // Start router
+    blueRouter.start( options );
+})();
 
 // Unit tests
 require( './navigation.js' )();

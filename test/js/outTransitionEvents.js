@@ -1,10 +1,10 @@
 // Tests for events, both transitions
 
-//var blueRouter = require( '../../dist/blueRouter.js' );
 var blueRouter = require( '../../index.js' );
 
 // Init router
-const initRouter = () => {
+let eventList = [];
+const initRouter = (() => {
     // Initialize pages
     const pages = {};
 
@@ -19,15 +19,11 @@ const initRouter = () => {
         routes: require( './routesInlineForEvents.js' )
     };
     
-    // Create new router instance
-    return new blueRouter( options );
-};
-
-// Init router
-let eventList = [];
-const router = initRouter();
+    // Start router
+    blueRouter.start( options );
+})();
 
 // Unit tests
-require( './events.js' )( router, eventList );
+require( './events.js' )( blueRouter, eventList );
 
 

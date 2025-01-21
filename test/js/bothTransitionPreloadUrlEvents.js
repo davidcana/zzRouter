@@ -1,13 +1,13 @@
 // Tests for events, both transitions and preloadPagesOnLoad
 
-//var blueRouter = require( '../../dist/blueRouter.js' );
 var blueRouter = require( '../../index.js' );
 var utils = require( './utils.js' );
 var Qunit = require( 'qunit' );
 var zz = require( 'zzdom' );
 
 // Init router
-const initRouter = () => {
+let eventList = [];
+const initRouter = (() => {
     // Initialize pages
     const pages = {};
 
@@ -22,13 +22,9 @@ const initRouter = () => {
         preloadPagesOnLoad: true
     };
     
-    // Create new router instance
-    return new blueRouter( options );
-};
-
-// Init router
-let eventList = [];
-const router = initRouter();
+    // Start router
+    blueRouter.start( options );
+})();
 
 // Unit tests
 QUnit.test( "Preload URLs test", async function( assert ) {
@@ -138,21 +134,21 @@ QUnit.test( "Preload URLs test", async function( assert ) {
 `;
 
     // Test all pages, content must have been already loaded
-    assert.equal( router.routesMap[ '[home]' ].url , 'pages/home.html' );
-    assert.equal( router.routesMap[ '[home]' ].content , homeContent );
-    assert.equal( router.routesMap[ 'page1' ].url , 'pages/page1.html' );
-    assert.equal( router.routesMap[ 'page1' ].content , page1Content );
-    assert.equal( router.routesMap[ 'textWriter' ].url , 'pages/textWriter.html' );
-    assert.equal( router.routesMap[ 'textWriter' ].content , textWriterContent );
-    assert.equal( router.routesMap[ 'page2' ].url , 'pages/page2.html' );
-    assert.equal( router.routesMap[ 'page2' ].content , page2Content );
-    assert.equal( router.routesMap[ '[404]' ].url , 'pages/404.html' );
-    assert.equal( router.routesMap[ '[404]' ].content , _404Content );
+    assert.equal( blueRouter.routesMap[ '[home]' ].url , 'pages/home.html' );
+    assert.equal( blueRouter.routesMap[ '[home]' ].content , homeContent );
+    assert.equal( blueRouter.routesMap[ 'page1' ].url , 'pages/page1.html' );
+    assert.equal( blueRouter.routesMap[ 'page1' ].content , page1Content );
+    assert.equal( blueRouter.routesMap[ 'textWriter' ].url , 'pages/textWriter.html' );
+    assert.equal( blueRouter.routesMap[ 'textWriter' ].content , textWriterContent );
+    assert.equal( blueRouter.routesMap[ 'page2' ].url , 'pages/page2.html' );
+    assert.equal( blueRouter.routesMap[ 'page2' ].content , page2Content );
+    assert.equal( blueRouter.routesMap[ '[404]' ].url , 'pages/404.html' );
+    assert.equal( blueRouter.routesMap[ '[404]' ].content , _404Content );
 
     // Finish qunit test
     done();
 });
 
-require( './events.js' )( router, eventList );
+require( './events.js' )( blueRouter, eventList );
 
 

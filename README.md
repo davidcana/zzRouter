@@ -128,8 +128,8 @@ An example of routes with content defined as string literals. This SPA consist o
         }
     };
 
-    // Create new router instance
-    const router = new blueRouter.router({
+    // Start router
+    blueRouter.start({
         routes: routes
     });
 ```
@@ -155,8 +155,8 @@ An example of lazy loading of HTML from URLs. Providing **pages/home.html**, **p
         }
     };
 
-    // Create new router instance
-    const router = new blueRouter.router({
+    // Start router
+    blueRouter.start({
         routes: routes
     });
 ```
@@ -164,8 +164,8 @@ An example of lazy loading of HTML from URLs. Providing **pages/home.html**, **p
 If we prefer to preload pages use the **preloadPagesOnLoad** option:
 
 ```javascript
-    // Create new router instance
-    const router = new blueRouter.router({
+    // Start router
+    blueRouter.start({
         routes: routes,
         preloadPagesOnLoad: true
     });
