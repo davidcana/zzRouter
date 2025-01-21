@@ -1,4 +1,4 @@
-/*! bluerouter - v0.1.0 - 2025-01-21 12:53:31 */
+/*! bluerouter - v0.1.0 - 2025-01-21 12:56:45 */
 /**
  * A namespace.
  * @const
@@ -598,20 +598,6 @@ blueRouter.utils.extend = function( out, from1, from2 ) {
     }
 
     return out;
-};
-
-/* formatString */
-// Example: itils.formatString( '{0} is dead, but {1} is alive!', 'ASP', 'ASP.NET' )
-/**
- * Takes 1 or more strings and do something cool with them.
- * @param {...string|number} format
- */
-blueRouter.utils.formatString = function( format ) {
-    
-    var args = Array.prototype.slice.call( arguments, 1 );
-    return format.replace(/{(\d+)}/g, function ( match, number ) {
-        return typeof args[ number ] != 'undefined'? args[ number ] : match;
-    });
 };
 
 blueRouter.utils.isFunction = function isFunction( obj ) {
