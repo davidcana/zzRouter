@@ -2,6 +2,7 @@
  * blueRouter
  */
 /** @nocollapse */
+/** @this {Object} */
 blueRouter.start = function ( userOptions ) {
 
     // Init options
@@ -28,6 +29,8 @@ blueRouter.start = function ( userOptions ) {
 /* Methods */
 
 /** @suppress {missingProperties} */
+/** @nocollapse */
+/** @this {Object} */
 blueRouter.init = function() {
 
     // Init some other vars
@@ -46,6 +49,7 @@ blueRouter.init = function() {
 
 // Check that mandatory user defined properties are defined
 /** @suppress {missingProperties} */
+/** @this {Object} */
 blueRouter.checkOptions = function() {
 
     let errors = 0;
@@ -71,6 +75,7 @@ blueRouter.alertError = function( message ){
     throw message;
 };
 
+/** @this {Object} */
 blueRouter.addEventListenersForWindow = function() {
     /*
     window.onload = () => {
@@ -84,6 +89,7 @@ blueRouter.addEventListenersForWindow = function() {
 };
 
 /** @suppress {missingProperties} */
+/** @this {Object} */
 blueRouter.addEventListenersForLinks = function( pageId ) {
     
     let self = this;
@@ -121,6 +127,7 @@ blueRouter.addEventListenersForLinks = function( pageId ) {
 };
 
 // Create a map with the data in routes, using the path as the key
+/** @this {Object} */
 blueRouter.createRoutesMap = function() {
 
     const routerMap = {};
@@ -134,6 +141,7 @@ blueRouter.createRoutesMap = function() {
 };
 
 /** @suppress {missingProperties} */
+/** @this {Object} */
 blueRouter.getRouteItem = function( pageId ) {
 
     // Look for the route
@@ -156,11 +164,12 @@ blueRouter.getRouteItem = function( pageId ) {
     //this.alertError( 'No route found with id ' + pageId + ' and no 404 page found.' );
 };
 
+/** @this {Object} */
 blueRouter.navigateUrl = function( url, mustAnimateByCode ) {
     //alert( 'navigateUrl\nurl: ' + url );
 
     // Create an url object to make it easy everything
-    let urlObject = blueRouter.utils.analizeUrl( url, this.options );
+    let urlObject = this.utils.analizeUrl( url, this.options );
 
     // Update stack and get currentPageId
     let currentPageId = this.updateStack( urlObject.page );
@@ -191,6 +200,7 @@ blueRouter.navigateUrl = function( url, mustAnimateByCode ) {
     this.doPageTransition( content, urlObject.page, currentPageId, urlObject, mustAnimateByCode );
 };
 
+/** @this {Object} */
 blueRouter.updateStack = function( pageId ) {
     
     // If the penultimate element is the pageId then we are going backwards; otherwise we are going forward
@@ -207,6 +217,7 @@ blueRouter.updateStack = function( pageId ) {
     return currentPageId;
 };
 
+/** @this {Object} */
 blueRouter.getContentForPage = function( pageId ) {
 
     // Get the routeItem from the routesMap
@@ -216,6 +227,7 @@ blueRouter.getContentForPage = function( pageId ) {
     return this.getContentForRoute( routeItem );
 };
 
+/** @this {Object} */
 blueRouter.getContentForRoute = function( routeItem ) {
     
     // Check keepAlive
@@ -235,13 +247,14 @@ blueRouter.getContentForRoute = function( routeItem ) {
     // Check url
     let url = routeItem.url;
     if ( url ){
-        return blueRouter.htmlFetcher.loadUrl( url );
+        return this.htmlFetcher.loadUrl( url );
     }
 
     return '<div id="error">No content found for route from path ' + routeItem.id + '</div>';
 };
 
 /** @suppress {missingProperties} */
+/** @this {Object} */
 blueRouter.doPageTransition = function( content, nextPageId, currentPageId, urlObject, mustAnimateByCode ) {
 
     // Get mustAnimateOut and mustAnimateIn
@@ -316,6 +329,7 @@ blueRouter.doPageTransition = function( content, nextPageId, currentPageId, urlO
 };
 
 /** @suppress {missingProperties} */
+/** @this {Object} */
 blueRouter.runRenderRelated = function( initEvent, nextPageId, urlObject ){
 
     // Run preEvent (EVENT_PRE_INIT or EVENT_PRE_REINIT)
@@ -378,6 +392,7 @@ blueRouter.addNextPage = function( currentPage, content, nextPageId ){
 };
 
 // Retire current page: save it as an alive page or remove it
+/** @this {Object} */
 blueRouter.retireCurrentPage = function( currentPageId, currentPage ){
 
     let currentRoute = this.getRouteItem( currentPageId );
@@ -394,6 +409,7 @@ blueRouter.retireCurrentPage = function( currentPageId, currentPage ){
     currentPage.remove();
 };
 
+/** @this {Object} */
 blueRouter.runEvent = function( eventId, pageId, urlObject ) {
 
     if ( eventId == blueRouter.defaultOptions.EVENT_INIT ){
