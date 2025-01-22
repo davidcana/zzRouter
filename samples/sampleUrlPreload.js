@@ -35,5 +35,5 @@ options.routes = [
 ];
 
 // Start router
-blueRouter.start( options );
+zzRouter.start( options );
 

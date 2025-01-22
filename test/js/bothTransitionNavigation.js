@@ -1,7 +1,7 @@
 // Tests for navigation, both transitions
 
 var Qunit = require( 'qunit' );
-var blueRouter = require( '../../index.js' );
+var zzRouter = require( '../../index.js' );
 
 // Init router
 const initRouter = (() => {
@@ -15,7 +15,7 @@ const initRouter = (() => {
     };
 
     // Start router
-    blueRouter.start( options );
+    zzRouter.start( options );
 })();
 
 // Unit tests

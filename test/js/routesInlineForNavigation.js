@@ -4,7 +4,7 @@ const routes = [
     {
         id: '[home]',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div class="page-content">
     <h3>Home page</h3>
@@ -30,7 +30,7 @@ const routes = [
     {
     id: 'page1',
     content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div>
     <a href="!" id="page1_homeLink">Home</a>
@@ -57,7 +57,7 @@ const routes = [
     {
         id: 'page11',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div>
     <a href="!" id="page11_homeLink">Home</a>
@@ -75,7 +75,7 @@ const routes = [
     {
         id: 'page12',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div>
     <a href="!" id="page12_homeLink">Home</a>
@@ -93,7 +93,7 @@ const routes = [
     {
         id: 'page2',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div>
     <a href="!" id="page2_homeLink">Home</a>
@@ -120,7 +120,7 @@ const routes = [
     {
         id: 'page21',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div>
     <a href="!" id="page21_homeLink">Home</a>
@@ -138,7 +138,7 @@ const routes = [
     {
         id: 'page22',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div>
     <a href="!" id="page22_homeLink">Home</a>
@@ -162,7 +162,7 @@ const routes = [
     {
         id: 'page221',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div>
     <a href="!" id="page221_homeLink">Home</a>
@@ -184,7 +184,7 @@ const routes = [
     {
         id: '[404]',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div>
     <a href="!" id="e404_homeLink">Home</a>

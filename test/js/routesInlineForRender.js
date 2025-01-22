@@ -5,7 +5,7 @@ const routes = [
     {
         id: '[home]',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div class="page-content">
 <h3>Home page</h3>
@@ -28,7 +28,7 @@ const routes = [
     {
         id: 'renderWithoutWaiting',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div>
 <a href="!" id="renderWithoutWaiting_homeLink">Home</a>
@@ -50,7 +50,7 @@ const routes = [
     {
         id: 'renderWaitingForServer',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div>
 <a href="!" id="renderWaitingForServer_homeLink">Home</a>
@@ -72,7 +72,7 @@ const routes = [
     {
         id: '[404]',
         content: `
-<h1>Blue router test</h1>
+<h1>zzRouter test</h1>
 
 <div>
 <a href="!" id="e404_homeLink">Home</a>

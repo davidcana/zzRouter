@@ -1,5 +1,5 @@
 {
-  "name": "bluerouter",
+  "name": "zzrouter",
   "version": "0.1.0",
   "main": "index.js",
   "description": "A simple router component to make it easy build Single Page Applications.",
@@ -13,7 +13,7 @@
   "contributors": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidcana/blueRouter"
+    "url": "https://github.com/davidcana/zzRouter"
   },
   "devDependencies": {
     "beefy": "^2.1.8",

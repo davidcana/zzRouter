@@ -1,14 +1,14 @@
-/*! bluerouter - v0.1.0 - 2025-01-22 13:22:35 */
+/*! zzrouter - v0.1.0 - 2025-01-22 14:16:30 */
 /**
  * A namespace.
  * @const
  */
-const blueRouter = {};
+const zzRouter = {};
 
 
 /** @nocollapse */
 /** @this {Object} */
-blueRouter.start = function( userOptions ) {
+zzRouter.start = function( userOptions ) {
 
     // Init options
     this.options = {};
@@ -36,7 +36,7 @@ blueRouter.start = function( userOptions ) {
 /** @suppress {missingProperties} */
 /** @nocollapse */
 /** @this {Object} */
-blueRouter.init = function() {
+zzRouter.init = function() {
 
     // Init some other vars
     this.routesMap = this.createRoutesMap();
@@ -55,7 +55,7 @@ blueRouter.init = function() {
 // Check that mandatory user defined properties are defined
 /** @suppress {missingProperties} */
 /** @this {Object} */
-blueRouter.checkOptions = function() {
+zzRouter.checkOptions = function() {
 
     let errors = 0;
     let errorMessages = '';
@@ -71,17 +71,17 @@ blueRouter.checkOptions = function() {
     }
 
     if ( errors ){
-        this.alertError( 'Unable to initalize Blue router. ' + errors + ' errors found: ' + errorMessages );
+        this.alertError( 'Unable to initalize zzRouter. ' + errors + ' errors found: ' + errorMessages );
     }
 };
 
-blueRouter.alertError = function( message ){
+zzRouter.alertError = function( message ){
     alert( message );
     throw message;
 };
 
 /** @this {Object} */
-blueRouter.addEventListenersForWindow = function() {
+zzRouter.addEventListenersForWindow = function() {
     /*
     window.onload = () => {
         this.navigateUrl( this.options.updateOnStart? window.location.href: '', true );
@@ -95,7 +95,7 @@ blueRouter.addEventListenersForWindow = function() {
 
 /** @suppress {missingProperties} */
 /** @this {Object} */
-blueRouter.addEventListenersForLinks = function( pageId ) {
+zzRouter.addEventListenersForLinks = function( pageId ) {
     
     let self = this;
 
@@ -133,7 +133,7 @@ blueRouter.addEventListenersForLinks = function( pageId ) {
 
 // Create a map with the data in routes, using the path as the key
 /** @this {Object} */
-blueRouter.createRoutesMap = function() {
+zzRouter.createRoutesMap = function() {
 
     const routerMap = {};
     const routes = this.options.routes || [];
@@ -147,7 +147,7 @@ blueRouter.createRoutesMap = function() {
 
 /** @suppress {missingProperties} */
 /** @this {Object} */
-blueRouter.getRouteItem = function( pageId ) {
+zzRouter.getRouteItem = function( pageId ) {
 
     // Look for the route
     let routeItem = this.routesMap[ pageId ];
@@ -170,7 +170,7 @@ blueRouter.getRouteItem = function( pageId ) {
 };
 
 /** @this {Object} */
-blueRouter.navigateUrl = function( url, mustAnimateByCode ) {
+zzRouter.navigateUrl = function( url, mustAnimateByCode ) {
     //alert( 'navigateUrl\nurl: ' + url );
 
     // Create an url object to make it easy everything
@@ -206,7 +206,7 @@ blueRouter.navigateUrl = function( url, mustAnimateByCode ) {
 };
 
 /** @this {Object} */
-blueRouter.updateStack = function( pageId ) {
+zzRouter.updateStack = function( pageId ) {
     
     // If the penultimate element is the pageId then we are going backwards; otherwise we are going forward
     let isBackward = this.stack[ this.stack.length - 2 ] == pageId;
@@ -223,7 +223,7 @@ blueRouter.updateStack = function( pageId ) {
 };
 
 /** @this {Object} */
-blueRouter.getContentForPage = function( pageId ) {
+zzRouter.getContentForPage = function( pageId ) {
 
     // Get the routeItem from the routesMap
     let routeItem = this.getRouteItem( pageId );
@@ -233,7 +233,7 @@ blueRouter.getContentForPage = function( pageId ) {
 };
 
 /** @this {Object} */
-blueRouter.getContentForRoute = function( routeItem ) {
+zzRouter.getContentForRoute = function( routeItem ) {
     
     // Check keepAlive
     if ( routeItem.keepAlive ){
@@ -260,7 +260,7 @@ blueRouter.getContentForRoute = function( routeItem ) {
 
 /** @suppress {missingProperties} */
 /** @this {Object} */
-blueRouter.doPageTransition = function( content, nextPageId, currentPageId, urlObject, mustAnimateByCode ) {
+zzRouter.doPageTransition = function( content, nextPageId, currentPageId, urlObject, mustAnimateByCode ) {
 
     // Get mustAnimateOut and mustAnimateIn
     const mustAnimateOut = mustAnimateByCode && !!this.options.animationOut;
@@ -335,7 +335,7 @@ blueRouter.doPageTransition = function( content, nextPageId, currentPageId, urlO
 
 /** @suppress {missingProperties} */
 /** @this {Object} */
-blueRouter.runRenderRelated = function( initEvent, nextPageId, urlObject ){
+zzRouter.runRenderRelated = function( initEvent, nextPageId, urlObject ){
 
     // Run preEvent (EVENT_PRE_INIT or EVENT_PRE_REINIT)
     const preEvent = initEvent ===  this.options.EVENT_INIT?
@@ -363,7 +363,7 @@ blueRouter.runRenderRelated = function( initEvent, nextPageId, urlObject ){
     }
 };
 
-blueRouter.buildPageInstance = function( pageId ){
+zzRouter.buildPageInstance = function( pageId ){
 
     return {
          'id': pageId,
@@ -371,7 +371,7 @@ blueRouter.buildPageInstance = function( pageId ){
     };
 };
 
-blueRouter.addNextPage = function( currentPage, content, nextPageId ){
+zzRouter.addNextPage = function( currentPage, content, nextPageId ){
 
     if ( content instanceof HTMLElement ){
         // content is HTMLElement
@@ -398,7 +398,7 @@ blueRouter.addNextPage = function( currentPage, content, nextPageId ){
 
 // Retire current page: save it as an alive page or remove it
 /** @this {Object} */
-blueRouter.retireCurrentPage = function( currentPageId, currentPage ){
+zzRouter.retireCurrentPage = function( currentPageId, currentPage ){
 
     let currentRoute = this.getRouteItem( currentPageId );
 
@@ -415,7 +415,7 @@ blueRouter.retireCurrentPage = function( currentPageId, currentPage ){
 };
 
 /** @this {Object} */
-blueRouter.runEvent = function( eventId, pageId, urlObject ) {
+zzRouter.runEvent = function( eventId, pageId, urlObject ) {
 
     if ( eventId == this.defaultOptions.EVENT_INIT ){
         this.addEventListenersForLinks( pageId );
@@ -439,7 +439,7 @@ blueRouter.runEvent = function( eventId, pageId, urlObject ) {
 
 // Default options
 
-blueRouter.defaultOptions = {
+zzRouter.defaultOptions = {
     updateOnStart: true,
     preloadPagesOnStart: false,
 
@@ -472,9 +472,9 @@ blueRouter.defaultOptions = {
 };
 
 
-blueRouter.htmlFetcher = {};
+zzRouter.htmlFetcher = {};
 
-blueRouter.htmlFetcher.loadAllUrls = function( router, callback ){
+zzRouter.htmlFetcher.loadAllUrls = function( router, callback ){
 
     // Get the routes to use
     const routes = router.options.routes || [];
@@ -487,13 +487,13 @@ blueRouter.htmlFetcher.loadAllUrls = function( router, callback ){
         let url = routeItem.url;
         if ( url ){
             ++pending;
-            blueRouter.htmlFetcher.loadUrl( url ).then(
+            zzRouter.htmlFetcher.loadUrl( url ).then(
                 function( text ){
                     // Update content of route
                     routeItem.content = text;
 
                     // Run callback when all files have been loaded
-                    if ( --pending == 0 && callback && blueRouter.utils.isFunction( callback ) ){
+                    if ( --pending == 0 && callback && zzRouter.utils.isFunction( callback ) ){
                         callback();
                     }
                 }
@@ -506,7 +506,7 @@ blueRouter.htmlFetcher.loadAllUrls = function( router, callback ){
  * @param {string} url
  * 
  */
-blueRouter.htmlFetcher.loadUrl = async function( url ){
+zzRouter.htmlFetcher.loadUrl = async function( url ){
 
     const response = await fetch( url );
 
@@ -520,7 +520,7 @@ blueRouter.htmlFetcher.loadUrl = async function( url ){
     return text;
 };
 
-blueRouter.utils = {};
+zzRouter.utils = {};
 
 /*
     Builds an object with data about the url. An example:
@@ -534,7 +534,7 @@ blueRouter.utils = {};
         param2: b
     }
 */
-blueRouter.utils.analizeUrl = function( url, options ) {
+zzRouter.utils.analizeUrl = function( url, options ) {
     
     let result = {};
 
@@ -575,14 +575,14 @@ blueRouter.utils.analizeUrl = function( url, options ) {
     return result;
 };
 
-blueRouter.utils.addEventListenerOnList = function( list, event, fn ) {
+zzRouter.utils.addEventListenerOnList = function( list, event, fn ) {
 
     for ( let i = 0, len = list.length; i < len; i++ ) {
         list[ i ].addEventListener( event, fn, false );
     }
 };
 
-blueRouter.utils.extend = function( out, from1, from2 ) {
+zzRouter.utils.extend = function( out, from1, from2 ) {
     out = out || {};
 
     for ( var i = 1; i < arguments.length; i++ ) {
@@ -600,7 +600,7 @@ blueRouter.utils.extend = function( out, from1, from2 ) {
     return out;
 };
 
-blueRouter.utils.isFunction = function isFunction( obj ) {
+zzRouter.utils.isFunction = function isFunction( obj ) {
 
     // Support: Chrome <=57, Firefox <=52
     // In some browsers, typeof returns "function" for HTML <object> elements
@@ -610,7 +610,7 @@ blueRouter.utils.isFunction = function isFunction( obj ) {
 };
 /* end of utils */
 
-// Register blueRouter if we are using Node
+// Register zzRouter if we are using Node
 if ( typeof module === 'object' && module.exports ) {
-    module.exports = blueRouter;
+    module.exports = zzRouter;
 }

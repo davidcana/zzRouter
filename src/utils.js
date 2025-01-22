@@ -1,5 +1,5 @@
 /* utils */
-blueRouter.utils = {};
+zzRouter.utils = {};
 
 /*
     Builds an object with data about the url. An example:
@@ -13,7 +13,7 @@ blueRouter.utils = {};
         param2: b
     }
 */
-blueRouter.utils.analizeUrl = function( url, options ) {
+zzRouter.utils.analizeUrl = function( url, options ) {
     
     let result = {};
 
@@ -54,14 +54,14 @@ blueRouter.utils.analizeUrl = function( url, options ) {
     return result;
 };
 
-blueRouter.utils.addEventListenerOnList = function( list, event, fn ) {
+zzRouter.utils.addEventListenerOnList = function( list, event, fn ) {
 
     for ( let i = 0, len = list.length; i < len; i++ ) {
         list[ i ].addEventListener( event, fn, false );
     }
 };
 
-blueRouter.utils.extend = function( out, from1, from2 ) {
+zzRouter.utils.extend = function( out, from1, from2 ) {
     out = out || {};
 
     for ( var i = 1; i < arguments.length; i++ ) {
@@ -79,7 +79,7 @@ blueRouter.utils.extend = function( out, from1, from2 ) {
     return out;
 };
 
-blueRouter.utils.isFunction = function isFunction( obj ) {
+zzRouter.utils.isFunction = function isFunction( obj ) {
 
     // Support: Chrome <=57, Firefox <=52
     // In some browsers, typeof returns "function" for HTML <object> elements

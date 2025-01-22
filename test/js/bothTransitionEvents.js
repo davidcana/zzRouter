@@ -1,6 +1,6 @@
 // Tests for events, both transitions
 
-var blueRouter = require( '../../index.js' );
+var zzRouter = require( '../../index.js' );
 
 // Init router
 let eventList = [];
@@ -19,11 +19,11 @@ const initRouter = (() => {
     };
     
     // Start router
-    blueRouter.start( options );
+    zzRouter.start( options );
 })();
 
 
 // Unit tests
-require( './events.js' )( blueRouter, eventList );
+require( './events.js' )( zzRouter, eventList );
 
 

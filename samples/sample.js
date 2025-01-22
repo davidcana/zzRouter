@@ -14,7 +14,7 @@ options.routes = [
     {
         id: '[home]',
         content: `
-<h1>Blue router sample</h1>
+<h1>zzRouter sample</h1>
 
 <div class="page-content">
     <h3>Home page</h3>
@@ -43,7 +43,7 @@ options.routes = [
     {
         id: 'links',
         content: `
-<h1>Blue router sample</h1>
+<h1>zzRouter sample</h1>
 
 <div>
     <a href="!">Home</a>
@@ -57,7 +57,7 @@ options.routes = [
 
     <ul>
         <li>
-            <a href="https://github.com/davidcana/blueRouter">Blue router</a>.
+            <a href="https://github.com/davidcana/zzRouter">zzRouter</a>.
             A simple router component to make it easy build Single Page Applications.
         </li>
         <li>
@@ -81,7 +81,7 @@ options.routes = [
         id: 'textWriter',
         keepAlive: true,
         content: `
-<h1>Blue router sample</h1>
+<h1>zzRouter sample</h1>
 
 <div>
     <a href="!">Home</a>
@@ -112,7 +112,7 @@ options.routes = [
     {
         id: '[404]',
         content: `
-<h1>Blue router sample</h1>
+<h1>zzRouter sample</h1>
 
 <div>
     <a href="!">Home</a>
@@ -132,5 +132,5 @@ options.routes = [
 ];
 
 // Start router
-blueRouter.start( options );
+zzRouter.start( options );
 

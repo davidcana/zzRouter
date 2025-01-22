@@ -1,4 +1,4 @@
 /* Declare exports */
-var blueRouter = require( './dist/blueRouter.js' );
-module.exports = blueRouter;
+var zzRouter = require( './dist/zzRouter.js' );
+module.exports = zzRouter;
 

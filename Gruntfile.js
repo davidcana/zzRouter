@@ -184,21 +184,21 @@ module.exports = function(grunt) {
             },
             standalone: {
                 src: [
-                    'src/blueRouter.js', 
+                    'src/zzRouter.js', 
                     'src/router.js', 
                     'src/defaultOptions.js',
                     'src/htmlFetcher.js',
                     'src/utils.js',
                     'src/export.js'
                 ],
-                dest: 'dist/blueRouter.js',
+                dest: 'dist/zzRouter.js',
                 nonull: true
             }
         },
         uglify: {
             standalone: {
                 files: {
-                    'dist/blueRouter.min.js': [ 'dist/blueRouter.js' ]
+                    'dist/zzRouter.min.js': [ 'dist/zzRouter.js' ]
                 }
             }
         },
@@ -209,8 +209,8 @@ module.exports = function(grunt) {
                 },
                 files: [
                     {
-                        src: [ 'dist/blueRouter.min.js' ],
-                        dest: 'dist/blueRouter.min.js.gz',
+                        src: [ 'dist/zzRouter.min.js' ],
+                        dest: 'dist/zzRouter.min.js.gz',
                     }
                 ]
             }
@@ -219,7 +219,7 @@ module.exports = function(grunt) {
             sample: {
                 options: {
                     js: [
-                        'src/blueRouter.js', 
+                        'src/zzRouter.js', 
                         'src/router.js', 
                         'src/defaultOptions.js',
                         'src/htmlFetcher.js',

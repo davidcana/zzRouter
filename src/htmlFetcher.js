@@ -2,9 +2,9 @@
     htmlFetcher singleton class
 */
 
-blueRouter.htmlFetcher = {};
+zzRouter.htmlFetcher = {};
 
-blueRouter.htmlFetcher.loadAllUrls = function( router, callback ){
+zzRouter.htmlFetcher.loadAllUrls = function( router, callback ){
 
     // Get the routes to use
     const routes = router.options.routes || [];
@@ -17,13 +17,13 @@ blueRouter.htmlFetcher.loadAllUrls = function( router, callback ){
         let url = routeItem.url;
         if ( url ){
             ++pending;
-            blueRouter.htmlFetcher.loadUrl( url ).then(
+            zzRouter.htmlFetcher.loadUrl( url ).then(
                 function( text ){
                     // Update content of route
                     routeItem.content = text;
 
                     // Run callback when all files have been loaded
-                    if ( --pending == 0 && callback && blueRouter.utils.isFunction( callback ) ){
+                    if ( --pending == 0 && callback && zzRouter.utils.isFunction( callback ) ){
                         callback();
                     }
                 }
@@ -36,7 +36,7 @@ blueRouter.htmlFetcher.loadAllUrls = function( router, callback ){
  * @param {string} url
  * 
  */
-blueRouter.htmlFetcher.loadUrl = async function( url ){
+zzRouter.htmlFetcher.loadUrl = async function( url ){
 
     const response = await fetch( url );
 

@@ -1,7 +1,7 @@
 /* textWriter page */
 pages[ 'textWriter' ] = {};
 
-pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_INIT ] = function( event ){
+pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_INIT ] = function( event ){
     //alert( 'EVENT_INIT' );
 
     document.getElementById( 'textWriter_addTextButton' ).addEventListener( 'click', function( event ){
@@ -12,11 +12,11 @@ pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_INIT ] = function( event 
     });
 };
 
-pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_REINIT ] = function( event ){
+pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_REINIT ] = function( event ){
     //alert( 'EVENT_REINIT' );
 };
 
-pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_MOUNTED ] = function( event ){
+pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_MOUNTED ] = function( event ){
     //alert( 'EVENT_MOUNTED' );
 
     // Add text1 and text2 parameters to textWriter_history
@@ -30,11 +30,11 @@ pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_MOUNTED ] = function( eve
     }
 };
 
-pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_BEFORE_OUT ] = function( event ){
+pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_BEFORE_OUT ] = function( event ){
     //alert( 'EVENT_BEFORE_OUT' );
 };
 
-pages[ 'textWriter' ][ blueRouter.defaultOptions.EVENT_AFTER_OUT ] = function( event ){
+pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_AFTER_OUT ] = function( event ){
     //alert( 'EVENT_AFTER_OUT' );
 };
 

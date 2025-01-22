@@ -1,6 +1,6 @@
 // Default options
 
-blueRouter.defaultOptions = {
+zzRouter.defaultOptions = {
     updateOnStart: true,
     preloadPagesOnStart: false,
 
