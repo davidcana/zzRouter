@@ -161,13 +161,13 @@ An example of lazy loading of HTML from URLs. Providing **pages/home.html**, **p
     });
 ```
 
-If we prefer to preload pages use the **preloadPagesOnLoad** option:
+If we prefer to preload pages use the **preloadPagesOnStart** option:
 
 ```javascript
     // Start router
     blueRouter.start({
         routes: routes,
-        preloadPagesOnLoad: true
+        preloadPagesOnStart: true
     });
 ```
 
@@ -226,9 +226,9 @@ Options in lower case are recommended to be customized:
 
 * pages (undefined). An object with all the event listeners.
 * renderFunction (undefined). A function that will be executed after preinit event and before init event, depending on the value of **RUN_RENDER_BEFORE_EVENT_INIT**. It also can be executed after prereinit event and before reinit event, depending on the value of **RUN_RENDER_BEFORE_EVENT_REINIT**.
-* preloadPagesOnLoad (false). Set to **true** if you want to preload all the pages defined in routes with the **url** configuration option. Default value is **false**.
-* updateOnLoad (true). Set to **true** if you want to go the page in the URL on load page event. For example, if current URL is https://mySpaApp.org/sample.html#!links and **updateOnLoad** is **true**, **Blue router** will show **link** page; otherwise  **Blue router** will show **[home]** page.
-* animateTransitionsOnLoad (false). Set to **true** if you want to animate transition just after loading the web page. Default value is **false**.
+* preloadPagesOnStart (false). Set to **true** if you want to preload all the pages defined in routes with the **url** configuration option. Default value is **false**.
+* updateOnStart (true). Set to **true** if you want to go the page in the URL on load page event. For example, if current URL is https://mySpaApp.org/sample.html#!links and **updateOnStart** is **true**, **Blue router** will show **link** page; otherwise  **Blue router** will show **[home]** page.
+* animateTransitionsOnStart (false). Set to **true** if you want to animate transition just after loading the web page. Default value is **false**.
 * animationOut ('slide-out-top'). The name of the CSS animation used just before the current page is replaced by the new one. Set it to **false** to disable it.
 * animationIn ('scale-in-center'). The name of the CSS animation used just before the new page is shown. Set it to **false** to disable it.
 

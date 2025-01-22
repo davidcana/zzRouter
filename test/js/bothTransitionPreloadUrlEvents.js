@@ -1,4 +1,4 @@
-// Tests for events, both transitions and preloadPagesOnLoad
+// Tests for events, both transitions and preloadPagesOnStart
 
 var blueRouter = require( '../../index.js' );
 var utils = require( './utils.js' );
@@ -15,11 +15,11 @@ const initRouter = (() => {
     pages[ 'page1' ] = require( './pages/page1.js' )( eventList );
     pages[ 'textWriter' ] = require( './pages/textWriter.js' );
 
-    // Initialize options: both animations and preloadPagesOnLoad
+    // Initialize options: both animations and preloadPagesOnStart
     let options = {
         eventsByPage: pages,
         routes: require( './routesUrlForEvents.js' ),
-        preloadPagesOnLoad: true
+        preloadPagesOnStart: true
     };
     
     // Start router

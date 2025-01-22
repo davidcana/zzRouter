@@ -1,4 +1,4 @@
-/*! bluerouter - v0.1.0 - 2025-01-21 12:56:45 */
+/*! bluerouter - v0.1.0 - 2025-01-22 13:22:35 */
 /**
  * A namespace.
  * @const
@@ -16,7 +16,7 @@ blueRouter.start = function( userOptions ) {
     this.checkOptions();
 
     // Preload pages if needed
-    if ( this.options.preloadPagesOnLoad ){
+    if ( this.options.preloadPagesOnStart ){
         let self = this;
         this.htmlFetcher.loadAllUrls(
             this,
@@ -47,8 +47,8 @@ blueRouter.init = function() {
 
     // Navigate to window.location.href or home
     this.navigateUrl(
-        this.options.updateOnLoad? window.location.href: '',
-        this.options.animateTransitionsOnLoad
+        this.options.updateOnStart? window.location.href: '',
+        this.options.animateTransitionsOnStart
     );
 };
 
@@ -84,7 +84,7 @@ blueRouter.alertError = function( message ){
 blueRouter.addEventListenersForWindow = function() {
     /*
     window.onload = () => {
-        this.navigateUrl( this.options.updateOnLoad? window.location.href: '', true );
+        this.navigateUrl( this.options.updateOnStart? window.location.href: '', true );
     }
     */
     window.onpopstate = ( e ) => {
@@ -440,15 +440,15 @@ blueRouter.runEvent = function( eventId, pageId, urlObject ) {
 // Default options
 
 blueRouter.defaultOptions = {
-    updateOnLoad: true,
-    preloadPagesOnLoad: false,
+    updateOnStart: true,
+    preloadPagesOnStart: false,
 
     // Animations
     animationOut: 'slide-out-top',
     //animationOut: false,
     animationIn: 'scale-in-center',
     //animationIn: false,
-    animateTransitionsOnLoad: false,
+    animateTransitionsOnStart: false,
     
     // Misc
     PAGE_PREFIX: '!',

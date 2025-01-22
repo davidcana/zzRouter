@@ -1,15 +1,15 @@
 // Default options
 
 blueRouter.defaultOptions = {
-    updateOnLoad: true,
-    preloadPagesOnLoad: false,
+    updateOnStart: true,
+    preloadPagesOnStart: false,
 
     // Animations
     animationOut: 'slide-out-top',
     //animationOut: false,
     animationIn: 'scale-in-center',
     //animationIn: false,
-    animateTransitionsOnLoad: false,
+    animateTransitionsOnStart: false,
     
     // Misc
     PAGE_PREFIX: '!',
