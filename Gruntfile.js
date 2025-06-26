@@ -220,11 +220,11 @@ module.exports = function(grunt) {
                 options: {
                     js: [
                         'src/zzRouter.js', 
-                        'src/router.js', 
                         'src/defaultOptions.js',
                         'src/htmlFetcher.js',
                         'src/utils.js',
-                        'samples/sample.js'
+                        'samples/sample.js',
+                        'samples/pages/textWriter.js',
                     ],
                     js_output_file: 'build/sample.gcc.js',
                     compilation_level: 'ADVANCED',

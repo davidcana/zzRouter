@@ -1,7 +1,7 @@
 /* textWriter page */
-pages[ 'textWriter' ] = {};
+export const page = {};
 
-pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_INIT ] = function( event ){
+page[ 'init' ] = function( event ){
     //alert( 'EVENT_INIT' );
 
     document.getElementById( 'textWriter_addTextButton' ).addEventListener( 'click', function( event ){
@@ -12,11 +12,11 @@ pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_INIT ] = function( event ){
     });
 };
 
-pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_REINIT ] = function( event ){
+page[ 'reinit' ] = function( event ){
     //alert( 'EVENT_REINIT' );
 };
 
-pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_MOUNTED ] = function( event ){
+page[ 'mounted' ] = function( event ){
     //alert( 'EVENT_MOUNTED' );
 
     // Add text1 and text2 parameters to textWriter_history
@@ -30,11 +30,11 @@ pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_MOUNTED ] = function( event
     }
 };
 
-pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_BEFORE_OUT ] = function( event ){
+page[ 'beforeOut' ] = function( event ){
     //alert( 'EVENT_BEFORE_OUT' );
 };
 
-pages[ 'textWriter' ][ zzRouter.defaultOptions.EVENT_AFTER_OUT ] = function( event ){
+page[ 'afterOut' ] = function( event ){
     //alert( 'EVENT_AFTER_OUT' );
 };
 

@@ -1,6 +1,5 @@
 // Default options
-
-zzRouter.defaultOptions = {
+export const defaultOptions = {
     updateOnStart: true,
     preloadPagesOnStart: false,
 

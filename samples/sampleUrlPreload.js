@@ -1,7 +1,13 @@
 // Sample
 
+// Import modules
+import { zzRouter } from '../src/zzRouter.js';
+import { page as textWriterPage } from './pages/textWriter.js';
+
 // Initialize pages
-const pages = {};
+const pages = {
+    textWriter: textWriterPage
+};
 
 // Initialize options
 let options = {
