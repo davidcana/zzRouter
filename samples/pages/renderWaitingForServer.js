@@ -1,15 +1,20 @@
-/* renderWithoutWaiting page */
-pages[ 'renderWaitingForServer' ] = {};
+/* renderWaitingForServer page */
 
-pages[ 'renderWaitingForServer' ][ zzRouter.defaultOptions.EVENT_PRE_INIT ] = function( event ){
+// Import modules
+import { zpt } from '../deps/zpt.module.js';
 
+export const page = {};
+
+page[ 'preInit' ] = function( event ){
+    const dictionary = zpt.getOptions().dictionary;
     dictionary[ 'successMessageFromServer' ] = 'Loading...';
 };
 
-pages[ 'renderWaitingForServer' ][ zzRouter.defaultOptions.EVENT_INIT ] = function( event ){
+page[ 'init' ] = function( event ){
 
     setTimeout(
         function(){
+            const dictionary = zpt.getOptions().dictionary;
             dictionary[ 'successMessageFromServer' ] = 'It works!';
             zpt.run({
                 'command': 'partialRender',

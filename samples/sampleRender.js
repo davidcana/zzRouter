@@ -1,7 +1,18 @@
 // Sample
 
+// Import modules
+import { zzRouter } from '../src/zzRouter.js';
+import { page as textWriterPage } from './pages/textWriter.js';
+import { page as renderWithoutWaitingPage } from './pages/renderWithoutWaiting.js';
+import { page as renderWaitingForServerPage } from './pages/renderWaitingForServer.js';
+import { zpt } from './deps/zpt.module.js';
+
 // Initialize pages
-const pages = {};
+const pages = {
+    textWriter: textWriterPage,
+    renderWithoutWaiting: renderWithoutWaitingPage,
+    renderWaitingForServer: renderWaitingForServerPage
+};
 
 // Initialize options
 let initializeZPT = true;
@@ -10,7 +21,7 @@ let options = {
 };
 
 // Add renderFunction
-const dictionary = {};
+const dictionary = zpt.getOptions().dictionary || {};
 options.renderFunction = ( page ) => {
     if ( initializeZPT ){
         zpt.run({

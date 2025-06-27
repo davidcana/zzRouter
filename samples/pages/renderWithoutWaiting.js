@@ -1,9 +1,14 @@
 /* renderWithoutWaiting page */
-pages[ 'renderWithoutWaiting' ] = {};
 
-pages[ 'renderWithoutWaiting' ][ zzRouter.defaultOptions.EVENT_PRE_INIT ] = function( event ){
+// Import modules
+import { zpt } from '../deps/zpt.module.js';
+
+export const page = {};
+
+page[ 'preInit' ] = function( event ){
     //alert( 'EVENT_PRE_INIT' );
 
+    const dictionary = zpt.getOptions().dictionary;
     dictionary[ 'successMessage' ] = 'It works!';
 };
 
