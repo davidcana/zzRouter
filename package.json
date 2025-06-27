@@ -40,6 +40,6 @@
     "http-server": "http-server -p 9000",
     "beefy": "cd ./build; beefy *.js",
     "start": "npm-run-all -p -r beefy http-server",
-    "version": "genversion src/version.js"
+    "version": "genversion --esm --semi src/version.js"
   }
 }

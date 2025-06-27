@@ -15,6 +15,9 @@ zzRouter.defaultOptions = defaultOptions;
 import { htmlFetcher } from './htmlFetcher.js';
 zzRouter.htmlFetcher = htmlFetcher;
 
+import { version } from './version.js';
+zzRouter.version = version;
+
 /*
  * zzRouter main methods
  */
