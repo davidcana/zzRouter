@@ -6,6 +6,7 @@ import { page as textWriterPage } from './pages/textWriter.js';
 import { page as renderWithoutWaitingPage } from './pages/renderWithoutWaiting.js';
 import { page as renderWaitingForServerPage } from './pages/renderWaitingForServer.js';
 import { zpt } from './deps/zpt.module.js';
+import { context } from './context.js';
 
 // Initialize pages
 const pages = {
@@ -21,12 +22,12 @@ let options = {
 };
 
 // Add renderFunction
-const dictionary = zpt.getOptions().dictionary || {};
+//const dictionary = zpt.getOptions().dictionary || {};
 options.renderFunction = ( page ) => {
     if ( initializeZPT ){
         zpt.run({
             'root': document.body,
-            'dictionary': dictionary
+            'dictionary': context.getDictionary()
         });
         initializeZPT = false;
     } else {

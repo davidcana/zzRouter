@@ -6109,8 +6109,8 @@ global_zpt.ExpressionTokenizer = exports.ExpressionTokenizer;
 global_zpt.ReactiveDictionary = exports.ReactiveDictionary;
 global_zpt.version = exports.version;
 
-var parser = _dereq_( './parsers/parser.js' );
-global_zpt.getOptions = parser.getOptions; // Must add getOptions to exported functions
+//var parser = _dereq_( './parsers/parser.js' );
+//global_zpt.getOptions = parser.getOptions; // Must add getOptions to exported functions
 
 },{"./context.js":20,"./expressions/evaluateHelper.js":37,"./expressions/expressionBuilder.js":39,"./expressions/expressionTokenizer.js":40,"./i18n/i18n.js":64,"./i18n/i18nBundle.js":65,"./i18n/i18nHelper.js":66,"./logHelper.js":67,"./parsers/parser.js":85,"./scopes/reactiveDictionary.js":91,"./version.js":95}],69:[function(_dereq_,module,exports){
 /* 
