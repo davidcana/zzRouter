@@ -1,23 +1,29 @@
-var Qunit = require( 'qunit' );
-var zz = require( 'zzdom' );
-var zpt = require( 'zpt' );
-var zzRouter = require( '../../index.js' );
+// Tests for events, both transitions and render
+
+import { zzRouter } from '/src/zzRouter.js';
+import { page as renderWithoutWaitingPage } from './pages/renderWithoutWaiting.js';
+import { page as renderWaitingForServerPage } from './pages/renderWaitingForServer.js';
+import { routes } from './routesInlineForRender.js';
+import { runTests } from './render.js';
+import { zpt } from '/samples/deps/zpt.module.js';
+import { context } from './context.js';
+import { zzDOM } from '/samples/deps/zzDOM-closures-full.module.js';
+
+const zz = zzDOM.zz;
 
 // Init router
 const initRouter = (() => {
     // Initialize pages
-    const pages = {};
-
-    // Load js of pages
-    const dictionary = {};
-    pages[ 'renderWithoutWaiting' ] = require( './pages/renderWithoutWaiting.js' )( dictionary );
-    pages[ 'renderWaitingForServer' ] = require( './pages/renderWaitingForServer.js' )( dictionary );
+    const pages = {
+        renderWithoutWaiting: renderWithoutWaitingPage,
+        renderWaitingForServer: renderWaitingForServerPage
+    };
 
     // Initialize options: no animations
     let initializeZPT = true;
     let options = {
         eventsByPage: pages,
-        routes: require( './routesInlineForRender.js' )
+        routes: routes
     };
 
     // Add renderFunction
@@ -25,7 +31,7 @@ const initRouter = (() => {
         if ( initializeZPT ){
             zpt.run({
                 'root': document.body,
-                'dictionary': dictionary
+                'dictionary': context.getDictionary()
             });
             initializeZPT = false;
         } else {
@@ -41,5 +47,5 @@ const initRouter = (() => {
 })();
 
 // Unit tests
-require( './render.js' )();
+runTests();
 

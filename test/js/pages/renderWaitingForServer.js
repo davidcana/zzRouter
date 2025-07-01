@@ -1,28 +1,27 @@
 /* renderWithoutWaiting page */
-module.exports = function ( dictionary ) {
-    
-    var zpt = require( 'zpt' );
 
-    const page = {};
+import { zpt } from '/samples/deps/zpt.module.js';
+import { context } from './context.js';
 
-    page[ 'preInit' ] = function( event ){
+export const page = {};
 
-        dictionary[ 'successMessageFromServer' ] = 'Loading...';
-    };
-
-    page[ 'init' ] = function( event ){
-
-        setTimeout(
-            function(){
-                dictionary[ 'successMessageFromServer' ] = 'It works!';
-                zpt.run({
-                    'command': 'partialRender',
-                    'target': document.getElementById( 'renderWaitingForServer_message' )
-                });
-            },
-            300
-        );
-    };
-
-    return page;
+page[ 'preInit' ] = function( event ){
+    const dictionary = context.getDictionary();
+    dictionary[ 'successMessageFromServer' ] = 'Loading...';
 };
+
+page[ 'init' ] = function( event ){
+
+    setTimeout(
+        function(){
+            const dictionary = context.getDictionary();
+            dictionary[ 'successMessageFromServer' ] = 'It works!';
+            zpt.run({
+                'command': 'partialRender',
+                'target': document.getElementById( 'renderWaitingForServer_message' )
+            });
+        },
+        300
+    );
+};
+

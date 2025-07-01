@@ -1,24 +1,31 @@
 // Tests for events, both transitions
 
-var zzRouter = require( '../../index.js' );
-var utils = require( './utils.js' );
-var Qunit = require( 'qunit' );
-var zz = require( 'zzdom' );
+import { zzRouter } from '/src/zzRouter.js';
+import { page as page1 } from './pages/page1.js';
+import { page as textWriterPage } from './pages/textWriter.js';
+import { routes } from './routesUrlForEvents.js';
+import { utils } from './utils.js';
+import { zzDOM } from '/samples/deps/zzDOM-closures-full.module.js';
+import { runTests } from './events.js';
+
+const zz = zzDOM.zz;
 
 // Init router
 let eventList = [];
 const initRouter = (() => {
     // Initialize pages
-    const pages = {};
-
-    // Load js of pages
-    pages[ 'page1' ] = require( './pages/page1.js' )( eventList );
-    pages[ 'textWriter' ] = require( './pages/textWriter.js' );
+    const pages = {
+        page1: page1,
+        textWriter: textWriterPage
+    };
+    
+    // Init eventList in page 1
+    page1[ 'setEventList' ]( eventList );
 
     // Initialize options: both animations
     let options = {
         eventsByPage: pages,
-        routes: require( './routesUrlForEvents.js' )
+        routes: routes
     };
     
     // Start router
@@ -117,6 +124,5 @@ QUnit.test( "Lazy URLs test", async function( assert ) {
     done();
 });
 
-require( './events.js' )( zzRouter, eventList );
-
+runTests( zzRouter, eventList );
 

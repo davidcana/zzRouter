@@ -1,10 +1,12 @@
-const navigation = {};
+// Tests for navigation
 
-var zz = require( 'zzdom' );
-var utils = require( './utils.js' );
+import { zzDOM } from '/samples/deps/zzDOM-closures-full.module.js';
+import { utils } from './utils.js';
+
+const zz = zzDOM.zz;
 
 // Unit tests
-module.exports = function () {
+export const runTests = function () {
 
     QUnit.test( "Simple navigation test", async function( assert ) {
         
@@ -173,5 +175,4 @@ module.exports = function () {
     });
 
 };
-
 

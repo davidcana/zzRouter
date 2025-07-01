@@ -1,4 +1,4 @@
-const utils = {};
+export const utils = {};
 
 utils.waitShort = function() {
     return utils.wait( 1000 );
@@ -9,6 +9,4 @@ utils.wait = function( timeout ) {
         setTimeout( resolve, timeout );
     });
 };
-
-module.exports = utils;
 

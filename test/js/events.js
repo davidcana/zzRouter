@@ -1,11 +1,12 @@
 // Tests for events
 
-var zz = require( 'zzdom' );
-var utils = require( './utils.js' );
-var Qunit = require( 'qunit' );
+import { zzDOM } from '/samples/deps/zzDOM-closures-full.module.js';
+import { utils } from './utils.js';
+
+const zz = zzDOM.zz;
 
 // Unit tests
-module.exports = function ( router, eventList ) {
+export const runTests = function ( router, eventList ) {
 
     // Invoked from Simple events test and Simple events keepAlive test
     const simpleEventTest = async function( assert, initEventAgain ){

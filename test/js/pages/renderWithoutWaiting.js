@@ -1,14 +1,13 @@
 /* renderWithoutWaiting page */
 
-module.exports = function ( dictionary ) {
+import { context } from './context.js';
 
-    const page = {};
+export const page = {};
 
-    page[ 'preInit' ] = function( event ){
-        //alert( 'EVENT_PRE_INIT' );
-
-        dictionary[ 'successMessage' ] = 'It works!';
-    };
-
-    return page;
+page[ 'preInit' ] = function( event ){
+    //alert( 'EVENT_PRE_INIT' );
+    const dictionary = context.getDictionary();
+    dictionary[ 'successMessage' ] = 'It works!';
 };
+
+

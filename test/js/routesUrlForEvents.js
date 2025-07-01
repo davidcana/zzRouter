@@ -1,5 +1,5 @@
 // Routes for url contents for event tests
-const routes = [
+export const routes = [
     // Home page
     {
         id: '[home]',
@@ -26,7 +26,5 @@ const routes = [
         url: 'pages/404.html'
     }
 ];
-
-module.exports = routes;
 
 

@@ -1,5 +1,5 @@
 // Routes for inline content for event tests
-const routes = [
+export const routes = [
     // Home page
     {
         id: '[home]',
@@ -118,7 +118,5 @@ const routes = [
 `
     }
 ];
-
-module.exports = routes;
 
 

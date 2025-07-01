@@ -1,5 +1,5 @@
 /* textWriter page */
-const page = {};
+export const page = {};
 
 page[ 'init' ] = function( event ){
     //alert( 'EVENT_INIT' );
@@ -26,4 +26,3 @@ page[ 'mounted' ] = function( event ){
     }
 };
 
-module.exports = page;

@@ -1,5 +1,4 @@
 module.exports = function(grunt) {
-    
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
         browserify: {
@@ -185,11 +184,10 @@ module.exports = function(grunt) {
             standalone: {
                 src: [
                     'src/zzRouter.js', 
-                    'src/router.js', 
                     'src/defaultOptions.js',
                     'src/htmlFetcher.js',
                     'src/utils.js',
-                    'src/export.js'
+                    'src/version.js'
                 ],
                 dest: 'dist/zzRouter.js',
                 nonull: true
@@ -223,6 +221,7 @@ module.exports = function(grunt) {
                         'src/defaultOptions.js',
                         'src/htmlFetcher.js',
                         'src/utils.js',
+                        'src/version.js',
                         'samples/sample.js',
                         'samples/pages/textWriter.js',
                     ],

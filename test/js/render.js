@@ -1,11 +1,12 @@
 // Tests for events
 
-var zz = require( 'zzdom' );
-var utils = require( './utils.js' );
-var Qunit = require( 'qunit' );
+import { utils } from './utils.js';
+import { zzDOM } from '/samples/deps/zzDOM-closures-full.module.js';
+
+const zz = zzDOM.zz;
 
 // Unit tests
-module.exports = function () {
+export const runTests = function () {
 
     // Non waiting render test
     QUnit.test( "Non waiting render test", async function( assert ) {

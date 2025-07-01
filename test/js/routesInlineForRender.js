@@ -1,6 +1,6 @@
 // Routes for inline content for render tests
 
-const routes = [
+export const routes = [
     // Home page
     {
         id: '[home]',
@@ -90,7 +90,5 @@ const routes = [
 `
     }
 ];
-
-module.exports = routes;
 
 
