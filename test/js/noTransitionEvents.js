@@ -1,23 +1,29 @@
-var Qunit = require( 'qunit' );
-var zz = require( 'zzdom' );
-var zzRouter = require( '../../index.js' );
+// Tests for events, no transitions
+
+import { zzRouter } from '/src/zzRouter.js';
+import { page as page1 } from './pages/page1.js';
+import { page as textWriterPage } from './pages/textWriter.js';
+import { routes } from './routesInlineForEvents.js';
+import { runTests } from './events.js';
 
 // Init router
 let eventList = [];
 const initRouter = (() => {
     // Initialize pages
-    const pages = {};
-
-    // Load js of pages
-    pages[ 'page1' ] = require( './pages/page1.js' )( eventList );
-    pages[ 'textWriter' ] = require( './pages/textWriter.js' );
+    const pages = {
+        page1: page1,
+        textWriter: textWriterPage
+    };
+    
+    // Init eventList in page 1
+    page1[ 'setEventList' ]( eventList );
 
     // Initialize options: no animations
     let options = {
         eventsByPage: pages,
         animationOut: false,
         animationIn: false,
-        routes: require( './routesInlineForEvents.js' )
+        routes: routes
     };
 
     // Start router
@@ -25,5 +31,5 @@ const initRouter = (() => {
 })();
 
 // Unit tests
-require( './events.js' )( zzRouter, eventList );
+runTests( zzRouter, eventList );
 

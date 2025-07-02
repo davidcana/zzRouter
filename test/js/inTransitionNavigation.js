@@ -1,7 +1,8 @@
 // Tests for navigation, both transitions
 
-var Qunit = require( 'qunit' );
-var zzRouter = require( '../../index.js' );
+import { zzRouter } from '/src/zzRouter.js';
+import { routes } from './routesInlineForNavigation.js';
+import { runTests } from './navigation.js';
 
 // Init router
 const initRouter = (() => {
@@ -12,7 +13,7 @@ const initRouter = (() => {
     let options = {
         eventsByPage: pages,
         animationOut: false,
-        routes: require( './routesInlineForNavigation.js' )
+        routes: routes
     };
 
     // Start router
@@ -20,6 +21,6 @@ const initRouter = (() => {
 })();
 
 // Unit tests
-require( './navigation.js' )();
+runTests();
 
 

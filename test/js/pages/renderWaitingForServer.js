@@ -1,7 +1,7 @@
 /* renderWithoutWaiting page */
 
 import { zpt } from '/samples/deps/zpt.module.js';
-import { context } from './context.js';
+import { context } from '../context.js';
 
 export const page = {};
 

@@ -1,4 +1,4 @@
-// Tests for events, both transitions and render
+// Tests for render, both transitions
 
 import { zzRouter } from '/src/zzRouter.js';
 import { page as renderWithoutWaitingPage } from './pages/renderWithoutWaiting.js';

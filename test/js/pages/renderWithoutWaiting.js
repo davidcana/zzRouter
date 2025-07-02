@@ -1,6 +1,6 @@
 /* renderWithoutWaiting page */
 
-import { context } from './context.js';
+import { context } from '../context.js';
 
 export const page = {};
 

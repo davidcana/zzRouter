@@ -1,22 +1,28 @@
 // Tests for events, both transitions
 
-var zzRouter = require( '../../index.js' );
+import { zzRouter } from '/src/zzRouter.js';
+import { page as page1 } from './pages/page1.js';
+import { page as textWriterPage } from './pages/textWriter.js';
+import { routes } from './routesInlineForEvents.js';
+import { runTests } from './events.js';
 
 // Init router
 let eventList = [];
 const initRouter = (() => {
     // Initialize pages
-    const pages = {};
+    const pages = {
+        page1: page1,
+        textWriter: textWriterPage
+    };
 
-    // Load js of pages
-    pages[ 'page1' ] = require( './pages/page1.js' )( eventList );
-    pages[ 'textWriter' ] = require( './pages/textWriter.js' );
+    // Init eventList in page 1
+    page1[ 'setEventList' ]( eventList );
 
     // Initialize options: both animations
     let options = {
         eventsByPage: pages,
         animationOut: false,
-        routes: require( './routesInlineForEvents.js' )
+        routes: routes
     };
     
     // Start router
@@ -24,6 +30,5 @@ const initRouter = (() => {
 })();
 
 // Unit tests
-require( './events.js' )( zzRouter, eventList );
-
+runTests( zzRouter, eventList );
 
