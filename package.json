@@ -22,9 +22,6 @@
   "devDependencies": {
     "esbuild": "0.25.5",
     "genversion": "^3.2.0",
-    "google-closure-compiler": "^20240317.0.0",
-    "grunt": "^1.6.1",
-    "grunt-contrib-qunit": "^10.1.1",
     "http-server": "^14.1.1",
     "qunit": "~2.11.2",
     "qunit-composite": "^2.0.0",
@@ -32,7 +29,6 @@
     "zzdom": "^0.2.0"
   },
   "scripts": {
-    "test": "grunt qunit",
     "start": "http-server -p 9000 -c-1",
     "version": "genversion --esm --semi src/version.js",
     "build": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter.js --format=esm",
