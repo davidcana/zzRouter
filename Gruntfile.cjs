@@ -1,134 +1,6 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
-        browserify: {
-            noTransitionNavigation: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/noTransitionNavigation.js',
-                dest: 'build/js/noTransitionNavigation.js'
-            },
-            noTransitionEvents: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/noTransitionEvents.js',
-                dest: 'build/js/noTransitionEvents.js'
-            },
-            noTransitionRender: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/noTransitionRender.js',
-                dest: 'build/js/noTransitionRender.js'
-            },
-            bothTransitionNavigation: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/bothTransitionNavigation.js',
-                dest: 'build/js/bothTransitionNavigation.js'
-            },
-            inTransitionNavigation: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/inTransitionNavigation.js',
-                dest: 'build/js/inTransitionNavigation.js'
-            },
-            outTransitionNavigation: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/outTransitionNavigation.js',
-                dest: 'build/js/outTransitionNavigation.js'
-            },
-            bothTransitionEvents: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/bothTransitionEvents.js',
-                dest: 'build/js/bothTransitionEvents.js'
-            },
-            inTransitionEvents: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/inTransitionEvents.js',
-                dest: 'build/js/inTransitionEvents.js'
-            },
-            outTransitionEvents: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/outTransitionEvents.js',
-                dest: 'build/js/outTransitionEvents.js'
-            },
-            bothTransitionRender: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/bothTransitionRender.js',
-                dest: 'build/js/bothTransitionRender.js'
-            },
-            inTransitionRender: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/inTransitionRender.js',
-                dest: 'build/js/inTransitionRender.js'
-            },
-            outTransitionRender: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/outTransitionRender.js',
-                dest: 'build/js/outTransitionRender.js'
-            },
-            bothTransitionLazyUrlEvents: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/bothTransitionLazyUrlEvents.js',
-                dest: 'build/js/bothTransitionLazyUrlEvents.js'
-            },
-            bothTransitionPreloadUrlEvents: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/bothTransitionPreloadUrlEvents.js',
-                dest: 'build/js/bothTransitionPreloadUrlEvents.js'
-            }
-        },
         qunit: {
             browser: {
                 options: {
@@ -155,64 +27,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        watch: {
-            src: {
-                files: [
-                    'src/*.js',
-                ],
-                tasks: [
-                    'concat:standalone',
-                    'uglify:standalone',
-                    'browserify'
-                ]
-            },
-            test: {
-                files: [
-                    'test/js/*.js',
-                    'test/js/pages/*.js'
-                ],
-                tasks: [
-                    'browserify'
-                ]
-            }
-        },
-        concat: {
-            options: {
-                stripBanners: true,
-                banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd HH:M:s") %> */\n'
-            },
-            standalone: {
-                src: [
-                    'src/zzRouter.js', 
-                    'src/defaultOptions.js',
-                    'src/htmlFetcher.js',
-                    'src/utils.js',
-                    'src/version.js'
-                ],
-                dest: 'dist/zzRouter.js',
-                nonull: true
-            }
-        },
-        uglify: {
-            standalone: {
-                files: {
-                    'dist/zzRouter.min.js': [ 'dist/zzRouter.js' ]
-                }
-            }
-        },
-        compress: {
-            standalone: {
-                options: {
-                    mode: 'gzip'
-                },
-                files: [
-                    {
-                        src: [ 'dist/zzRouter.min.js' ],
-                        dest: 'dist/zzRouter.min.js.gz',
-                    }
-                ]
-            }
-        },
         'closure-compiler': {
             sample: {
                 options: {
@@ -237,11 +51,6 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-qunit');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-compress');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-browserify')
 
     require('google-closure-compiler').grunt(grunt, {
         platform: ['native', 'java', 'javascript'],
@@ -251,11 +60,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('test', ['qunit']);
     grunt.registerTask('default', [
-        'closure-compiler:sample',
-        'concat:standalone',
-        'uglify:standalone',
-        'compress:standalone',
-        'browserify'
+        'closure-compiler:sample'
     ]);
     grunt.registerTask('all', ['default', 'test']);
 };

@@ -20,21 +20,12 @@
     "url": "https://github.com/davidcana/zzRouter"
   },
   "devDependencies": {
-    "beefy": "^2.1.8",
-    "browserify": "^17.0.1",
-    "browserify-derequire": "^1.1.1",
     "esbuild": "0.25.5",
     "genversion": "^3.2.0",
     "google-closure-compiler": "^20240317.0.0",
     "grunt": "^1.6.1",
-    "grunt-browserify": "^6.0.0",
-    "grunt-contrib-compress": "^2.0.0",
-    "grunt-contrib-concat": "^2.1.0",
     "grunt-contrib-qunit": "^10.1.1",
-    "grunt-contrib-uglify": "^5.2.1",
-    "grunt-contrib-watch": "^1.1.0",
     "http-server": "^14.1.1",
-    "npm-run-all": "^4.1.5",
     "qunit": "~2.11.2",
     "qunit-composite": "^2.0.0",
     "zpt": "^0.40.6",
@@ -42,11 +33,11 @@
   },
   "scripts": {
     "test": "grunt qunit",
-    "http-server": "http-server -p 9000 -c-1",
-    "beefy": "cd ./build; beefy *.js",
-    "start": "npm-run-all -p -r beefy http-server",
+    "start": "http-server -p 9000 -c-1",
     "version": "genversion --esm --semi src/version.js",
-    "build": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter.prod.js --format=esm",
-    "build-minify": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter.prod.min.js --format=esm --minify"
+    "build": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter.js --format=esm",
+    "build-minify": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter.min.js --format=esm --minify",
+    "build-gz": "gzip -fk ./dist/zzRouter.min.js",
+    "build-all": "npm run build && npm run build-minify && npm run build-gz"
   }
 }
