@@ -40,8 +40,8 @@
     "build-esm-minify": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter-esm.min.js --format=esm --minify",
     "build-esm-gz": "gzip -fk ./dist/zzRouter-esm.min.js",
     "build-esm-all": "npm run build-esm && npm run build-esm-minify && npm run build-esm-gz",
-    "build-cjs": "esbuild ./src/zzRouter.js --bundle --outfile=./src/zzRouter-cjs.cjs --format=cjs",
-    "build-cjs-rollup": "rollup index.js --file ./src/zzRouter-cjs.cjs --format cjs",
+    "build-cjs": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter-cjs.cjs --format=cjs",
+    "build-cjs-rollup": "rollup index.js --file ./dist/zzRouter-cjs.cjs --format cjs",
     "build-all": "npm run build-esm-all && npm run build-cjs"
   }
 }

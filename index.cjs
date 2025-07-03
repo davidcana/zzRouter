@@ -1,2 +1,2 @@
-const zzRouter = require('./src/zzRouter-cjs.cjs').zzRouter;
+const zzRouter = require('./dist/zzRouter-cjs.cjs').zzRouter;
 module.exports = zzRouter;
