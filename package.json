@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "description": "A simple router component to make it easy build Single Page Applications.",
   "type": "module",
-  "exports": "./src/zzRouter.js",
+  "exports": {
+    "import": "./index.js",
+    "require": "./index.cjs"
+  },
   "engines": {
     "node": ">=18"
   },
@@ -31,9 +34,10 @@
   "scripts": {
     "start": "http-server -p 9000 -c-1",
     "version": "genversion --esm --semi src/version.js",
-    "build": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter.js --format=esm",
-    "build-minify": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter.min.js --format=esm --minify",
-    "build-gz": "gzip -fk ./dist/zzRouter.min.js",
-    "build-all": "npm run build && npm run build-minify && npm run build-gz"
+    "build-esm": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter-esm.js --format=esm",
+    "build-esm-minify": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter-esm.min.js --format=esm --minify",
+    "build-esm-gz": "gzip -fk ./dist/zzRouter-esm.min.js",
+    "build-esm-all": "npm run build-esm && npm run build-esm-minify && npm run build-esm-gz",
+    "build-cjs": "esbuild ./src/zzRouter.js --bundle --outfile=./index.cjs --format=cjs"
   }
 }

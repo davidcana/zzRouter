@@ -1,4 +1,5 @@
 /* Declare exports */
-var zzRouter = require( './dist/zzRouter.js' );
-module.exports = zzRouter;
+import zzRouter from './src/zzRouter.js';
+export { zzRouter };
+export default zzRouter;
 
