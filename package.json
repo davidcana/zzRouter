@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "A simple router component to make it easy build Single Page Applications.",
   "type": "module",
+  "main": "index.js",
   "exports": {
     "import": "./index.js",
     "require": "./index.cjs"
@@ -28,6 +29,7 @@
     "http-server": "14.1.1",
     "qunit": "2.24.1",
     "qunit-composite": "2.0.0",
+    "rollup": "^4.44.1",
     "zpt": "0.40.9",
     "zzdom": "0.5.1"
   },
@@ -38,6 +40,7 @@
     "build-esm-minify": "esbuild ./src/zzRouter.js --bundle --outfile=./dist/zzRouter-esm.min.js --format=esm --minify",
     "build-esm-gz": "gzip -fk ./dist/zzRouter-esm.min.js",
     "build-esm-all": "npm run build-esm && npm run build-esm-minify && npm run build-esm-gz",
-    "build-cjs": "esbuild ./src/zzRouter.js --bundle --outfile=./index.cjs --format=cjs"
+    "build-cjs": "esbuild ./src/zzRouter.js --bundle --outfile=./src/zzRouter-cjs.cjs --format=cjs",
+    "build-cjs-rollup": "rollup index.js --file ./src/zzRouter-cjs.cjs --format cjs"
   }
 }
