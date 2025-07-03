@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A simple router component to make it easy build Single Page Applications.",
   "type": "module",
-  "main": "index.js",
+  "main": "index.cjs",
   "exports": {
     "import": "./index.js",
     "require": "./index.cjs"
