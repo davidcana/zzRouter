@@ -10,15 +10,17 @@
         * Can be defined as strings to optimize load time.
     * Support of browser history using [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). Use back and forward buttons to navigate through internal pages.
     * Life cycle events support:
-        * Events includes events before page is ready (preInit, init, preReinit, reinit and mounted) and events before page is removed (beforeOut and afterOut).
+        * Events includes events before page is ready (preInit, init, preReinit, reinit and mounted).
+        * Also includes events before page is removed (beforeOut and afterOut).
     * Support of alive pages. Some pages can be cached before being removed, so they are recovered from the cache afterwards.
 * Easy to customize and to extend. Clear and simple code: [KISS](https://en.wikipedia.org/wiki/KISS_principle).
 * Support of [CSS transitions](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions).
     * Select your page-in transition; select your page-out transition. Transitions can be disabled too.
     * Includes some simple CSS transitions.
     * Use your custom CSS transitions easily.
+* Written as an [ES module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), can be used as a **ES module** as well as a [CommonJS module](https://nodejs.org/api/modules.html).
 * Small size:
-    * 17.2KB, 6.1KB minified, 2.4KB gzipped.
+    * 10.9KB, 6.0KB minified, 2.2KB gzipped.
 
 ## Why use zzRouter
 
@@ -33,20 +35,50 @@ No support for very old browsers. No polyfills. **zzRouter** should work with an
 * [Promises](https://caniuse.com/promises).
 * [History API](https://caniuse.com/mdn-api_history).
 
+## Installation
+
+**zzRouter** is registered as a package on [npm](https://www.npmjs.com/package/zzrouter). This is the recomended way of downloading it. You can install the latest version of zzRouter with the npm CLI command:
+
+```bash
+npm install zzrouter
+```
+
+## Importing/requiring zzRouter
+
+First of all, 2 files are needed to be added to the HTML page, a JS file and a CSS file. Using ES modules:
+
+```html
+    <script type="module" src="zzRouterSampleESM.js"></script>
+    <link href="zzRouter.css" rel="stylesheet">
+```
+
+Let's import the zzRouter module in the javascript file:
+
+```javascript
+
+    import { zzRouter } from '/node_modules/zzrouter/index.js';
+```
+
+You can also use CommonJS:
+
+```javascript
+
+    const zzRouter = require( 'zzrouter' );
+```
+
+For production you might use built versions in **dist** directory:
+
+* **zzRouter-esm.js** : The ES module version.
+* **zzRouter-cjs.cjs** : The CommonJS version.
+
 ## Using zzRouter
 
 Let's see some examples.
 
-First of all, 2 files are needed to be added to the HTML page, a JS file and a CSS file:
-
-```html
-    <script src="zzRouter.js" defer></script>
-    <link href="zzRouter.css" rel="stylesheet">
-```
-
 An example of routes with content defined as string literals. This SPA consist of a home page, a links page and a 404 error page:
 
 ```javascript
+
     const routes = {
         // Home page
         {
