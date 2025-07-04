@@ -1,13 +1,16 @@
 New in 0.1.0
 - Initial version.
 
-New in 0.2.0 (coming soon)
+New in 0.2.0
+- Now using ES modules instead of commonJS. Can be used using require or import.
+
+New in 0.3.0 (coming soon)
 - Events management improved. 3 ways to define event listeners:
     - In routeItems, 'events' configuration option. An object of functions, one per event.
     - In configuration options, 'events' configuration option. An object of functions, one per event.
     - In configuration options, 'eventsByPage' configuration option. An object of objects of functions, one per event.
 
-New in 0.3.0 (coming soon)
+New in 0.4.0 (coming soon)
 - Add parent configuration option to routeItems.
 - Add getParents method to router.
 - Add getCurrentPageId method to router.

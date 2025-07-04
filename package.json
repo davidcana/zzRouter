@@ -1,6 +1,6 @@
 {
   "name": "zzrouter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A simple router component to make it easy build Single Page Applications.",
   "type": "module",
   "main": "index.cjs",
@@ -24,14 +24,14 @@
     "url": "https://github.com/davidcana/zzRouter"
   },
   "devDependencies": {
-    "esbuild": "0.25.5",
-    "genversion": "3.2.0",
-    "http-server": "14.1.1",
-    "qunit": "2.24.1",
-    "qunit-composite": "2.0.0",
+    "esbuild": "^0.25.5",
+    "genversion": "^3.2.0",
+    "http-server": "^14.1.1",
+    "qunit": "^2.24.1",
+    "qunit-composite": "^2.0.0",
     "rollup": "^4.44.1",
-    "zpt": "0.40.9",
-    "zzdom": "0.5.1"
+    "zpt": "^0.40.9",
+    "zzdom": "^0.5.1"
   },
   "scripts": {
     "start": "http-server -p 9000 -c-1",
